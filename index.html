@@ -14,10 +14,10 @@
     --surface: #FFFFFF;
     --surface2: #EFEDE8;
     --border: #DDD9D0;
-    --text: #1A1915;
+    --text: #1E40AF;
     --muted: #7A776E;
-    --accent: #1A1915;
-    --accent-fg: #F5F3EE;
+    --accent: #1E40AF;
+    --accent-fg: #1E40AF;
     --green: #2D6A4F;
     --green-bg: #D8F3DC;
     --red: #A4262C;
@@ -56,9 +56,15 @@
     overflow-y: auto;
   }
   .logo-wrap { display: flex; flex-direction: column; gap: 6px; }
-  .logo-img {
-    height: 32px; width: auto; object-fit: contain; align-self: flex-start;
-    filter: brightness(0) invert(1);
+  .logo-texto {
+    font-family: 'DM Sans', sans-serif; 
+    font-weight: 700;          
+    font-size: 26px;          
+    letter-spacing: -0.05em;   
+    color: #FFFFFF;            
+    line-height: 1;           
+    display: block;           
+    align-self: flex-start;    
   }
   .logo-tag {
     font-family: 'DM Sans', sans-serif;
