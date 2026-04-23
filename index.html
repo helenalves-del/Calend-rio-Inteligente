@@ -706,9 +706,6 @@ function setDefaultDates() {
   document.getElementById('date-end').value = fmt(later);
 }
 
-// Tempo de expiração do token (Google emite tokens de 3600s = 1h)
-let tokenExpiresAt = 0;
-
 function waitForGIS() {
   if (typeof google === 'undefined' || !google.accounts) {
     setTimeout(waitForGIS, 300);
@@ -720,68 +717,35 @@ function waitForGIS() {
     callback: (resp) => {
       if (resp.error) { console.error(resp); return; }
       accessToken = resp.access_token;
-      // Salva quando o token expira (com 60s de margem)
-      const expiresIn = parseInt(resp.expires_in || 3600, 10);
-      tokenExpiresAt = Date.now() + (expiresIn - 60) * 1000;
       fetchUserInfo();
     }
   });
 }
 
-// Retorna uma Promise com um token válido, pedindo novo se necessário
-function getValidToken() {
-  return new Promise((resolve, reject) => {
-    if (accessToken && Date.now() < tokenExpiresAt) {
-      resolve(accessToken);
-      return;
-    }
-    // Token ausente ou expirado: pede silenciosamente (sem tela de consentimento)
-    const origCallback = tokenClient.callback;
-    tokenClient.callback = (resp) => {
-      tokenClient.callback = origCallback;
-      if (resp.error) { reject(new Error(resp.error)); return; }
-      accessToken = resp.access_token;
-      const expiresIn = parseInt(resp.expires_in || 3600, 10);
-      tokenExpiresAt = Date.now() + (expiresIn - 60) * 1000;
-      resolve(accessToken);
-    };
-    // prompt: '' = tenta silencioso; se falhar o Google abre o seletor
-    tokenClient.requestAccessToken({ prompt: '' });
-  });
-}
-
 function signIn() {
   if (!tokenClient) { alert('Google Identity Services ainda carregando. Aguarde.'); return; }
-  // Na primeira vez mostra o seletor de conta; depois reutiliza a sessão
-  tokenClient.requestAccessToken({ prompt: accessToken ? '' : 'select_account' });
+  tokenClient.requestAccessToken({ prompt: 'consent' });
 }
 
 function signOut() {
   if (accessToken) google.accounts.oauth2.revoke(accessToken);
   accessToken = null;
-  tokenExpiresAt = 0;
   userProfile = null;
   updateAuthUI(false);
 }
 
 async function fetchUserInfo() {
-  try {
-    const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    });
-    if (!r.ok) {
-      console.warn('Token inválido (status ' + r.status + '). Faça login novamente.');
-      accessToken = null;
-      updateAuthUI(false);
-      return;
-    }
-    userProfile = await r.json();
+  const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+    headers: { Authorization: 'Bearer ' + accessToken }
+  });
+  if (!r.ok) {
+    // Token não tem scope de perfil — exibe só o estado logado sem nome
+    userProfile = { name: '', email: '' };
     updateAuthUI(true);
-  } catch (e) {
-    console.error('Erro ao buscar perfil:', e);
-    accessToken = null;
-    updateAuthUI(false);
+    return;
   }
+  userProfile = await r.json();
+  updateAuthUI(true);
 }
 
 function updateAuthUI(loggedIn) {
@@ -1068,7 +1032,7 @@ function fmtTime(date) {
 
 // Search
 async function searchSlots() {
-  if (!accessToken && tokenExpiresAt === 0) {
+  if (!accessToken) {
     alert('Faça login com o Google primeiro.');
     return;
   }
@@ -1091,11 +1055,10 @@ async function searchSlots() {
   const items = [{ id: 'primary' }, ...emails.map(e => ({ id: e }))];
 
   try {
-    const token = await getValidToken();
     const r = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': 'Bearer ' + accessToken,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ timeMin, timeMax, timeZone: tz, items })
@@ -1242,11 +1205,10 @@ async function criarEvento() {
   const url = `https://www.googleapis.com/calendar/v3/calendars/primary/events?sendUpdates=${notifParam}${meetParam}`;
 
   try {
-    const token = await getValidToken();
     const r = await fetch(url, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': 'Bearer ' + accessToken,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
