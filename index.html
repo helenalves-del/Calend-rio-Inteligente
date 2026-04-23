@@ -426,20 +426,22 @@
         <div class="field">
           <label>Duração da reunião</label>
           <div class="pill-group" id="dur-group">
-            <button class="pill" onclick="setDur(30,this)">30 min</button>
-            <button class="pill active" onclick="setDur(60,this)">1 hora</button>
-            <button class="pill" onclick="setDur(90,this)">1h 30min</button>
-            <button class="pill" onclick="setDur(120,this)">2 horas</button>
-           <div class="campo-customizado" style="display: inline-flex; align-items: center; margin-left: 8px;">
+  <button class="pill" onclick="setDur(30, this)">30 min</button>
+  <button class="pill active" onclick="setDur(60, this)">1 hora</button>
+  <button class="pill" onclick="setDur(90, this)">1h 30min</button>
+  <button class="pill" onclick="setDur(120, this)">2 horas</button>
+  
+  <div style="display: inline-flex; align-items: center; margin-left: 8px;">
     <input 
-        type="number" 
-        placeholder="Outro (min)" 
-        class="pílula" 
-        style="width: 100px; border: 1px solid #ccc; padding: 5px 10px; border-radius: 20px;"
-        oninput="definirDuracao(this.value, this)"
+      type="number" 
+      id="input-manual"
+      placeholder="Outro (min)" 
+      class="pill" 
+      style="width: 100px; outline: none;"
+      oninput="setDur(this.value, this)"
     />
+  </div>
 </div>
-          </div>
         </div>
 
         <div class="divider"></div>
