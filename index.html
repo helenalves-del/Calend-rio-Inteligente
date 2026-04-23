@@ -520,7 +520,7 @@
       </div>
       <!-- END event-form-card -->
 
-      <button class="btn btn-primary btn-full" id="btn-create" onclick="createEvent()">
+      <button class="btn btn-primary btn-full" id="btn-create" onclick="criarEvento()">
         Criar no Google Calendar
       </button>
 
@@ -735,11 +735,23 @@ function signOut() {
 }
 
 async function fetchUserInfo() {
-  const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-    headers: { Authorization: `Bearer ${accessToken}` }
-  });
-  userProfile = await r.json();
-  updateAuthUI(true);
+  try {
+    const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    });
+    if (!r.ok) {
+      console.warn('Token inválido (status ' + r.status + '). Faça login novamente.');
+      accessToken = null;
+      updateAuthUI(false);
+      return;
+    }
+    userProfile = await r.json();
+    updateAuthUI(true);
+  } catch (e) {
+    console.error('Erro ao buscar perfil:', e);
+    accessToken = null;
+    updateAuthUI(false);
+  }
 }
 
 function updateAuthUI(loggedIn) {
@@ -1169,7 +1181,7 @@ function selectSlot(i, el) {
 }
 
 // Create Event
-async function createEvent() {
+async function criarEvento() {
   if (!selectedSlot) { alert('Selecione um horário.'); return; }
   const title = document.getElementById('ev-title').value.trim();
   if (!title) { alert('Informe o título da reunião.'); return; }
