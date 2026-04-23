@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
-  /* ── Reset & Base ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -38,14 +37,12 @@
     line-height: 1.6;
   }
 
-  /* ── Layout ── */
   .app-shell {
     display: grid;
     grid-template-columns: 260px 1fr;
     min-height: 100vh;
   }
 
-  /* ── Sidebar ── */
   .sidebar {
     background: var(--text);
     color: var(--bg);
@@ -61,7 +58,6 @@
   .logo-wrap { display: flex; flex-direction: column; gap: 6px; }
   .logo-img {
     height: 32px; width: auto; object-fit: contain; align-self: flex-start;
-    /* invert the dark logo so it shows white on the dark sidebar */
     filter: brightness(0) invert(1);
   }
   .logo-tag {
@@ -74,7 +70,6 @@
   .sidebar-section { display: flex; flex-direction: column; gap: 0.5rem; }
   .sidebar-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.4; font-weight: 500; margin-bottom: 4px; }
 
-  /* User Auth Status */
   .auth-card {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
@@ -104,19 +99,16 @@
   .btn-auth.signin { background: var(--bg); color: var(--text); border-color: transparent; }
   .btn-auth.signin:hover { opacity: 0.9; }
 
-  /* Quick stats */
   .stat-row { display: flex; flex-direction: column; gap: 4px; }
   .stat { font-size: 11px; opacity: 0.5; display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
   .stat:last-child { border-bottom: none; }
   .stat strong { opacity: 1; font-weight: 500; color: var(--bg); }
 
-  /* ── Main ── */
   .main { padding: 2.5rem 2.5rem 3rem; max-width: 820px; }
   .page-header { margin-bottom: 2rem; }
   .page-title { font-family: 'DM Serif Display', serif; font-size: 2rem; letter-spacing: -0.03em; line-height: 1.2; }
   .page-subtitle { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
 
-  /* ── Cards ── */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -143,7 +135,6 @@
   }
   .card-title-link:hover { text-decoration: underline; }
 
-  /* ── Form Elements ── */
   label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 5px; font-weight: 400; }
   input[type=text], input[type=email], input[type=date], input[type=time], input[type=number], select, textarea {
     width: 100%;
@@ -168,7 +159,6 @@
   .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
   .field { margin-bottom: 12px; }
 
-  /* ── Pill Toggles ── */
   .pill-group { display: flex; gap: 4px; flex-wrap: wrap; }
   .pill {
     padding: 5px 12px;
@@ -185,7 +175,6 @@
   .pill:hover { border-color: var(--text); color: var(--text); }
   .pill.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-  /* ── Team Chips ── */
   .team-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
   .team-chip {
     display: inline-flex; align-items: center; gap: 6px;
@@ -200,25 +189,17 @@
     font-family: inherit;
   }
   .team-chip:hover { border-color: var(--text); }
-  .team-chip.active {
-    background: var(--text); color: var(--bg); border-color: var(--text);
-  }
+  .team-chip.active { background: var(--text); color: var(--bg); border-color: var(--text); }
   .team-chip-count {
     font-size: 11px; opacity: 0.6; background: rgba(0,0,0,0.07);
     padding: 1px 6px; border-radius: 99px;
   }
   .team-chip.active .team-chip-count { background: rgba(255,255,255,0.2); opacity: 0.9; }
-  .team-chip-edit {
-    background: none; border: none; color: inherit; opacity: 0.5;
-    cursor: pointer; padding: 0; font-size: 13px; line-height: 1;
-  }
-  .team-chip-edit:hover { opacity: 1; }
   .team-chip.add {
     background: transparent; color: var(--muted); border-style: dashed;
   }
   .team-chip.add:hover { color: var(--text); border-color: var(--text); }
 
-  /* ── Tags (emails) ── */
   .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 4px; }
   .tag {
     display: inline-flex; align-items: center; gap: 6px;
@@ -238,7 +219,6 @@
   }
   .tag-x:hover { color: var(--text); }
 
-  /* ── Buttons ── */
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     padding: 10px 20px; font-family: 'DM Sans', sans-serif;
@@ -256,7 +236,6 @@
   .btn-full { width: 100%; }
   .btn-sm { padding: 6px 14px; font-size: 13px; }
 
-  /* ── Spinner ── */
   .spinner {
     width: 14px; height: 14px;
     border: 2px solid rgba(255,255,255,0.3);
@@ -268,7 +247,6 @@
   .spinner.dark { border-color: rgba(0,0,0,0.1); border-top-color: var(--text); }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── Slot Cards ── */
   .slots-grid { display: flex; flex-direction: column; gap: 8px; }
   .slot-item {
     display: flex; align-items: center; justify-content: space-between;
@@ -282,13 +260,10 @@
   .slot-weekday { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
   .slot-time { font-family: 'DM Serif Display', serif; font-size: 1.25rem; letter-spacing: -0.02em; }
   .slot-date { font-size: 12px; color: var(--muted); margin-top: 1px; }
-  .badge {
-    font-size: 11px; padding: 3px 10px; border-radius: 99px; font-weight: 500;
-  }
+  .badge { font-size: 11px; padding: 3px 10px; border-radius: 99px; font-weight: 500; }
   .badge-green { background: var(--green-bg); color: var(--green); }
   .badge-muted { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
 
-  /* ── Status messages ── */
   .status { text-align: center; padding: 2rem; color: var(--muted); font-size: 14px; }
   .alert {
     padding: 0.875rem 1rem; border-radius: var(--radius-sm);
@@ -299,15 +274,12 @@
   .alert-success { background: var(--green-bg); color: var(--green); border-color: #A8DABC; }
   .alert-error { background: var(--red-bg); color: var(--red); border-color: #F7BCBE; }
 
-  /* ── Steps indicator ── */
   .steps { display: flex; gap: 6px; margin-bottom: 2rem; }
   .step-bar { flex: 1; height: 2px; border-radius: 99px; background: var(--border); transition: background 0.3s; }
   .step-bar.done { background: var(--text); }
 
-  /* ── Divider ── */
   .divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
 
-  /* ── Modal ── */
   .modal-backdrop {
     position: fixed; inset: 0; background: rgba(0,0,0,0.45);
     display: none; align-items: center; justify-content: center;
@@ -329,7 +301,6 @@
     display: flex; gap: 8px; justify-content: space-between; margin-top: 1.25rem;
   }
 
-  /* ── Responsive ── */
   @media (max-width: 700px) {
     .app-shell { grid-template-columns: 1fr; }
     .sidebar { position: static; height: auto; }
@@ -337,11 +308,9 @@
     .grid2, .grid3 { grid-template-columns: 1fr; }
   }
 
-  /* ── Animations ── */
   .fade-in { animation: fadeIn 0.25s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-  /* ── Config banner ── */
   .config-banner {
     background: #FFF8E7; border: 1px solid #F5D87A; border-radius: var(--radius-sm);
     padding: 0.875rem 1rem; font-size: 13px; color: #7A5C00; margin-bottom: 1.5rem;
@@ -356,10 +325,10 @@
 
 <div class="app-shell">
 
-  <!-- ══ SIDEBAR ══ -->
+  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="logo-wrap">
-      <img class="logo-img" src="data:image/jpeg;base64,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" alt="Gogroup" />
+      <img class="logo-img" src="data:image/jpeg;base64,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" alt="Gogroup" />
       <span class="logo-tag">Agendador de reuniões</span>
     </div>
 
@@ -394,10 +363,9 @@
     </div>
   </aside>
 
-  <!-- ══ MAIN ══ -->
+  <!-- MAIN -->
   <main class="main">
 
-    <!-- Config warning if CLIENT_ID not set -->
     <div class="config-banner" id="config-banner" style="display:none;">
       ⚠️ Configure seu <code>CLIENT_ID</code> do Google Cloud no topo do arquivo <code>index.html</code> para ativar a autenticação.
       <a href="#setup-guide" style="color:inherit; font-weight:500;"> Ver instruções ↓</a>
@@ -414,10 +382,9 @@
       <div class="step-bar" id="bar3"></div>
     </div>
 
-    <!-- ── STEP 1: Form ── -->
+    <!-- STEP 1: Form -->
     <div id="view-form">
 
-      <!-- ── Teams card ── -->
       <div class="card">
         <div class="card-title">
           <span>Times</span>
@@ -503,8 +470,9 @@
       </button>
 
     </div>
+    <!-- END STEP 1 -->
 
-    <!-- ── STEP 2: Results ── -->
+    <!-- STEP 2: Results -->
     <div id="view-results" style="display:none;" class="fade-in">
 
       <div class="card">
@@ -550,24 +518,23 @@
         </div>
 
       </div>
-    </div>
-  </div>
+      <!-- END event-form-card -->
 
-  <button class="btn btn-primary btn-full" id="btn-create" onclick="createEvent()">
-    Criar no Google Calendar
-  </button>
+      <button class="btn btn-primary btn-full" id="btn-create" onclick="createEvent()">
+        Criar no Google Calendar
+      </button>
 
-        <div class="alert alert-success" id="alert-success"></div>
-        <div class="alert alert-error" id="alert-error"></div>
-      </div>
+      <div class="alert alert-success" id="alert-success"></div>
+      <div class="alert alert-error" id="alert-error"></div>
 
-      <button class="btn btn-outline" onclick="goBack()" style="margin-top:4px;">
+      <button class="btn btn-outline" onclick="goBack()" style="margin-top:8px;">
         ← Nova busca
       </button>
 
     </div>
+    <!-- END STEP 2 -->
 
-    <!-- ── Setup Guide ── -->
+    <!-- Setup Guide -->
     <div id="setup-guide" style="margin-top:3rem; padding-top:2rem; border-top:1px solid var(--border);">
       <h2 style="font-family:'DM Serif Display',serif; font-size:1.4rem; margin-bottom:1rem; letter-spacing:-0.02em;">
         Como configurar
@@ -586,7 +553,7 @@
   </main>
 </div>
 
-<!-- ══ Modal: Teams Manager ══ -->
+<!-- Modal: Teams Manager -->
 <div class="modal-backdrop" id="teams-modal">
   <div class="modal">
     <div class="modal-title">Gerenciar times</div>
@@ -602,7 +569,7 @@
   </div>
 </div>
 
-<!-- ══ Modal: Team Editor ══ -->
+<!-- Modal: Team Editor -->
 <div class="modal-backdrop" id="team-editor-modal">
   <div class="modal">
     <div class="modal-title" id="editor-title">Novo time</div>
@@ -627,7 +594,6 @@
   </div>
 </div>
 
-<!-- Google Identity Services -->
 <script src="https://accounts.google.com/gsi/client" async></script>
 <script src="https://apis.google.com/js/api.js" async></script>
 
@@ -639,8 +605,26 @@ const CLIENT_ID = '737692861184-2e49p43be8purmfmiqc3m1nv6k4hn1f7.apps.googleuser
 const SCOPES = 'https://www.googleapis.com/auth/calendar';
 // ════════════════════════════════════════════════
 
-// ── Times padrão (sempre presentes, não podem ser removidos) ──
-const DEFAULT_TEAMS = [
+// FIX #5: aplica overrides de builtins ANTES de definir DEFAULT_TEAMS
+// para que loadTeams() já use os valores persistidos
+const BUILTIN_OVERRIDES_KEY = 'gogroup_agendador_builtin_overrides_v1';
+(function applyBuiltinOverridesOnLoad() {
+  try {
+    const raw = localStorage.getItem(BUILTIN_OVERRIDES_KEY);
+    if (!raw) return;
+    const ov = JSON.parse(raw);
+    DEFAULT_TEAMS_RAW.forEach(t => {
+      if (ov[t.id]) {
+        t.name = ov[t.id].name || t.name;
+        t.emails = ov[t.id].emails || t.emails;
+      }
+    });
+  } catch (e) {}
+})();
+
+// Times padrão (sempre presentes, não podem ser removidos)
+// Definidos como array mutável para suportar overrides
+const DEFAULT_TEAMS_RAW = [
   {
     id: 'default-gg',
     name: 'Gente e Gestão',
@@ -653,12 +637,27 @@ const DEFAULT_TEAMS = [
   }
 ];
 
-// ── State ──
+// FIX #5: aplica overrides de builtins ANTES de usá-los
+(function applyBuiltinOverrides() {
+  try {
+    const raw = localStorage.getItem(BUILTIN_OVERRIDES_KEY);
+    if (!raw) return;
+    const ov = JSON.parse(raw);
+    DEFAULT_TEAMS_RAW.forEach(t => {
+      if (ov[t.id]) {
+        t.name = ov[t.id].name || t.name;
+        t.emails = ov[t.id].emails || t.emails;
+      }
+    });
+  } catch (e) {}
+})();
+
+// State
 let tokenClient = null;
 let accessToken = null;
 let userProfile = null;
 let emails = [];
-let activeTeamIds = new Set(); // which teams are currently "selected"
+let activeTeamIds = new Set();
 let duration = 60;
 let excludeWeekends = true;
 let pageSize = 5;
@@ -666,26 +665,27 @@ let addMeet = true;
 let notifLevel = 'ALL';
 let selectedSlot = null;
 let foundSlots = [];
-let teams = []; // loaded from storage + defaults
+let teams = [];
 let editingTeamId = null;
 
-// ── Storage ──
+// Storage
 const STORAGE_KEY = 'gogroup_agendador_teams_v1';
+
 function loadTeams() {
   let custom = [];
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) custom = JSON.parse(raw) || [];
   } catch (e) { custom = []; }
-  // Merge: defaults first, then custom
-  teams = [...DEFAULT_TEAMS.map(t => ({ ...t })), ...custom];
+  teams = [...DEFAULT_TEAMS_RAW.map(t => ({ ...t })), ...custom];
 }
+
 function saveCustomTeams() {
   const custom = teams.filter(t => !t.builtin);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(custom));
 }
 
-// ── Init ──
+// Init
 window.addEventListener('load', () => {
   if (CLIENT_ID === 'SEU_CLIENT_ID_AQUI.apps.googleusercontent.com') {
     document.getElementById('config-banner').style.display = 'block';
@@ -698,16 +698,18 @@ window.addEventListener('load', () => {
 
 function setDefaultDates() {
   const now = new Date();
-  const pad = n => String(n).padStart(2,'0');
-  const fmt = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  const pad = n => String(n).padStart(2, '0');
+  const fmt = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   document.getElementById('date-start').value = fmt(now);
-  const later = new Date(now); later.setDate(now.getDate()+7);
+  const later = new Date(now);
+  later.setDate(now.getDate() + 7);
   document.getElementById('date-end').value = fmt(later);
 }
 
 function waitForGIS() {
   if (typeof google === 'undefined' || !google.accounts) {
-    setTimeout(waitForGIS, 300); return;
+    setTimeout(waitForGIS, 300);
+    return;
   }
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
@@ -727,7 +729,8 @@ function signIn() {
 
 function signOut() {
   if (accessToken) google.accounts.oauth2.revoke(accessToken);
-  accessToken = null; userProfile = null;
+  accessToken = null;
+  userProfile = null;
   updateAuthUI(false);
 }
 
@@ -769,7 +772,7 @@ function updateAuthUI(loggedIn) {
   }
 }
 
-// ── Teams: render chips on main screen ──
+// Teams: render chips on main screen
 function renderTeamChips() {
   const wrap = document.getElementById('team-chips');
   wrap.innerHTML = '';
@@ -783,7 +786,6 @@ function renderTeamChips() {
     `;
     wrap.appendChild(chip);
   });
-  // "new team" chip
   const add = document.createElement('button');
   add.className = 'team-chip add';
   add.onclick = () => openTeamEditor(null);
@@ -795,14 +797,16 @@ function toggleTeam(id) {
   const team = teams.find(t => t.id === id);
   if (!team) return;
   if (activeTeamIds.has(id)) {
-    // Remove: take out all emails that came from this team (only if they are not also in another active team)
     activeTeamIds.delete(id);
+    // Recalcula quais emails ainda estão cobertos por times ativos
     const stillCovered = new Set();
     activeTeamIds.forEach(tid => {
       const t = teams.find(x => x.id === tid);
-      if (t) t.emails.forEach(e => stillCovered.add(e.toLowerCase()));
+      if (t) t.emails.forEach(e => stillCovered.add(e.trim().toLowerCase()));
     });
-    emails = emails.filter(e => stillCovered.has(e) || !team.emails.map(x => x.toLowerCase()).includes(e));
+    const teamEmails = new Set(team.emails.map(e => e.trim().toLowerCase()));
+    // FIX #6: usa .trim() consistentemente ao comparar
+    emails = emails.filter(e => stillCovered.has(e) || !teamEmails.has(e));
   } else {
     activeTeamIds.add(id);
     team.emails.forEach(e => {
@@ -814,11 +818,12 @@ function toggleTeam(id) {
   renderTags();
 }
 
-// ── Teams Manager Modal ──
+// Teams Manager Modal
 function openTeamsManager() {
   renderTeamsList();
   openModal('teams-modal');
 }
+
 function renderTeamsList() {
   const list = document.getElementById('teams-list');
   list.innerHTML = '';
@@ -847,7 +852,6 @@ function openTeamEditor(id) {
   document.getElementById('editor-title').textContent = team ? 'Editar time' : 'Novo time';
   document.getElementById('editor-name').value = team ? team.name : '';
   document.getElementById('editor-emails').value = team ? team.emails.join('\n') : '';
-  // Only allow delete on non-builtin existing teams
   const btnDel = document.getElementById('editor-delete');
   btnDel.style.display = (team && !team.builtin) ? 'inline-flex' : 'none';
   openModal('team-editor-modal');
@@ -864,26 +868,19 @@ function saveTeamFromEditor() {
   if (editingTeamId) {
     const team = teams.find(t => t.id === editingTeamId);
     if (team) {
-      if (team.builtin) {
-        // Builtin: only allow name/emails edit, keep builtin flag
-        team.name = name;
-        team.emails = list;
-      } else {
-        team.name = name;
-        team.emails = list;
-      }
+      team.name = name;
+      team.emails = list;
     }
   } else {
     teams.push({
-      id: 'custom-' + Date.now() + '-' + Math.random().toString(36).slice(2,6),
+      id: 'custom-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
       name,
       emails: list,
       builtin: false
     });
   }
+
   saveCustomTeams();
-  // Note: builtin edits don't persist (they'll reset on reload). We save the entire custom list.
-  // To persist builtin edits too, store them separately:
   persistBuiltinEdits();
   editingTeamId = null;
   closeModal('team-editor-modal');
@@ -891,8 +888,6 @@ function saveTeamFromEditor() {
   openTeamsManager();
 }
 
-// Optional: persist edits to builtin teams so they survive a reload
-const BUILTIN_OVERRIDES_KEY = 'gogroup_agendador_builtin_overrides_v1';
 function persistBuiltinEdits() {
   const overrides = {};
   teams.filter(t => t.builtin).forEach(t => {
@@ -900,20 +895,6 @@ function persistBuiltinEdits() {
   });
   localStorage.setItem(BUILTIN_OVERRIDES_KEY, JSON.stringify(overrides));
 }
-// Apply overrides on load
-(function applyBuiltinOverridesOnLoad() {
-  try {
-    const raw = localStorage.getItem(BUILTIN_OVERRIDES_KEY);
-    if (!raw) return;
-    const ov = JSON.parse(raw);
-    DEFAULT_TEAMS.forEach(t => {
-      if (ov[t.id]) {
-        t.name = ov[t.id].name || t.name;
-        t.emails = ov[t.id].emails || t.emails;
-      }
-    });
-  } catch (e) {}
-})();
 
 function deleteTeamFromEditor() {
   if (!editingTeamId) return;
@@ -930,24 +911,23 @@ function deleteTeamFromEditor() {
   openTeamsManager();
 }
 
-// ── Modal helpers ──
+// Modal helpers
 function openModal(id) { document.getElementById(id).classList.add('visible'); }
 function closeModal(id) { document.getElementById(id).classList.remove('visible'); }
-// Close on backdrop click
+
 document.querySelectorAll('.modal-backdrop').forEach(el => {
   el.addEventListener('click', (e) => { if (e.target === el) el.classList.remove('visible'); });
 });
 
-// ── Escape ──
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   })[c]);
 }
 
-// ── Email tags ──
+// Email tags
 function initials(email) {
-  const parts = email.split('@')[0].replace(/[._-]/g,' ').trim().split(' ');
+  const parts = email.split('@')[0].replace(/[._-]/g, ' ').trim().split(' ');
   return ((parts[0][0] || '') + (parts[1] ? parts[1][0] : '')).toUpperCase();
 }
 
@@ -968,9 +948,11 @@ function addEmail() {
   const inp = document.getElementById('email-input');
   const val = inp.value.trim().toLowerCase();
   if (val && val.includes('@') && !emails.includes(val)) {
-    emails.push(val); renderTags();
+    emails.push(val);
+    renderTags();
   }
-  inp.value = ''; inp.focus();
+  inp.value = '';
+  inp.focus();
 }
 
 function handleEmailKey(e) {
@@ -979,21 +961,21 @@ function handleEmailKey(e) {
 
 function removeEmail(i) {
   const removed = emails[i];
-  emails.splice(i,1);
-  // If removed email was part of an active team and no longer covered, deactivate that team visually (optional)
-  // Keep logic simple: just re-render
-  renderTags();
-  // Recompute active teams: a team is "active" only if all its emails are in the current list
+  emails.splice(i, 1);
+  // FIX #6: recalcula activeTeamIds com trim() consistente
   const newActive = new Set();
   activeTeamIds.forEach(id => {
     const t = teams.find(x => x.id === id);
-    if (t && t.emails.every(e => emails.includes(e.toLowerCase()))) newActive.add(id);
+    if (t && t.emails.every(e => emails.includes(e.trim().toLowerCase()))) {
+      newActive.add(id);
+    }
   });
   activeTeamIds = newActive;
+  renderTags();
   renderTeamChips();
 }
 
-// ── Pill setters ──
+// Pill setters
 function setDur(d, btn) {
   duration = d;
   document.querySelectorAll('#dur-group .pill').forEach(b => b.classList.remove('active'));
@@ -1017,31 +999,36 @@ function setPref(key, val, btn) {
   btn.classList.add('active');
 }
 
-// ── Navigation ──
+// Navigation
 function goBack() {
   document.getElementById('view-form').style.display = '';
   document.getElementById('view-results').style.display = 'none';
+  // FIX #4: esconde o card de evento e limpa alertas ao voltar
   document.getElementById('event-form-card').style.display = 'none';
+  document.getElementById('alert-success').classList.remove('visible');
+  document.getElementById('alert-error').classList.remove('visible');
   document.getElementById('bar2').classList.remove('done');
   document.getElementById('bar3').classList.remove('done');
   selectedSlot = null;
 }
 
-// ── Helpers ──
-function fmtWeekday(iso) {
-  return new Date(iso).toLocaleDateString('pt-BR', { weekday: 'long' });
+// FIX #3: formata datas/horários a partir do objeto Date diretamente,
+// evitando o desvio de fuso causado por toISOString()
+function fmtWeekday(date) {
+  return date.toLocaleDateString('pt-BR', { weekday: 'long' });
 }
-function fmtDate(iso) {
-  return new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+function fmtDate(date) {
+  return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
 }
-function fmtTime(iso) {
-  return new Date(iso).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+function fmtTime(date) {
+  return date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 }
 
-// ── Search ──
+// Search
 async function searchSlots() {
   if (!accessToken) {
-    alert('Faça login com o Google primeiro.'); return;
+    alert('Faça login com o Google primeiro.');
+    return;
   }
   const ds = document.getElementById('date-start').value;
   const de = document.getElementById('date-end').value;
@@ -1056,7 +1043,6 @@ async function searchSlots() {
   const ws = document.getElementById('work-start').value;
   const we = document.getElementById('work-end').value;
 
-  // Build FreeBusy request to check availability
   const timeMin = ds + 'T00:00:00Z';
   const timeMax = de + 'T23:59:59Z';
 
@@ -1074,7 +1060,6 @@ async function searchSlots() {
     const data = await r.json();
     if (data.error) throw new Error(data.error.message);
 
-    // Collect all busy periods across all calendars
     const allBusy = [];
     for (const cal of Object.values(data.calendars)) {
       for (const b of (cal.busy || [])) {
@@ -1082,16 +1067,22 @@ async function searchSlots() {
       }
     }
 
-    // Generate candidate slots
-    const slots = generateSlots(new Date(ds + 'T00:00:00'), new Date(de + 'T23:59:59'), ws, we, duration, excludeWeekends, allBusy, pageSize);
+    const slots = generateSlots(
+      new Date(ds + 'T00:00:00'),
+      new Date(de + 'T23:59:59'),
+      ws, we, duration, excludeWeekends, allBusy, pageSize
+    );
     foundSlots = slots;
 
     // Update sidebar stats
     document.getElementById('stat-attendees').textContent = emails.length + 1;
-    document.getElementById('stat-duration').textContent = duration >= 60 ? Math.floor(duration/60)+'h'+(duration%60?''+duration%60+'min':'') : duration+'min';
+    const durLabel = duration >= 60
+      ? Math.floor(duration / 60) + 'h' + (duration % 60 ? (duration % 60) + 'min' : '')
+      : duration + 'min';
+    document.getElementById('stat-duration').textContent = durLabel;
     document.getElementById('stat-slots').textContent = slots.length;
 
-    // Render
+    // Show results view
     document.getElementById('view-form').style.display = 'none';
     document.getElementById('view-results').style.display = '';
     document.getElementById('bar2').classList.add('done');
@@ -1106,11 +1097,12 @@ async function searchSlots() {
         const div = document.createElement('div');
         div.className = 'slot-item';
         div.onclick = () => selectSlot(i, div);
+        // FIX #3: passa objeto Date diretamente, sem toISOString()
         div.innerHTML = `
           <div>
-            <div class="slot-weekday">${fmtWeekday(slot.start.toISOString())}</div>
-            <div class="slot-time">${fmtTime(slot.start.toISOString())} – ${fmtTime(slot.end.toISOString())}</div>
-            <div class="slot-date">${fmtDate(slot.start.toISOString())}</div>
+            <div class="slot-weekday">${fmtWeekday(slot.start)}</div>
+            <div class="slot-time">${fmtTime(slot.start)} – ${fmtTime(slot.end)}</div>
+            <div class="slot-date">${fmtDate(slot.start)}</div>
           </div>
           <span class="badge badge-green">Todos livres</span>`;
         grid.appendChild(div);
@@ -1128,7 +1120,7 @@ async function searchSlots() {
 // Generate free slots avoiding all busy periods
 function generateSlots(startDate, endDate, workStart, workEnd, durMins, excludeWknd, busyPeriods, limit) {
   const slots = [];
-  const step = 30; // check every 30min
+  const step = 30;
   const [wsH, wsM] = workStart.split(':').map(Number);
   const [weH, weM] = workEnd.split(':').map(Number);
 
@@ -1143,7 +1135,8 @@ function generateSlots(startDate, endDate, workStart, workEnd, durMins, excludeW
       continue;
     }
 
-    const endOfDay = new Date(cursor); endOfDay.setHours(weH, weM, 0, 0);
+    const endOfDay = new Date(cursor);
+    endOfDay.setHours(weH, weM, 0, 0);
     const slotEnd = new Date(cursor.getTime() + durMins * 60000);
 
     if (slotEnd > endOfDay) {
@@ -1152,9 +1145,7 @@ function generateSlots(startDate, endDate, workStart, workEnd, durMins, excludeW
       continue;
     }
 
-    const isFree = !busyPeriods.some(b =>
-      cursor < b.end && slotEnd > b.start
-    );
+    const isFree = !busyPeriods.some(b => cursor < b.end && slotEnd > b.start);
 
     if (isFree) {
       slots.push({ start: new Date(cursor), end: new Date(slotEnd) });
@@ -1177,7 +1168,7 @@ function selectSlot(i, el) {
   document.getElementById('bar3').classList.add('done');
 }
 
-// ── Create Event ──
+// Create Event
 async function createEvent() {
   if (!selectedSlot) { alert('Selecione um horário.'); return; }
   const title = document.getElementById('ev-title').value.trim();
