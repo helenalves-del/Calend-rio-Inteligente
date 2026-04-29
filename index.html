@@ -310,9 +310,9 @@
 
       <div class="card" id="event-form-card" style="display:none;">
         <div class="card-title"><span>Criar evento</span></div>
-        <div class="field"><label>Título da reunião *</label><input type="text" id="ev-title" placeholder="Ex: Alinhamento de produto" onkeydown="if(event.key==='Enter') createEvent()" /></div>
-        <div class="field"><label>Descrição</label><input type="text" id="ev-desc" placeholder="Pauta, contexto, link de referência..." onkeydown="if(event.key==='Enter') createEvent()" /></div>
-        <div class="field"><label>Local</label><input type="text" id="ev-location" placeholder="Sala X, link do Meet, endereço..." onkeydown="if(event.key==='Enter') createEvent()" /></div>
+        <div class="field"><label>Título da reunião *</label><input type="text" id="ev-title" placeholder="Ex: Alinhamento de produto" onkeydown="if(event.key==='Enter') criarEvento()" /></div>
+        <div class="field"><label>Descrição</label><input type="text" id="ev-desc" placeholder="Pauta, contexto, link de referência..." onkeydown="if(event.key==='Enter') criarEvento()" /></div>
+        <div class="field"><label>Local</label><input type="text" id="ev-location" placeholder="Sala X, link do Meet, endereço..." onkeydown="if(event.key==='Enter') criarEvento()" /></div>
         <div class="divider"></div>
         <div class="grid2 field">
           <div>
@@ -333,7 +333,7 @@
         </div>
       </div>
 
-      <button class="btn btn-primary btn-full" id="btn-create" onclick="createEvent()">Criar no Google Calendar</button>
+      <button class="btn btn-primary btn-full" id="btn-create" onclick="criarEvento()">Criar no Google Calendar</button>
       <div class="alert alert-success" id="alert-success"></div>
       <div class="alert alert-error" id="alert-error"></div>
 
@@ -1079,7 +1079,7 @@ function selectSlot(i, el) {
 // ════════════════════════════════════════════════
 //  CREATE EVENT
 // ════════════════════════════════════════════════
-async function createEvent() {
+async function criarEvento() {
   if (!selectedSlot) { alert('Selecione um horário.'); return; }
   const title = document.getElementById('ev-title').value.trim();
   if (!title) { alert('Informe o título da reunião.'); return; }
