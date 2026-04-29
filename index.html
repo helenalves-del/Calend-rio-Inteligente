@@ -52,12 +52,25 @@
   .stat strong { opacity: 1; font-weight: 500; color: var(--bg); }
   .main { padding: 2.5rem 2.5rem 3rem; max-width: 860px; }
   .page-header { margin-bottom: 2rem; }
-  .page-title { font-family: 'DM Serif Display', serif; font-size: 2rem; letter-spacing: -0.03em; line-height: 1.2; }
-  .page-subtitle { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 2.6rem; letter-spacing: -0.03em; line-height: 1.2; }
+  .page-subtitle { color: var(--muted); font-size: 1rem; margin-top: 6px; }
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
-  .card-title { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; color: var(--muted); margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; }
-  .card-title-link { font-size: 12px; color: var(--text); cursor: pointer; font-weight: 500; text-transform: none; letter-spacing: normal; background: none; border: none; padding: 0; font-family: inherit; }
+  .card-title { font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 600; color: var(--muted); margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; }
+  .card-title-link { font-size: 13px; color: var(--text); cursor: pointer; font-weight: 500; text-transform: none; letter-spacing: normal; background: none; border: none; padding: 0; font-family: inherit; }
   .card-title-link:hover { text-decoration: underline; }
+
+  /* ── Accordion ── */
+  .accordion-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 0; box-shadow: var(--shadow); transition: background 0.15s; user-select: none; }
+  .accordion-header:hover { background: var(--surface2); }
+  .accordion-header.open { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; }
+  .accordion-title { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+  .accordion-badge { font-size: 11px; font-weight: 500; background: var(--text); color: var(--bg); padding: 2px 8px; border-radius: 99px; }
+  .accordion-badge.room-badge { background: var(--room-text); }
+  .accordion-chevron { font-size: 16px; color: var(--muted); transition: transform 0.25s; line-height: 1; }
+  .accordion-chevron.open { transform: rotate(180deg); }
+  .accordion-body { background: var(--surface); border: 1px solid var(--border); border-top: none; border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow); display: none; }
+  .accordion-body.open { display: block; }
+  .accordion-actions { display: flex; gap: 8px; margin-bottom: 12px; }
   label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 5px; font-weight: 400; }
   input[type=text], input[type=email], input[type=date], input[type=time], input[type=number], select, textarea { width: 100%; padding: 9px 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); outline: none; transition: border-color 0.15s; appearance: none; -webkit-appearance: none; }
   input:focus, select:focus, textarea:focus { border-color: var(--text); }
@@ -220,10 +233,22 @@
 
     <!-- STEP 1 -->
     <div id="view-form">
-      <div class="card">
-        <div class="card-title">
+      <!-- Times accordion -->
+      <div class="accordion-header" id="acc-teams-header" onclick="toggleAccordion('teams')">
+        <div class="accordion-title">
           <span>Times</span>
-          <button class="card-title-link" onclick="openManageModal()">Gerenciar</button>
+          <span class="accordion-badge" id="acc-teams-badge" style="display:none;"></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button class="card-title-link" onclick="event.stopPropagation();openManageModal()">Gerenciar</button>
+          <span class="accordion-chevron" id="acc-teams-chevron">▾</span>
+        </div>
+      </div>
+      <div class="accordion-body" id="acc-teams-body">
+        <div class="accordion-actions">
+          <button class="btn btn-outline btn-sm" onclick="selectAllTeams()">Selecionar todos</button>
+          <button class="btn btn-outline btn-sm" onclick="clearAllTeams()">Limpar seleção</button>
+          <button class="card-title-link" style="margin-left:auto;" onclick="openTeamEditor(null)">+ Novo time</button>
         </div>
         <div class="teams-search-wrap">
           <span class="teams-search-icon">🔍</span>
@@ -232,7 +257,6 @@
         <div class="teams-grid" id="team-chips"></div>
         <div class="teams-meta">
           <span id="teams-count-label" style="color:var(--muted);"></span>
-          <button class="card-title-link" onclick="openTeamEditor(null)">+ Novo time</button>
         </div>
       </div>
 
@@ -240,11 +264,19 @@
         <div class="card-title"><span>Participantes e salas</span></div>
         <div class="tags-wrap" id="tags-wrap"></div>
 
-        <!-- Salas -->
+        <!-- Salas accordion -->
         <div style="margin-bottom:14px;">
-          <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;color:var(--muted);margin-bottom:10px;opacity:0.7;">Salas de reunião</div>
-          <div class="rooms-grid" id="room-chips"></div>
-          <div class="rooms-hint">Selecione uma sala para verificar disponibilidade e reservar junto com o evento.</div>
+          <div class="accordion-header" id="acc-rooms-header" onclick="toggleAccordion('rooms')" style="border-radius:var(--radius-sm);box-shadow:none;border-color:var(--border);">
+            <div class="accordion-title" style="font-size:12px;">
+              <span>Salas de reunião</span>
+              <span class="accordion-badge room-badge" id="acc-rooms-badge" style="display:none;"></span>
+            </div>
+            <span class="accordion-chevron" id="acc-rooms-chevron">▾</span>
+          </div>
+          <div class="accordion-body" id="acc-rooms-body" style="border-radius:0 0 var(--radius-sm) var(--radius-sm);box-shadow:none;margin-bottom:0;padding:1rem 1.25rem;">
+            <div class="rooms-grid" id="room-chips"></div>
+            <div class="rooms-hint" style="margin-top:8px;">Selecione uma sala para verificar disponibilidade e reservar junto com o evento.</div>
+          </div>
         </div>
 
         <div class="divider" style="margin:14px 0;"></div>
@@ -400,11 +432,29 @@ const SCOPES = 'https://www.googleapis.com/auth/calendar';
 //  SALAS DE REUNIÃO
 // ════════════════════════════════════════════════
 const ROOMS = [
-  { id: 'room-1', name: 'Gocase', location: 'Fortaleza/CE', email: 'c_188634b4765s6gjrkefsfe9vn52m0@resource.calendar.google.com' },
-  { id: 'room-2', name: 'Jeito Gogroup', location: 'Fortaleza/CE', email: 'c_1889l2geio636ig3lqm91jvihdcjq@resource.calendar.google.com' },
-  { id: 'room-3', name: 'Corações Flutuantes', location: 'Extrema/MG', email: 'c_1880ib1g2tmssho3g5fph799oqdlq@resource.calendar.google.com' },
-  { id: 'room-4', name: 'Sala Gobeaute', location: 'Fortaleza/CE', email: 'c_188emf2m6j2dmgqqk788rikp28vus@resource.calendar.google.com' },
-  { id: 'room-5', name: 'Sala Golovers', location: 'Fortaleza/CE', email: 'c_18844c9obivpiijfi37a0rrcdpmq0@resource.calendar.google.com' },
+  // Fortaleza/CE
+  { id: 'room-1',  name: 'Gocase',                  location: 'Fortaleza/CE', email: 'c_188634b4765s6gjrkefsfe9vn52m0@resource.calendar.google.com' },
+  { id: 'room-2',  name: 'Jeito Gogroup',            location: 'Fortaleza/CE', email: 'c_1889l2geio636ig3lqm91jvihdcjq@resource.calendar.google.com' },
+  { id: 'room-4',  name: 'Gobeaute',                 location: 'Fortaleza/CE', email: 'c_188emf2m6j2dmgqqk788rikp28vus@resource.calendar.google.com' },
+  { id: 'room-5',  name: 'Golovers',                 location: 'Fortaleza/CE', email: 'c_18844c9obivpiijfi37a0rrcdpmq0@resource.calendar.google.com' },
+  { id: 'room-6',  name: 'Transparência Máxima',     location: 'Fortaleza/CE', email: 'c_1888ps28eci2mhuqlv83gcs4sht9k@resource.calendar.google.com' },
+  { id: 'room-7',  name: 'Amor pelo Cliente',        location: 'Fortaleza/CE', email: 'c_188etulrgq8luh2ahanniob86b3j6@resource.calendar.google.com' },
+  { id: 'room-8',  name: 'Ponta Firme',              location: 'Fortaleza/CE', email: 'c_188ajnv26i4hai3kjfu5dj8qn4mh8@resource.calendar.google.com' },
+  { id: 'room-9',  name: 'Time Campeão',             location: 'Fortaleza/CE', email: 'c_188asksjjbhm6gp2hgf4lnudftr0i@resource.calendar.google.com' },
+  { id: 'room-10', name: 'Sonho Grande',             location: 'Fortaleza/CE', email: 'c_188efi3su8k7ojjshtekmidj9pctc@resource.calendar.google.com' },
+  { id: 'room-11', name: 'Mente Aberta',             location: 'Fortaleza/CE', email: 'c_188es3aio4lksgoai7u9ldduo2jma@resource.calendar.google.com' },
+  // Extrema/MG
+  { id: 'room-3',  name: 'Corações Flutuantes',      location: 'Extrema/MG',   email: 'c_1889g8b8adrl6hd6g2nevvg3vvttg@resource.calendar.google.com' },
+  // São Paulo/SP
+  { id: 'room-12', name: 'Gocase',                   location: 'São Paulo/SP', email: 'c_188ciia41kt82g6glel15qaj2mau2@resource.calendar.google.com' },
+  { id: 'room-13', name: 'Jeito Gogroup',            location: 'São Paulo/SP', email: 'c_1889oa3npd286jvcjdf3ei6e4v9bq@resource.calendar.google.com' },
+  { id: 'room-14', name: 'Gobeaute',                 location: 'São Paulo/SP', email: 'c_188ekgmrkvn3sjq8n6cf58u626180@resource.calendar.google.com' },
+  { id: 'room-15', name: 'Golovers',                 location: 'São Paulo/SP', email: 'c_188a5avcoecreh5qhuue25lq55snk@resource.calendar.google.com' },
+  { id: 'room-16', name: 'Transparência Máxima',     location: 'São Paulo/SP', email: 'c_18811padlc4c8ghtgvluh0etgdatg@resource.calendar.google.com' },
+  { id: 'room-17', name: 'Amor pelo Cliente',        location: 'São Paulo/SP', email: 'c_188ee0dchic5ohc2n64al68v70880@resource.calendar.google.com' },
+  { id: 'room-18', name: 'Ponta Firme',              location: 'São Paulo/SP', email: 'c_1882b0bihl5esipnn8t0k67cig830@resource.calendar.google.com' },
+  { id: 'room-19', name: 'Time Campeão',             location: 'São Paulo/SP', email: 'c_1887rrt78i64gh4qgilgotep3ta1k@resource.calendar.google.com' },
+  { id: 'room-20', name: 'Mente Aberta',             location: 'São Paulo/SP', email: 'c_188679cqbeh0uge8hn0t5oqreki9u@resource.calendar.google.com' },
 ];
 
 // ════════════════════════════════════════════════
@@ -579,14 +629,37 @@ function setDefaultDates() {
 function renderRoomChips() {
   const wrap = document.getElementById('room-chips');
   wrap.innerHTML = '';
-  ROOMS.forEach(room => {
-    const chip = document.createElement('button');
-    const isActive = activeRoomIds.has(room.id);
-    chip.className = 'room-chip' + (isActive ? ' active' : '');
-    chip.onclick = () => toggleRoom(room.id);
-    chip.innerHTML = `<span class="room-chip-icon">&#9679;</span><span>${escapeHtml(room.name)}</span><span style="font-size:10px;opacity:0.65;margin-left:2px;">${escapeHtml(room.location)}</span>`;
-    wrap.appendChild(chip);
+
+  const cities = [...new Set(ROOMS.map(r => r.location))];
+  cities.forEach(city => {
+    const cityRooms = ROOMS.filter(r => r.location === city);
+    const cityDiv = document.createElement('div');
+    cityDiv.style.cssText = 'width:100%;margin-bottom:10px;';
+
+    const cityLabel = document.createElement('div');
+    cityLabel.style.cssText = 'font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;color:var(--muted);opacity:0.6;margin-bottom:6px;';
+    cityLabel.textContent = city;
+    cityDiv.appendChild(cityLabel);
+
+    const chipsRow = document.createElement('div');
+    chipsRow.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;';
+    cityRooms.forEach(room => {
+      const chip = document.createElement('button');
+      const isActive = activeRoomIds.has(room.id);
+      chip.className = 'room-chip' + (isActive ? ' active' : '');
+      chip.onclick = () => toggleRoom(room.id);
+      chip.innerHTML = `<span class="room-chip-icon">&#9679;</span><span>${escapeHtml(room.name)}</span>`;
+      chipsRow.appendChild(chip);
+    });
+    cityDiv.appendChild(chipsRow);
+    wrap.appendChild(cityDiv);
   });
+
+  const badge = document.getElementById('acc-rooms-badge');
+  if (badge) {
+    if (activeRoomIds.size > 0) { badge.style.display = ''; badge.textContent = activeRoomIds.size + ' sala' + (activeRoomIds.size > 1 ? 's' : ''); }
+    else { badge.style.display = 'none'; }
+  }
 }
 
 function toggleRoom(id) {
@@ -628,6 +701,12 @@ function renderTeamChips() {
   if (label) label.textContent = filtered.length === allTeams.length
     ? `${allTeams.length} times disponíveis`
     : `${filtered.length} de ${allTeams.length} times`;
+
+  const badge = document.getElementById('acc-teams-badge');
+  if (badge) {
+    if (activeTeamIds.size > 0) { badge.style.display = ''; badge.textContent = activeTeamIds.size + ' selecionado' + (activeTeamIds.size > 1 ? 's' : ''); }
+    else { badge.style.display = 'none'; }
+  }
 }
 
 function toggleTeam(id) {
@@ -651,6 +730,38 @@ function toggleTeam(id) {
   }
   renderTeamChips();
   renderTags();
+}
+
+// ════════════════════════════════════════════════
+//  ACCORDION
+// ════════════════════════════════════════════════
+function toggleAccordion(key) {
+  const header = document.getElementById('acc-'+key+'-header');
+  const body   = document.getElementById('acc-'+key+'-body');
+  const chev   = document.getElementById('acc-'+key+'-chevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  header.classList.toggle('open', !isOpen);
+  chev.classList.toggle('open', !isOpen);
+}
+
+function selectAllTeams() {
+  getAllTeams().forEach(team => {
+    if (!activeTeamIds.has(team.id)) {
+      activeTeamIds.add(team.id);
+      team.emails.forEach(e => {
+        const lo = e.trim().toLowerCase();
+        if (lo && !emails.includes(lo)) emails.push(lo);
+      });
+    }
+  });
+  renderTeamChips(); renderTags();
+}
+
+function clearAllTeams() {
+  activeTeamIds.clear();
+  emails = [];
+  renderTeamChips(); renderTags();
 }
 
 // ════════════════════════════════════════════════
