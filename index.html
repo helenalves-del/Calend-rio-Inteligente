@@ -913,6 +913,8 @@ document.querySelectorAll('.modal-backdrop').forEach(el => {
 // ════════════════════════════════════════════════
 //  AUTH
 // ════════════════════════════════════════════════
+const STORAGE_PROFILE = 'gg_user_profile_v1';
+
 function waitForGIS() {
   if (typeof google === 'undefined' || !google.accounts) { setTimeout(waitForGIS, 300); return; }
   tokenClient = google.accounts.oauth2.initTokenClient({
@@ -923,6 +925,16 @@ function waitForGIS() {
       await fetchUserInfo();
     }
   });
+
+  // Tenta renovar token silenciosamente se já logou antes
+  const saved = localStorage.getItem(STORAGE_PROFILE);
+  if (saved) {
+    try {
+      userProfile = JSON.parse(saved);
+      updateAuthUI(true); // mostra como conectado imediatamente
+      tokenClient.requestAccessToken({ prompt: '' }); // renova token em segundo plano
+    } catch(e) { localStorage.removeItem(STORAGE_PROFILE); }
+  }
 }
 
 function signIn() {
@@ -933,6 +945,7 @@ function signIn() {
 function signOut() {
   if (accessToken) google.accounts.oauth2.revoke(accessToken);
   accessToken = null; userProfile = null;
+  localStorage.removeItem(STORAGE_PROFILE);
   updateAuthUI(false);
 }
 
@@ -951,6 +964,7 @@ async function fetchUserInfo() {
   try {
     const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: `Bearer ${accessToken}` } });
     userProfile = await r.json();
+    localStorage.setItem(STORAGE_PROFILE, JSON.stringify(userProfile)); // salva perfil
     updateAuthUI(true);
   } catch(e) { console.error(e); }
 }
