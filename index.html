@@ -21,17 +21,18 @@
     --green-bg: #D8F3DC;
     --red: #A4262C;
     --red-bg: #FDE8E9;
+    --room-bg: #EEF2FF;
+    --room-border: #C7D2FE;
+    --room-text: #3730A3;
     --radius: 12px;
     --radius-sm: 8px;
     --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
- 
   }
   html { font-size: 16px; }
   body { font-family: 'DM Sans', sans-serif; font-weight: 400; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
   .app-shell { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
   .sidebar { background: var(--text); color: var(--bg); padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 2.5rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
   .logo-wrap { display: flex; flex-direction: column; gap: 6px; }
-  .logo-img { height: 32px; width: auto; object-fit: contain; align-self: flex-start; filter: brightness(0) invert(1); }
   .logo-tag { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.78rem; opacity: 0.45; letter-spacing: 0.02em; }
   .sidebar-section { display: flex; flex-direction: column; gap: 0.5rem; }
   .sidebar-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.4; font-weight: 500; margin-bottom: 4px; }
@@ -89,10 +90,21 @@
   .team-chip.add:hover { color: var(--text); border-color: var(--text); }
   .teams-meta { font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
 
+  /* ── Room chips ── */
+  .rooms-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .room-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border: 1px solid var(--room-border); background: var(--room-bg); color: var(--room-text); border-radius: 99px; font-size: 12px; cursor: pointer; transition: all 0.15s; font-family: inherit; user-select: none; font-weight: 400; }
+  .room-chip:hover { border-color: var(--room-text); }
+  .room-chip.active { background: var(--room-text); color: #fff; border-color: var(--room-text); }
+  .room-chip-icon { font-size: 12px; opacity: 0.7; }
+  .room-chip.active .room-chip-icon { opacity: 1; }
+  .rooms-hint { font-size: 11px; color: var(--muted); opacity: 0.7; margin-top: 4px; }
+
   /* ── Tags ── */
   .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 4px; }
   .tag { display: inline-flex; align-items: center; gap: 6px; background: var(--surface2); border: 1px solid var(--border); border-radius: 99px; padding: 4px 10px 4px 7px; font-size: 13px; color: var(--text); }
+  .tag.tag-room { background: var(--room-bg); border-color: var(--room-border); color: var(--room-text); }
   .tag-avatar { width: 20px; height: 20px; border-radius: 50%; background: var(--text); color: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 500; flex-shrink: 0; }
+  .tag-avatar.room-avatar { background: var(--room-text); font-size: 11px; }
   .tag-x { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 16px; line-height: 1; padding: 0; display: flex; align-items: center; }
   .tag-x:hover { color: var(--text); }
 
@@ -167,7 +179,7 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="logo-wrap">
-      <span style="font-family:'DM Serif Display',serif; font-size:2.4rem; color:var(--bg); letter-spacing:-0.02em;">gogroup</span>
+      <span style="font-family:'DM Serif Display',serif; font-size:1.4rem; color:var(--bg); letter-spacing:-0.02em;">gogroup</span>
       <span class="logo-tag">Agenda Inteligente</span>
     </div>
     <div class="sidebar-section">
@@ -184,6 +196,7 @@
       <div class="sidebar-label">Última busca</div>
       <div class="stat-row">
         <div class="stat"><span>Participantes</span><strong id="stat-attendees">—</strong></div>
+        <div class="stat"><span>Salas</span><strong id="stat-rooms">—</strong></div>
         <div class="stat"><span>Duração</span><strong id="stat-duration">—</strong></div>
         <div class="stat"><span>Horários encontrados</span><strong id="stat-slots">—</strong></div>
       </div>
@@ -212,7 +225,6 @@
           <span>Times</span>
           <button class="card-title-link" onclick="openManageModal()">Gerenciar</button>
         </div>
-        <!-- Search -->
         <div class="teams-search-wrap">
           <span class="teams-search-icon">🔍</span>
           <input type="text" id="teams-search" placeholder="Buscar time..." oninput="renderTeamChips()" style="font-size:13px;" />
@@ -225,8 +237,18 @@
       </div>
 
       <div class="card">
-        <div class="card-title"><span>Participantes</span></div>
+        <div class="card-title"><span>Participantes e salas</span></div>
         <div class="tags-wrap" id="tags-wrap"></div>
+
+        <!-- Salas -->
+        <div style="margin-bottom:14px;">
+          <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;color:var(--muted);margin-bottom:10px;opacity:0.7;">Salas de reunião</div>
+          <div class="rooms-grid" id="room-chips"></div>
+          <div class="rooms-hint">Selecione uma sala para verificar disponibilidade e reservar junto com o evento.</div>
+        </div>
+
+        <div class="divider" style="margin:14px 0;"></div>
+
         <div style="display:flex;gap:8px;">
           <input type="email" id="email-input" placeholder="email@empresa.com" style="flex:1;" onkeydown="handleEmailKey(event)" />
           <button class="btn btn-outline btn-sm" onclick="addEmail()">Adicionar</button>
@@ -240,26 +262,20 @@
           <div><label>Data inicial</label><input type="date" id="date-start" /></div>
           <div><label>Data final</label><input type="date" id="date-end" /></div>
         </div>
-          <div class="field">
+        <div class="field">
           <label>Duração da reunião</label>
-          <div class="pill-group" id="dur-group">
-  <button class="pill" onclick="setDur(30, this)">30 min</button>
-  <button class="pill active" onclick="setDur(60, this)">1 hora</button>
-  <button class="pill" onclick="setDur(90, this)">1h 30min</button>
-  <button class="pill" onclick="setDur(120, this)">2 horas</button>
-  
-  <div style="display: inline-flex; align-items: center; margin-left: 8px;">
-    <input 
-      type="number" 
-      id="input-manual"
-      placeholder="Outro (min)" 
-      class="pill" 
-      style="width: 100px; outline: none;"
-      oninput="setDur(this.value, this)"
-    />
-  </div>
-</div>
-
+          <div class="pill-group" id="dur-group" style="align-items:center;">
+            <button class="pill" onclick="setDur(30,this)">30 min</button>
+            <button class="pill active" onclick="setDur(60,this)">1 hora</button>
+            <button class="pill" onclick="setDur(90,this)">1h 30min</button>
+            <button class="pill" onclick="setDur(120,this)">2 horas</button>
+            <button class="pill" id="pill-custom" onclick="toggleCustomDur(this)">Outro</button>
+          </div>
+          <div id="custom-dur-wrap" style="display:none;margin-top:10px;display:none;align-items:center;gap:8px;">
+            <input type="number" id="custom-dur-input" min="5" max="480" placeholder="Ex: 45" style="width:110px;" oninput="applyCustomDur()" />
+            <span style="font-size:13px;color:var(--muted);">minutos</span>
+          </div>
+        </div>
         <div class="divider"></div>
         <div class="grid2 field">
           <div><label>Início do expediente</label><input type="time" id="work-start" value="09:00" /></div>
@@ -381,7 +397,18 @@ const CLIENT_ID = '737692861184-2e49p43be8purmfmiqc3m1nv6k4hn1f7.apps.googleuser
 const SCOPES = 'https://www.googleapis.com/auth/calendar';
 
 // ════════════════════════════════════════════════
-//  TIMES DA EMPRESA (114 times da planilha)
+//  SALAS DE REUNIÃO
+// ════════════════════════════════════════════════
+const ROOMS = [
+  { id: 'room-1', name: 'Gocase', location: 'Fortaleza/CE', email: 'c_188634b4765s6gjrkefsfe9vn52m0@resource.calendar.google.com' },
+  { id: 'room-2', name: 'Jeito Gogroup', location: 'Fortaleza/CE', email: 'c_1889l2geio636ig3lqm91jvihdcjq@resource.calendar.google.com' },
+  { id: 'room-3', name: 'Corações Flutuantes', location: 'Extrema/MG', email: 'c_1880ib1g2tmssho3g5fph799oqdlq@resource.calendar.google.com' },
+  { id: 'room-4', name: 'Sala Gobeaute', location: 'Fortaleza/CE', email: 'c_188emf2m6j2dmgqqk788rikp28vus@resource.calendar.google.com' },
+  { id: 'room-5', name: 'Sala Golovers', location: 'Fortaleza/CE', email: 'c_18844c9obivpiijfi37a0rrcdpmq0@resource.calendar.google.com' },
+];
+
+// ════════════════════════════════════════════════
+//  TIMES DA EMPRESA
 // ════════════════════════════════════════════════
 const COMPANY_TEAMS = [
   { id:"team-80515", name:"ARMAZÉM EXTREMA", emails:["ana.morais@gocase.com","bruno.oliveira@gocase.com","francisco.anderson@gocase.com","isabela.souza@gocase.com","izaac.bezerra@gocase.com","jairo.sousa@gocase.com","wilian.mello@gocase.com"] },
@@ -491,13 +518,13 @@ const COMPANY_TEAMS = [
 // ════════════════════════════════════════════════
 //  STATE
 // ════════════════════════════════════════════════
-const STORAGE_HIDDEN = 'gg_hidden_teams_v1';   // company teams hidden by user
-const STORAGE_CUSTOM = 'gg_custom_teams_v1';   // user-created teams
-const STORAGE_BUILTIN_EDITS = 'gg_builtin_edits_v1';
+const STORAGE_HIDDEN = 'gg_hidden_teams_v1';
+const STORAGE_CUSTOM = 'gg_custom_teams_v1';
 
-let hiddenTeamIds = new Set();  // company teams hidden
-let customTeams = [];           // user-created
+let hiddenTeamIds = new Set();
+let customTeams = [];
 let activeTeamIds = new Set();
+let activeRoomIds = new Set();   // selected rooms
 let editingTeamId = null;
 let emails = [];
 let tokenClient = null;
@@ -518,6 +545,7 @@ window.addEventListener('load', () => {
   loadStorage();
   setDefaultDates();
   renderTeamChips();
+  renderRoomChips();
   waitForGIS();
 });
 
@@ -531,7 +559,6 @@ function saveStorage() {
   localStorage.setItem(STORAGE_CUSTOM, JSON.stringify(customTeams));
 }
 
-// All visible teams = company (not hidden) + custom
 function getAllTeams() {
   const visible = COMPANY_TEAMS.filter(t => !hiddenTeamIds.has(t.id));
   return [...visible, ...customTeams];
@@ -544,6 +571,38 @@ function setDefaultDates() {
   document.getElementById('date-start').value = fmt(now);
   const later = new Date(now); later.setDate(now.getDate()+7);
   document.getElementById('date-end').value = fmt(later);
+}
+
+// ════════════════════════════════════════════════
+//  ROOM CHIPS
+// ════════════════════════════════════════════════
+function renderRoomChips() {
+  const wrap = document.getElementById('room-chips');
+  wrap.innerHTML = '';
+  ROOMS.forEach(room => {
+    const chip = document.createElement('button');
+    const isActive = activeRoomIds.has(room.id);
+    chip.className = 'room-chip' + (isActive ? ' active' : '');
+    chip.onclick = () => toggleRoom(room.id);
+    chip.innerHTML = `<span class="room-chip-icon">&#9679;</span><span>${escapeHtml(room.name)}</span><span style="font-size:10px;opacity:0.65;margin-left:2px;">${escapeHtml(room.location)}</span>`;
+    wrap.appendChild(chip);
+  });
+}
+
+function toggleRoom(id) {
+  const room = ROOMS.find(r => r.id === id);
+  if (!room) return;
+  if (activeRoomIds.has(id)) {
+    activeRoomIds.delete(id);
+  } else {
+    activeRoomIds.add(id);
+  }
+  renderRoomChips();
+  renderTags();
+}
+
+function getSelectedRooms() {
+  return ROOMS.filter(r => activeRoomIds.has(r.id));
 }
 
 // ════════════════════════════════════════════════
@@ -607,7 +666,6 @@ function renderManageList() {
   const list = document.getElementById('manage-list');
   list.innerHTML = '';
 
-  // Company teams
   const companyFiltered = COMPANY_TEAMS.filter(t => !query || t.name.toLowerCase().includes(query));
   if (companyFiltered.length) {
     const hdr = document.createElement('div');
@@ -620,7 +678,6 @@ function renderManageList() {
     });
   }
 
-  // Custom teams
   const customFiltered = customTeams.filter(t => !query || t.name.toLowerCase().includes(query));
   if (customFiltered.length) {
     const hdr = document.createElement('div');
@@ -819,6 +876,16 @@ function initials(email) {
 function renderTags() {
   const wrap = document.getElementById('tags-wrap');
   wrap.innerHTML = '';
+
+  // Render selected rooms first
+  getSelectedRooms().forEach(room => {
+    const tag = document.createElement('div');
+    tag.className = 'tag tag-room';
+    tag.innerHTML = `<div class="tag-avatar room-avatar">&#9679;</div><span>${escapeHtml(room.name)}</span><span style="font-size:11px;opacity:0.65;margin-left:2px;">${escapeHtml(room.location)}</span>`;
+    wrap.appendChild(tag);
+  });
+
+  // Render people emails
   emails.forEach((e, i) => {
     const tag = document.createElement('div');
     tag.className = 'tag';
@@ -851,7 +918,25 @@ function removeEmail(i) {
 // ════════════════════════════════════════════════
 //  PILLS
 // ════════════════════════════════════════════════
-function setDur(d, btn) { duration = d; document.querySelectorAll('#dur-group .pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+function setDur(d, btn) {
+  duration = d;
+  document.querySelectorAll('#dur-group .pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('custom-dur-wrap').style.display = 'none';
+}
+function toggleCustomDur(btn) {
+  document.querySelectorAll('#dur-group .pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const wrap = document.getElementById('custom-dur-wrap');
+  wrap.style.display = 'flex';
+  const inp = document.getElementById('custom-dur-input');
+  inp.focus();
+  if (inp.value) duration = Math.max(5, parseInt(inp.value) || 60);
+}
+function applyCustomDur() {
+  const val = parseInt(document.getElementById('custom-dur-input').value);
+  if (val && val >= 5) duration = val;
+}
 function setWknd(val, btn) { excludeWeekends = !val; document.querySelectorAll('#wknd-group .pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
 function setQty(n, btn) { pageSize = n; document.querySelectorAll('#qty-group .pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
 function setPref(key, val, btn) {
@@ -891,7 +976,14 @@ async function searchSlots() {
   const we = document.getElementById('work-end').value;
   const timeMin = ds + 'T00:00:00Z';
   const timeMax = de + 'T23:59:59Z';
-  const items = [{ id: 'primary' }, ...emails.map(e => ({ id: e }))];
+
+  // Include people + selected rooms in freeBusy query
+  const selectedRooms = getSelectedRooms();
+  const items = [
+    { id: 'primary' },
+    ...emails.map(e => ({ id: e })),
+    ...selectedRooms.map(r => ({ id: r.email }))
+  ];
 
   try {
     const r = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
@@ -911,6 +1003,7 @@ async function searchSlots() {
     foundSlots = slots;
 
     document.getElementById('stat-attendees').textContent = emails.length + 1;
+    document.getElementById('stat-rooms').textContent = selectedRooms.length || '—';
     document.getElementById('stat-duration').textContent = duration >= 60 ? Math.floor(duration/60)+'h'+(duration%60?duration%60+'min':'') : duration+'min';
     document.getElementById('stat-slots').textContent = slots.length;
 
@@ -928,7 +1021,15 @@ async function searchSlots() {
         const div = document.createElement('div');
         div.className = 'slot-item';
         div.onclick = () => selectSlot(i, div);
-        div.innerHTML = `<div><div class="slot-weekday">${fmtWeekday(slot.start)}</div><div class="slot-time">${fmtTime(slot.start)} – ${fmtTime(slot.end)}</div><div class="slot-date">${fmtDate(slot.start)}</div></div><span class="badge badge-green">Todos livres</span>`;
+
+        let badgeExtra = '';
+        if (selectedRooms.length === 1) {
+          badgeExtra = `<span class="badge badge-muted" style="margin-left:6px;">${escapeHtml(selectedRooms[0].name)}</span>`;
+        } else if (selectedRooms.length > 1) {
+          badgeExtra = `<span class="badge badge-muted" style="margin-left:6px;">${selectedRooms.length} salas livres</span>`;
+        }
+
+        div.innerHTML = `<div><div class="slot-weekday">${fmtWeekday(slot.start)}</div><div class="slot-time">${fmtTime(slot.start)} – ${fmtTime(slot.end)}</div><div class="slot-date">${fmtDate(slot.start)}</div></div><div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;justify-content:flex-end;"><span class="badge badge-green">Todos livres</span>${badgeExtra}</div>`;
         grid.appendChild(div);
       });
     }
@@ -963,6 +1064,14 @@ function selectSlot(i, el) {
   el.classList.add('selected');
   const card = document.getElementById('event-form-card');
   card.style.display = 'block'; card.classList.add('fade-in');
+
+  // Auto-fill location with room name if a single room is selected
+  const selectedRooms = getSelectedRooms();
+  if (selectedRooms.length === 1) {
+    const locInput = document.getElementById('ev-location');
+    if (!locInput.value) locInput.value = selectedRooms[0].name + ' — ' + selectedRooms[0].location;
+  }
+
   card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   document.getElementById('bar3').classList.add('done');
 }
@@ -983,12 +1092,19 @@ async function createEvent() {
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const desc = document.getElementById('ev-desc').value.trim();
   const loc = document.getElementById('ev-location').value.trim();
+  const selectedRooms = getSelectedRooms();
+
+  // Attendees = people + room resources
+  const allAttendees = [
+    ...emails.map(e => ({ email: e })),
+    ...selectedRooms.map(r => ({ email: r.email, resource: true }))
+  ];
 
   const body = {
     summary: title,
     start: { dateTime: selectedSlot.start.toISOString(), timeZone: tz },
     end: { dateTime: selectedSlot.end.toISOString(), timeZone: tz },
-    attendees: emails.map(e => ({ email: e })),
+    attendees: allAttendees,
     reminders: { useDefault: true }
   };
   if (desc) body.description = desc;
@@ -1008,9 +1124,10 @@ async function createEvent() {
     const data = await r.json();
     if (data.error) throw new Error(data.error.message);
     const link = data.htmlLink;
+    const roomNames = selectedRooms.map(r => r.name).join(', ');
     const successEl = document.getElementById('alert-success');
     successEl.classList.add('visible');
-    successEl.innerHTML = `✅ Evento criado com sucesso! ${emails.length ? `Convite enviado para ${emails.length} participante(s). ` : ''}${link ? `<a href="${link}" target="_blank" style="color:var(--green);font-weight:500;">Abrir no Google Calendar →</a>` : ''}`;
+    successEl.innerHTML = `✅ Evento criado com sucesso! ${allAttendees.length ? `Convite enviado para ${emails.length} participante(s)${selectedRooms.length ? ` e sala(s): ${roomNames}` : ''}. ` : ''}${link ? `<a href="${link}" target="_blank" style="color:var(--green);font-weight:500;">Abrir no Google Calendar →</a>` : ''}`;
     document.getElementById('alert-error').classList.remove('visible');
   } catch(err) {
     const errEl = document.getElementById('alert-error');
