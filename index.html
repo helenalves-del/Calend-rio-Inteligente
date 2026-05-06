@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- :root {
+  :root {
     --bg: #F5F3EE;
     --surface: #FFFFFF;
     --surface2: #EFEDE8;
@@ -54,23 +54,26 @@
   .page-header { margin-bottom: 2rem; }
   .page-title { font-family: 'DM Serif Display', serif; font-size: 2.6rem; letter-spacing: -0.03em; line-height: 1.2; }
   .page-subtitle { color: var(--muted); font-size: 1rem; margin-top: 6px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
-  .card-title { font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 600; color: var(--muted); margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; }
-  .card-title-link { font-size: 13px; color: var(--text); cursor: pointer; font-weight: 500; text-transform: none; letter-spacing: normal; background: none; border: none; padding: 0; font-family: inherit; }
+
+  /* ── Cards ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 0.75rem; box-shadow: var(--shadow); }
+  .card-title { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--text); margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; opacity: 1; }
+  .card-title-link { font-size: 13px; color: var(--text); cursor: pointer; font-weight: 500; text-transform: none; letter-spacing: normal; background: none; border: none; padding: 0; font-family: inherit; opacity: 1; }
   .card-title-link:hover { text-decoration: underline; }
 
   /* ── Accordion ── */
-  .accordion-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 0; box-shadow: var(--shadow); transition: background 0.15s; user-select: none; }
+  .accordion-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 0.875rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 0; box-shadow: var(--shadow); transition: background 0.15s; user-select: none; }
   .accordion-header:hover { background: var(--surface2); }
   .accordion-header.open { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; }
-  .accordion-title { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; color: var(--muted); display: flex; align-items: center; gap: 10px; }
-  .accordion-badge { font-size: 11px; font-weight: 500; background: var(--text); color: var(--bg); padding: 2px 8px; border-radius: 99px; }
+  .accordion-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); display: flex; align-items: center; gap: 10px; opacity: 1; }
+  .accordion-badge { font-size: 11px; font-weight: 500; background: var(--text); color: var(--bg); padding: 2px 8px; border-radius: 99px; opacity: 1; }
   .accordion-badge.room-badge { background: var(--room-text); }
-  .accordion-chevron { font-size: 16px; color: var(--muted); transition: transform 0.25s; line-height: 1; }
+  .accordion-chevron { font-size: 14px; color: var(--muted); transition: transform 0.25s; line-height: 1; }
   .accordion-chevron.open { transform: rotate(180deg); }
-  .accordion-body { background: var(--surface); border: 1px solid var(--border); border-top: none; border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow); display: none; }
+  .accordion-body { background: var(--surface); border: 1px solid var(--border); border-top: none; border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius); padding: 1rem 1.5rem; margin-bottom: 0.75rem; box-shadow: var(--shadow); display: none; }
   .accordion-body.open { display: block; }
   .accordion-actions { display: flex; gap: 8px; margin-bottom: 12px; }
+
   label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 5px; font-weight: 400; }
   input[type=text], input[type=email], input[type=date], input[type=time], input[type=number], select, textarea { width: 100%; padding: 9px 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); outline: none; transition: border-color 0.15s; appearance: none; -webkit-appearance: none; }
   input:focus, select:focus, textarea:focus { border-color: var(--text); }
@@ -83,25 +86,14 @@
   .pill:hover { border-color: var(--text); color: var(--text); }
   .pill.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-  /* ── Team chips ── */
+  /* ── Team list (accordion por área) ── */
   .teams-search-wrap { margin-bottom: 12px; position: relative; }
   .teams-search-wrap input { padding-left: 32px; }
   .teams-search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 14px; pointer-events: none; }
-  .teams-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; max-height: 200px; overflow-y: auto; padding-right: 4px; }
-  .teams-grid::-webkit-scrollbar { width: 4px; }
-  .teams-grid::-webkit-scrollbar-track { background: transparent; }
-  .teams-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
-  .team-chip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px 5px 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); border-radius: 99px; font-size: 12px; cursor: pointer; transition: all 0.15s; font-family: inherit; user-select: none; }
-  .team-chip:hover { border-color: var(--text); }
-  .team-chip.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-  .team-chip-count { font-size: 10px; opacity: 0.6; background: rgba(0,0,0,0.07); padding: 1px 5px; border-radius: 99px; flex-shrink: 0; }
-  .team-chip.active .team-chip-count { background: rgba(255,255,255,0.2); opacity: 0.9; }
-  .team-chip-del { background: none; border: none; color: inherit; opacity: 0; cursor: pointer; padding: 0 0 0 2px; font-size: 14px; line-height: 1; display: flex; align-items: center; transition: opacity 0.15s; }
-  .team-chip:hover .team-chip-del { opacity: 0.5; }
-  .team-chip:hover .team-chip-del:hover { opacity: 1; }
-  .team-chip.add { background: transparent; color: var(--muted); border-style: dashed; }
-  .team-chip.add:hover { color: var(--text); border-color: var(--text); }
-  .teams-meta { font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+  .teams-meta { font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+  #team-chips { display: flex; flex-direction: column; gap: 4px; max-height: 240px; overflow-y: auto; padding-right: 4px; }
+  #team-chips::-webkit-scrollbar { width: 4px; }
+  #team-chips::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
 
   /* ── Room chips ── */
   .rooms-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
@@ -113,7 +105,7 @@
   .rooms-hint { font-size: 11px; color: var(--muted); opacity: 0.7; margin-top: 4px; }
 
   /* ── Tags ── */
-  .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 4px; }
+  .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; min-height: 4px; }
   .tag { display: inline-flex; align-items: center; gap: 6px; background: var(--surface2); border: 1px solid var(--border); border-radius: 99px; padding: 4px 10px 4px 7px; font-size: 13px; color: var(--text); }
   .tag.tag-room { background: var(--room-bg); border-color: var(--room-border); color: var(--room-text); }
   .tag-avatar { width: 20px; height: 20px; border-radius: 50%; background: var(--text); color: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 500; flex-shrink: 0; }
@@ -157,6 +149,25 @@
   .step-bar.done { background: var(--text); }
   .divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
 
+  /* ── Autocomplete dropdown ── */
+  .autocomplete-wrap { position: relative; flex: 1; }
+  .autocomplete-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius-sm) var(--radius-sm); box-shadow: var(--shadow); z-index: 50; max-height: 220px; overflow-y: auto; display: none; }
+  .autocomplete-dropdown.visible { display: block; }
+  .autocomplete-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; cursor: pointer; transition: background 0.1s; gap: 10px; }
+  .autocomplete-item:hover, .autocomplete-item.active { background: var(--surface2); }
+  .autocomplete-email { font-size: 13px; color: var(--text); font-weight: 500; }
+  .autocomplete-teams { font-size: 11px; color: var(--muted); opacity: 0.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+  .autocomplete-add { font-size: 11px; color: var(--text); white-space: nowrap; opacity: 0.6; }
+  .autocomplete-divider { height: 1px; background: var(--border); margin: 2px 0; }
+
+  /* ── Sync status ── */
+  .sync-badge { font-size: 11px; padding: 2px 8px; border-radius: 99px; display: inline-flex; align-items: center; gap: 4px; }
+  .sync-badge.synced { background: var(--green-bg); color: var(--green); }
+  .sync-badge.syncing { background: var(--surface2); color: var(--muted); }
+  .sync-badge.error { background: var(--red-bg); color: var(--red); }
+  .sticky-search-bar { position: sticky; bottom: 0; background: var(--bg); padding: 10px 0 16px; margin-top: 4px; border-top: 1px solid var(--border); }
+  .search-summary { font-size: 12px; color: var(--muted); margin-bottom: 8px; text-align: center; min-height: 18px; }
+
   /* ── Modal ── */
   .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center; z-index: 100; padding: 1rem; }
   .modal-backdrop.visible { display: flex; }
@@ -164,8 +175,6 @@
   .modal-title { font-family: 'DM Serif Display', serif; font-size: 1.35rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
   .modal-subtitle { color: var(--muted); font-size: 13px; margin-bottom: 1.25rem; }
   .modal-actions { display: flex; gap: 8px; justify-content: space-between; margin-top: 1.25rem; }
-
-  /* ── Manage modal team list ── */
   .manage-team-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 6px; }
   .manage-team-info { flex: 1; min-width: 0; }
   .manage-team-name { font-weight: 500; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -233,7 +242,8 @@
 
     <!-- STEP 1 -->
     <div id="view-form">
-      <!-- Times accordion -->
+
+      <!-- Times accordion (agrupado por área) -->
       <div class="accordion-header" id="acc-teams-header" onclick="toggleAccordion('teams')">
         <div class="accordion-title">
           <span>Times</span>
@@ -252,42 +262,42 @@
         </div>
         <div class="teams-search-wrap">
           <span class="teams-search-icon">🔍</span>
-          <input type="text" id="teams-search" placeholder="Buscar time..." oninput="renderTeamChips()" style="font-size:13px;" />
+          <input type="text" id="teams-search" placeholder="Buscar por time ou e-mail..." oninput="renderTeamChips()" style="font-size:13px;" />
         </div>
-        <div class="teams-grid" id="team-chips"></div>
+        <div id="team-chips"></div>
         <div class="teams-meta">
           <span id="teams-count-label" style="color:var(--muted);"></span>
         </div>
-      </div>
 
-      <div class="card">
-        <div class="card-title"><span>Participantes e salas</span></div>
+        <div class="divider" style="margin:14px 0 10px;"></div>
+
+        <!-- Email input com autocomplete -->
+        <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--text);margin-bottom:8px;">Adicionar participante individualmente</div>
+        <div style="position:relative;margin-bottom:8px;">
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="email-input" placeholder="Buscar por nome ou e-mail..." onkeydown="handleEmailKey(event)" oninput="onEmailInput()" autocomplete="off" style="flex:1;" />
+            <button class="btn btn-outline btn-sm" onclick="addEmailFromInput()">Adicionar</button>
+          </div>
+          <div id="autocomplete-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius-sm) var(--radius-sm);box-shadow:var(--shadow);z-index:99;max-height:220px;overflow-y:auto;"></div>
+        </div>
         <div class="tags-wrap" id="tags-wrap"></div>
-
-        <!-- Salas accordion -->
-        <div style="margin-bottom:14px;">
-          <div class="accordion-header" id="acc-rooms-header" onclick="toggleAccordion('rooms')" style="border-radius:var(--radius-sm);box-shadow:none;border-color:var(--border);">
-            <div class="accordion-title" style="font-size:12px;">
-              <span>Salas de reunião</span>
-              <span class="accordion-badge room-badge" id="acc-rooms-badge" style="display:none;"></span>
-            </div>
-            <span class="accordion-chevron" id="acc-rooms-chevron">▾</span>
-          </div>
-          <div class="accordion-body" id="acc-rooms-body" style="border-radius:0 0 var(--radius-sm) var(--radius-sm);box-shadow:none;margin-bottom:0;padding:1rem 1.25rem;">
-            <div class="rooms-grid" id="room-chips"></div>
-            <div class="rooms-hint" style="margin-top:8px;">Selecione uma sala para verificar disponibilidade e reservar junto com o evento.</div>
-          </div>
-        </div>
-
-        <div class="divider" style="margin:14px 0;"></div>
-
-        <div style="display:flex;gap:8px;">
-          <input type="email" id="email-input" placeholder="email@empresa.com" style="flex:1;" onkeydown="handleEmailKey(event)" />
-          <button class="btn btn-outline btn-sm" onclick="addEmail()">Adicionar</button>
-        </div>
-        <div style="font-size:12px;color:var(--muted);margin-top:8px;">Sua agenda é incluída automaticamente na busca.</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;opacity:0.7;">Sua agenda é incluída automaticamente na busca.</div>
       </div>
 
+      <!-- Salas de reunião — card separado -->
+      <div class="accordion-header" id="acc-rooms-header" onclick="toggleAccordion('rooms')">
+        <div class="accordion-title">
+          <span>Salas de reunião</span>
+          <span class="accordion-badge room-badge" id="acc-rooms-badge" style="display:none;"></span>
+        </div>
+        <span class="accordion-chevron" id="acc-rooms-chevron">▾</span>
+      </div>
+      <div class="accordion-body" id="acc-rooms-body">
+        <div class="rooms-grid" id="room-chips"></div>
+        <div class="rooms-hint" style="margin-top:8px;">Selecione uma sala para verificar disponibilidade e reservar junto com o evento.</div>
+      </div>
+
+      <!-- Período e preferências -->
       <div class="card">
         <div class="card-title"><span>Período e preferências</span></div>
         <div class="grid2 field">
@@ -303,7 +313,7 @@
             <button class="pill" onclick="setDur(120,this)">2 horas</button>
             <button class="pill" id="pill-custom" onclick="toggleCustomDur(this)">Outro</button>
           </div>
-          <div id="custom-dur-wrap" style="display:none;margin-top:10px;display:none;align-items:center;gap:8px;">
+          <div id="custom-dur-wrap" style="display:none;margin-top:10px;align-items:center;gap:8px;">
             <input type="number" id="custom-dur-input" min="5" max="480" placeholder="Ex: 45" style="width:110px;" oninput="applyCustomDur()" />
             <span style="font-size:13px;color:var(--muted);">minutos</span>
           </div>
@@ -330,7 +340,12 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-primary btn-full" id="btn-search" onclick="searchSlots()">Buscar horários disponíveis</button>
+
+      <!-- Sticky search bar com contador -->
+      <div class="sticky-search-bar">
+        <div class="search-summary" id="pre-search-summary"></div>
+        <button class="btn btn-primary btn-full" id="btn-search" onclick="searchSlots()">Buscar horários disponíveis</button>
+      </div>
     </div>
 
     <!-- STEP 2 -->
@@ -368,7 +383,6 @@
       <button class="btn btn-primary btn-full" id="btn-create" onclick="criarEvento()">Criar no Google Calendar</button>
       <div class="alert alert-success" id="alert-success"></div>
       <div class="alert alert-error" id="alert-error"></div>
-
       <button class="btn btn-outline" onclick="goBack()" style="margin-top:8px;">← Nova busca</button>
     </div>
 
@@ -390,7 +404,10 @@
 <div class="modal-backdrop" id="manage-modal">
   <div class="modal">
     <div class="modal-title">Gerenciar times</div>
-    <div class="modal-subtitle">Times da empresa e times personalizados. Times excluídos da empresa serão restaurados ao recarregar a página.</div>
+    <div class="modal-subtitle" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+      <span>Times personalizados são salvos no Google Drive e ficam visíveis para todos.</span>
+      <span class="sync-badge syncing" id="sync-badge" style="display:none;"></span>
+    </div>
     <div class="manage-search">
       <input type="text" id="manage-search" placeholder="Buscar time..." oninput="renderManageList()" style="font-size:13px;" />
     </div>
@@ -420,173 +437,179 @@
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async></script>
-
 <script>
 // ════════════════════════════════════════════════
 //  ⚙️  CONFIGURAÇÃO
 // ════════════════════════════════════════════════
 const CLIENT_ID = '737692861184-2e49p43be8purmfmiqc3m1nv6k4hn1f7.apps.googleusercontent.com';
-const SCOPES = 'https://www.googleapis.com/auth/calendar';
+const SCOPES = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/drive.file';
+
+// ════════════════════════════════════════════════
+//  TIMES COMPARTILHADOS (Google Drive)
+//  Nome do arquivo compartilhado no Drive.
+//  Todos que usarem o app verão o mesmo arquivo.
+// ════════════════════════════════════════════════
+const SHARED_FILE_NAME = 'gogroup-agenda-custom-teams.json';
+let sharedFileId = localStorage.getItem('gg_shared_file_id') || null;
+let syncStatus = 'idle'; // idle | syncing | synced | error
 
 // ════════════════════════════════════════════════
 //  SALAS DE REUNIÃO
 // ════════════════════════════════════════════════
 const ROOMS = [
-  // Fortaleza/CE
-  { id: 'room-1',  name: 'Gocase',                  location: 'Fortaleza/CE', email: 'c_188634b4765s6gjrkefsfe9vn52m0@resource.calendar.google.com' },
-  { id: 'room-2',  name: 'Jeito Gogroup',            location: 'Fortaleza/CE', email: 'c_1889l2geio636ig3lqm91jvihdcjq@resource.calendar.google.com' },
-  { id: 'room-4',  name: 'Gobeaute',                 location: 'Fortaleza/CE', email: 'c_188emf2m6j2dmgqqk788rikp28vus@resource.calendar.google.com' },
-  { id: 'room-5',  name: 'Golovers',                 location: 'Fortaleza/CE', email: 'c_18844c9obivpiijfi37a0rrcdpmq0@resource.calendar.google.com' },
-  { id: 'room-6',  name: 'Transparência Máxima',     location: 'Fortaleza/CE', email: 'c_1888ps28eci2mhuqlv83gcs4sht9k@resource.calendar.google.com' },
-  { id: 'room-7',  name: 'Amor pelo Cliente',        location: 'Fortaleza/CE', email: 'c_188etulrgq8luh2ahanniob86b3j6@resource.calendar.google.com' },
-  { id: 'room-8',  name: 'Ponta Firme',              location: 'Fortaleza/CE', email: 'c_188ajnv26i4hai3kjfu5dj8qn4mh8@resource.calendar.google.com' },
-  { id: 'room-9',  name: 'Time Campeão',             location: 'Fortaleza/CE', email: 'c_188asksjjbhm6gp2hgf4lnudftr0i@resource.calendar.google.com' },
-  { id: 'room-10', name: 'Sonho Grande',             location: 'Fortaleza/CE', email: 'c_188efi3su8k7ojjshtekmidj9pctc@resource.calendar.google.com' },
-  { id: 'room-11', name: 'Mente Aberta',             location: 'Fortaleza/CE', email: 'c_188es3aio4lksgoai7u9ldduo2jma@resource.calendar.google.com' },
-  // Extrema/MG
-  { id: 'room-3',  name: 'Corações Flutuantes',      location: 'Extrema/MG',   email: 'c_1889g8b8adrl6hd6g2nevvg3vvttg@resource.calendar.google.com' },
-  // São Paulo/SP
-  { id: 'room-12', name: 'Gocase',                   location: 'São Paulo/SP', email: 'c_188ciia41kt82g6glel15qaj2mau2@resource.calendar.google.com' },
-  { id: 'room-13', name: 'Jeito Gogroup',            location: 'São Paulo/SP', email: 'c_1889oa3npd286jvcjdf3ei6e4v9bq@resource.calendar.google.com' },
-  { id: 'room-14', name: 'Gobeaute',                 location: 'São Paulo/SP', email: 'c_188ekgmrkvn3sjq8n6cf58u626180@resource.calendar.google.com' },
-  { id: 'room-15', name: 'Golovers',                 location: 'São Paulo/SP', email: 'c_188a5avcoecreh5qhuue25lq55snk@resource.calendar.google.com' },
-  { id: 'room-16', name: 'Transparência Máxima',     location: 'São Paulo/SP', email: 'c_18811padlc4c8ghtgvluh0etgdatg@resource.calendar.google.com' },
-  { id: 'room-17', name: 'Amor pelo Cliente',        location: 'São Paulo/SP', email: 'c_188ee0dchic5ohc2n64al68v70880@resource.calendar.google.com' },
-  { id: 'room-18', name: 'Ponta Firme',              location: 'São Paulo/SP', email: 'c_1882b0bihl5esipnn8t0k67cig830@resource.calendar.google.com' },
-  { id: 'room-19', name: 'Time Campeão',             location: 'São Paulo/SP', email: 'c_1887rrt78i64gh4qgilgotep3ta1k@resource.calendar.google.com' },
-  { id: 'room-20', name: 'Mente Aberta',             location: 'São Paulo/SP', email: 'c_188679cqbeh0uge8hn0t5oqreki9u@resource.calendar.google.com' },
+  { id:'room-1',  name:'Gocase',               location:'Fortaleza/CE', email:'c_188634b4765s6gjrkefsfe9vn52m0@resource.calendar.google.com' },
+  { id:'room-2',  name:'Jeito Gogroup',         location:'Fortaleza/CE', email:'c_1889l2geio636ig3lqm91jvihdcjq@resource.calendar.google.com' },
+  { id:'room-4',  name:'Gobeaute',              location:'Fortaleza/CE', email:'c_188emf2m6j2dmgqqk788rikp28vus@resource.calendar.google.com' },
+  { id:'room-5',  name:'Golovers',              location:'Fortaleza/CE', email:'c_18844c9obivpiijfi37a0rrcdpmq0@resource.calendar.google.com' },
+  { id:'room-6',  name:'Transparência Máxima',  location:'Fortaleza/CE', email:'c_1888ps28eci2mhuqlv83gcs4sht9k@resource.calendar.google.com' },
+  { id:'room-7',  name:'Amor pelo Cliente',     location:'Fortaleza/CE', email:'c_188etulrgq8luh2ahanniob86b3j6@resource.calendar.google.com' },
+  { id:'room-8',  name:'Ponta Firme',           location:'Fortaleza/CE', email:'c_188ajnv26i4hai3kjfu5dj8qn4mh8@resource.calendar.google.com' },
+  { id:'room-9',  name:'Time Campeão',          location:'Fortaleza/CE', email:'c_188asksjjbhm6gp2hgf4lnudftr0i@resource.calendar.google.com' },
+  { id:'room-10', name:'Sonho Grande',          location:'Fortaleza/CE', email:'c_188efi3su8k7ojjshtekmidj9pctc@resource.calendar.google.com' },
+  { id:'room-11', name:'Mente Aberta',          location:'Fortaleza/CE', email:'c_188es3aio4lksgoai7u9ldduo2jma@resource.calendar.google.com' },
+  { id:'room-3',  name:'Corações Flutuantes',   location:'Extrema/MG',   email:'c_1889g8b8adrl6hd6g2nevvg3vvttg@resource.calendar.google.com' },
+  { id:'room-12', name:'Gocase',                location:'São Paulo/SP', email:'c_188ciia41kt82g6glel15qaj2mau2@resource.calendar.google.com' },
+  { id:'room-13', name:'Jeito Gogroup',         location:'São Paulo/SP', email:'c_1889oa3npd286jvcjdf3ei6e4v9bq@resource.calendar.google.com' },
+  { id:'room-14', name:'Gobeaute',              location:'São Paulo/SP', email:'c_188ekgmrkvn3sjq8n6cf58u626180@resource.calendar.google.com' },
+  { id:'room-15', name:'Golovers',              location:'São Paulo/SP', email:'c_188a5avcoecreh5qhuue25lq55snk@resource.calendar.google.com' },
+  { id:'room-16', name:'Transparência Máxima',  location:'São Paulo/SP', email:'c_18811padlc4c8ghtgvluh0etgdatg@resource.calendar.google.com' },
+  { id:'room-17', name:'Amor pelo Cliente',     location:'São Paulo/SP', email:'c_188ee0dchic5ohc2n64al68v70880@resource.calendar.google.com' },
+  { id:'room-18', name:'Ponta Firme',           location:'São Paulo/SP', email:'c_1882b0bihl5esipnn8t0k67cig830@resource.calendar.google.com' },
+  { id:'room-19', name:'Time Campeão',          location:'São Paulo/SP', email:'c_1887rrt78i64gh4qgilgotep3ta1k@resource.calendar.google.com' },
+  { id:'room-20', name:'Mente Aberta',          location:'São Paulo/SP', email:'c_188679cqbeh0uge8hn0t5oqreki9u@resource.calendar.google.com' },
 ];
 
 // ════════════════════════════════════════════════
-//  TIMES DA EMPRESA
+//  TIMES DA EMPRESA (com área macro)
 // ════════════════════════════════════════════════
 const COMPANY_TEAMS = [
-  { id:"team-80515", name:"ARMAZÉM EXTREMA", emails:["ana.morais@gocase.com","bruno.oliveira@gocase.com","francisco.anderson@gocase.com","isabela.souza@gocase.com","izaac.bezerra@gocase.com","jairo.sousa@gocase.com","wilian.mello@gocase.com"] },
-  { id:"team-44659", name:"ARMAZÉN ITAPEVA", emails:["graziela.santos@gocase.com","joaopaulo.nobre@gocase.com"] },
-  { id:"team-5938", name:"B2B GOBEAUTE", emails:["eduardo.santana@gobeaute.com.br","italo.costa@gobeaute.com.br","joao.simao@gobeaute.com.br"] },
-  { id:"team-18889", name:"B2B GOCASE", emails:["darlison.santos@gocase.com","igor.morais@gocase.com","leonardo.filho@gocase.com","lucas.guerra@gocase.com"] },
-  { id:"team-4892", name:"CONTABILIDADE GOBEAUTE", emails:["alessandra.forte@gocase.com","stefanny.barros@gobeaute.com.br","bianca.rodrigues@gobeaute.com.br","johnathan.freitas@gobeaute.com.br","ludmila.rodrigues@gocase.com","misael.holanda@gobeaute.com.br"] },
-  { id:"team-40874", name:"CONTABILIDADE GOCASE", emails:["amanda.martins@gocase.com","luana.moreira@gocase.com","ludmila.rodrigues@gocase.com","misael.holanda@gobeaute.com.br","shelley.passos@gocase.com"] },
-  { id:"team-68419", name:"CSC", emails:["alice.souza@gobeaute.com.br","antonio.mendes@gocase.com","carmem.bianca@gobeaute.com.br","cristianne.moura@gobeaute.com.br","jenyfer.ferreira@gocase.com","luisa@gobeaute.com.br","luiza.teixeira@gobeaute.com.br","natanael.guedes@gobeaute.com.br"] },
-  { id:"team-64373", name:"CUSTOS", emails:["guilherme.alencar@gocase.com"] },
-  { id:"team-89513", name:"CX", emails:["bruna.cunha@gocase.com","ytalo.ferreira@gocase.com"] },
-  { id:"team-4014", name:"CX - OPERAÇÃO GOBEAUTE", emails:["larissa.queiroz@gocase.com"] },
-  { id:"team-47224", name:"DADOS", emails:["alzir.moreira@gocase.com","gustavo.oliveira@gocase.com","joao.lopessilva@gocase.com","levi.israel@gobeaute.com.br","rodrigo.maia@gocase.com"] },
-  { id:"team-55928", name:"DESENVOLVIMENTO PRODUTO GOBEAUTE", emails:["jessica.park@gobeaute.com.br","patricia.trajano@gobeaute.com.br"] },
-  { id:"team-26380", name:"DESENVOLVIMENTO PRODUTO GOCASE", emails:["clara.sousa@gocase.com","paloma.bermudez@gocase.com","silvia.scarabelot@gocase.com"] },
-  { id:"team-67035", name:"DHO E BP´S", emails:["erivania.martins@gocase.com","isabela.melo@gocase.com","jessica.andrade@gocase.com"] },
-  { id:"team-35017", name:"DP", emails:["ericka.caminha@gocase.com","gabriel.caleffi@gocase.com","isac.almeida@gocase.com","jhenyfer.lima@gocase.com","leticia.fernandes@gocase.com","maria.davila@gocase.com","nadia.mendes@gobeaute.com.br","will.fernandes@gocase.com"] },
-  { id:"team-57927", name:"E-COMMERCE", emails:["aline.montenegro@gocase.com","livia.dias@gocase.com","kaylane.santos@gobeaute.com.br","leticia.viana@gocase.com","victor.keven@gocase.com"] },
-  { id:"team-16772", name:"ENGENHARIA PRODUTO", emails:["carolina.ballestero@gocase.com"] },
-  { id:"team-5609", name:"EXPERIÊNCIA DO COLABORADOR", emails:["iasmin.brilhante@gocase.com","jaiane.pinheiro@gocase.com","layla.bezerril@gocase.com","suellen.leal@gocase.com"] },
-  { id:"team-45089", name:"FACILITIES", emails:["adyla.martins@gocase.com","andreia.araujo@gocase.com","matheus.silva@gocase.com","pedro.napolitano@gocase.com","rodrigo.pereira@gocase.com"] },
-  { id:"team-12790", name:"FINANCEIRO", emails:["anderson.matos@gocase.com","marilia.dantas@gocase.com","carlos.feitosa@gocase.com","yngrid.falsetti@gocase.com"] },
-  { id:"team-13479", name:"FISCAL", emails:["samir.labib@gocase.com","stefany.costa@gocase.com"] },
-  { id:"team-76921", name:"FP&A", emails:["giovanni.papini@gocase.com","hugo.santana@gobeaute.com.br","larissa.portacio@gocase.com","rodrigo.cruz@gocase.com","rute.souza@gobeaute.com.br"] },
-  { id:"team-27507", name:"FÁBRICAS GENTE E GESTÃO", emails:["jhenyfer.silva@gocase.com","juliana.bortoletto@gocase.com","kauany.oliveira@gocase.com"] },
-  { id:"team-95011", name:"GENTE E GESTÃO", emails:["simony.morais@gocase.com"] },
-  { id:"team-4619", name:"GESTÃO", emails:["laiza.garcia@gocase.com","leyde.rodrigues@gocase.com","luiza.rios@gocase.com","thaylana.deborah@gocase.com"] },
-  { id:"team-98138", name:"GROWTH", emails:["andre.castro@gocase.com","daniel.nunez@gocase.com","giovanna.rocha@gobeaute.com.br","guilherme.filgueiras@gocase.com","othon.neri@gocase.com"] },
-  { id:"team-58543", name:"GROWTH JUMP", emails:["alice.frota@gocase.com","lucas.breder@gocase.com","tadeu.benevides@gocase.com","yuri.rocha@gocase.com"] },
-  { id:"team-97487", name:"Geração de demandas", emails:["larissa.bauman@gocase.com"] },
-  { id:"team-4676", name:"ILUSTRA", emails:["aline.montenegro@gocase.com","giovanna.gouveia@gocase.com","gizele.falcao@gocase.com","joao.wellington@gocase.com","rian.mesquita@gocase.com"] },
-  { id:"team-63654", name:"INBOUND", emails:["juliana.brilhante@gobeaute.com.br","lailton.freitas@gobeaute.com.br","maysa.moraes@gobeaute.com.br","samuel.reboucas@gobeaute.com.br"] },
-  { id:"team-5109", name:"INTELIGÊNCIA DE MERCADO", emails:["emanuele.correia@gocase.com"] },
-  { id:"team-98081", name:"Inbound / Farming / Feiras", emails:["anacarolina.andrade@gocase.com","bianca.grilo@gocase.com","bianca.santos@gocase.com","carlos.henrique@gocase.com","deborah.diniz@gocase.com","gean.malaquias@gocase.com","igor.morais@gocase.com","juliana.gomes@gocase.com","luiz.moura@gocase.com","karliene.oliveira@gocase.com","kauanne.rodrigues@gocase.com","mariana.ventura@gocase.com","myrela.sousa@gocase.com","vanessa.araujo@gocase.com"] },
-  { id:"team-96723", name:"JURÍDICO", emails:["camila.mussim@gobeaute.com.br","gabrielle.donega@gocase.com","izadora.gomes@gocase.com","juliana.mastroeni@gobeaute.com.br","kamilly.silva@gobeaute.com.br"] },
-  { id:"team-32155", name:"LOJAS", emails:["nathalia.moraes@gocase.com","pedro.oliveira@gocase.com","rackel.viana@gocase.com","ricardo.lisboa@gocase.com"] },
-  { id:"team-14480", name:"MARKETING BRANDING", emails:["arnaldo.viana@gocase.com","kellery.moreira@gocase.com","luiza.belo@gocase.com","duda.sales@gocase.com","patricia.stadler@gocase.com","samia.carvalho@gocase.com","samir.carvalho@gocase.com","thaissa.albuquerque@gocase.com"] },
-  { id:"team-35675", name:"MARKETING DE INFLU.", emails:["kayo.lopes@gocase.com","leticia.louise@gocase.com","luiza.mariane@gocase.com"] },
-  { id:"team-94553", name:"OPERAÇÕES GOBEAUTE", emails:["gilvania.pinheiro@gobeaute.com.br","guilherme.freitas@gocase.com"] },
-  { id:"team-40691", name:"OUTBOUND", emails:["alice.aquino@gobeaute.com.br","carla.alencar@gobeaute.com.br","gilvania.pinheiro@gobeaute.com.br","juliana.sales@gobeaute.com.br","tifanne.mendes@gobeaute.com.br"] },
-  { id:"team-3749", name:"PROCESSO GOCASE", emails:["gessica.pinheiro@gocase.com","artur.sampaio@gocase.com","joao.carlos@gocase.com"] },
-  { id:"team-14857", name:"PRODUTO", emails:["laiza.garcia@gocase.com","pedro.ipanema@gocase.com","silvia.scarabelot@gocase.com"] },
-  { id:"team-27650", name:"PRODUÇÃO GOCASE", emails:["belluanney.silva@gocase.com","caio.ferreirarodrigues@gocase.com","igor.fontes@gocase.com","ingliti.silva@gocase.com","lucas.barbosa@gocase.com","wagner.azevedo@gocase.com"] },
-  { id:"team-1482", name:"PROJETOS - PRODUTO", emails:["andresa.ponte@gocase.com","joao.carlos@gocase.com"] },
-  { id:"team-46142", name:"Pós-venda", emails:["beatriz.nogueira@gocase.com","larissa.simoes@gocase.com","lucas.rodrigues@gocase.com","paulo.seabra@gocase.com","rayka.teofilo@gocase.com","rodrigo.costa@gocase.com","samuel.rios@gocase.com","symone.seidl@gocase.com"] },
-  { id:"team-71382", name:"QUALIDADE GOCASE", emails:["clistony.nascimento@gocase.com","felipe.nascif@gocase.com","gabriel.borges@gocase.com","iara.silva@gocase.com","jenifer.clementino@gocase.com","maycon.seabra@gocase.com","natalia.pavao@gocase.com"] },
-  { id:"team-75324", name:"R&S [TIME EDUARDA]", emails:["fernanda.pires@gocase.com","karolina.oliveira@gocase.com","eduarda.lourencini@gocase.com","nicole.campos@gocase.com","sabrina.braga@gocase.com"] },
-  { id:"team-60423", name:"RPA", emails:["joao.gabriel@gocase.com","joaovictor.esteves@gocase.com","kaique.breno@gocase.com","lucas.queiroz@gocase.com","lucas.noronha@gocase.com","victor.moreno@gocase.com"] },
-  { id:"team-86385", name:"SOURCING & PROCUREMENT GOBEAUTE", emails:["bruna.crisostomo@gobeaute.com.br","edivar@gobeaute.com.br","tainara.ferreira@gobeaute.com.br","jamille.costa@gobeaute.com.br","jessica.andrade@gobeaute.com.br","viviane.rodrigues@gobeaute.com.br"] },
-  { id:"team-67123", name:"SQUAD TÉRMICOS E PET", emails:["bruna.mendes@gocase.com","leticia.gomes@gocase.com"] },
-  { id:"team-40112", name:"SQUAD TÊXTIL - MIMOS - B2B", emails:["camila.galisa@gocase.com"] },
-  { id:"team-96130", name:"SQUAD VIAGEM + FITNESS", emails:["nayany.katayama@gocase.com"] },
-  { id:"team-14441", name:"SUPPLY CHAIN", emails:["murilo.guimaraes@gocase.com","kevyn.silva@gocase.com","mariane.vasconcelos@gocase.com","samyra.houch@gocase.com","saulo.oliveira@gocase.com","vitoria.azevedo@gocase.com"] },
-  { id:"team-39414", name:"TECNOLOGIA", emails:["help.desk@gocase.com","diego.rabelo@gocase.com","douglas.ghiraldello@gobeaute.com.br","erik.bonfim@gocase.com","eughenio.constantino@gocase.com","isaac.albano@gocase.com","isabella.santos@gocase.com","lucas.braide@gocase.com","reinaldo.oliveira@gocase.com","vitor.fraifer@gobeaute.com.br","vitor.rosa@gocase.com"] },
-  { id:"team-38568", name:"TIME ISABELA MELO - DHO", emails:["helen.alves@gocase.com","isabela.melo@gocase.com"] },
-  { id:"team-25706", name:"TIME JOAQUIM QUINDERE", emails:["joaquim@gobeaute.com.br","leandro.perruci@gobeaute.com.br"] },
-  { id:"team-65886", name:"TIME VINICIUS NISHIDE", emails:["luciano.cavalcante@gocase.com","vinicius.nishide@gobeaute.com.br"] },
-  { id:"team-29669", name:"TRANSPORTES", emails:["anamonique.fernandes@gocase.com","joao.conde@gocase.com","kelly.sousa@gocase.com","welis.ribeiro@gocase.com"] },
-  { id:"team-88603", name:"TRANSPORTES E SLA B2C", emails:["aline.souza@gobeaute.com.br","fablicia.lima@gocase.com","kelly.sousa@gocase.com","lucas.oliveira@gocase.com"] },
-  { id:"team-34324", name:"[B2B GOBEAUTE] EQUIPE DE VENDAS", emails:["flavia.lopes@gobeaute.com.br","davi.castro@gobeaute.com.br","edilberto.lobo@gobeaute.com.br","isabela.silva@gobeaute.com.br","joao.simao@gobeaute.com.br","juliana.ferreira@gobeaute.com.br","lara.ambrozio@gobeaute.com.br","vinicius.gabriel@gobeaute.com.br"] },
-  { id:"team-29489", name:"[CX] DADOS E MELHORIA CONTÍNUA", emails:["bruna.gondim@gocase.com","welder.silva@gocase.com","ytalo.ferreira@gocase.com","maria.ponciano@gocase.com","naiarlisson.fernandes@gocase.com"] },
-  { id:"team-1783", name:"[CX] JORNADA E INTEGRAÇÕES", emails:["giovanna.sabrina@gocase.com","kamel.ribeiro@gocase.com","marcelo.menezes@gocase.com","mariana.barros@gocase.com","mireia.torres@gobeaute.com.br"] },
-  { id:"team-74929", name:"[CX] OPERAÇÕES GOCASE", emails:["grasiele.passos@gocase.com","lucas.felix@gocase.com","vanessa.bezerra@gocase.com"] },
-  { id:"team-53417", name:"[CX] TIME NAIARLISSON", emails:["naiarlisson.fernandes@gocase.com","yasmin.matos@gocase.com"] },
-  { id:"team-39653", name:"[FINANCEIRO] TIME ANDERSON MATOS", emails:["anderson.matos@gocase.com","lucas.fernandes@gocase.com","renata.lira@gocase.com","sarah.christian@gobeaute.com.br"] },
-  { id:"team-89827", name:"[FINANCEIRO] TIME CARLOS FEITOSA", emails:["ana.claudia@gocase.com","edilane.espinoza@gocase.com","emanuel.silveira@gocase.com","carlos.feitosa@gocase.com","gabrielly.brito@gocase.com","natalia.jocundo@gocase.com"] },
-  { id:"team-3614", name:"[FINANCEIRO] TIME RENATA LIRA", emails:["izabelly.machado@gocase.com","renata.lira@gocase.com"] },
-  { id:"team-52388", name:"[FISCAL] TIME DAVID BRITO", emails:["aline.fonseca@gocase.com","david.brito@gobeaute.com.br","alex.barros@gocase.com","anderson.sousa@gobeaute.com.br","lorenna.ribeiro@gocase.com","samuel.campos@gocase.com"] },
-  { id:"team-81853", name:"[FISCAL] TIME HERLESON SILVA", emails:["aline.fonseca@gocase.com","lara.matos@gocase.com","alex.barros@gocase.com","gabrielle.liriel@gocase.com","herleson.amarante@gocase.com","joyce.malpera@gocase.com","nyara.sato@gocase.com","sarah.coutinho@gocase.com"] },
-  { id:"team-84141", name:"[FISCAL] TIME SAMUEL DA SILVA", emails:["antonelle.gomes@gocase.com","livia.arruda@gobeaute.com.br","luiza.vitoria@gobeaute.com.br","samuel.campos@gocase.com"] },
-  { id:"team-5383", name:"[FP&A] RODRIGO CRUZ", emails:["bruno.pereira@gocase.com","giovanni.papini@gocase.com"] },
-  { id:"team-6294", name:"[GROWTH] TIME ANTHONY", emails:["anita.perez@gobeaute.com.br","anthony.duarte@gocase.com","caio.joabe@gobeaute.com.br"] },
-  { id:"team-63606", name:"[GROWTH] TIME BEATRIZ MONTIZUMA", emails:["beatriz.montizuma@gocase.com","thalia.farias@gocase.com"] },
-  { id:"team-59259", name:"[GROWTH] TIME DANIEL RAMOS", emails:["beatriz.montizuma@gocase.com","andre.vasconcelos@gocase.com","daniel.nunez@gocase.com","geissilene.sousa@gocase.com","mateus.aragao@gocase.com"] },
-  { id:"team-11634", name:"[GROWTH] TIME ESTEVAO MACIEL", emails:["larissa.cavalcanti@gocase.com","estevao.vidal@gocase.com","eurides.silva@gocase.com","joyce.lima@gocase.com"] },
-  { id:"team-58452", name:"[GROWTH] TIME GABRIEL ARAUJO", emails:["gabriel.lopes@gocase.com","lia.linhares@gocase.com"] },
-  { id:"team-66348", name:"[GROWTH] TIME MATEUS ARAGAO", emails:["alice.katheley@gocase.com","avila.farias@gobeaute.com.br","mateus.aragao@gocase.com"] },
-  { id:"team-56334", name:"[GROWTH] TIME OTHON", emails:["anthony.duarte@gocase.com","gabriel.lopes@gocase.com","gustavo.abritta@gobeaute.com.br","maria.aguiar@gobeaute.com.br","matheus.vasconcelos@gocase.com","othon.neri@gocase.com"] },
-  { id:"team-57704", name:"[GROWTH] TIME VERSTAPEN", emails:["andre.vasconcelos@gocase.com","eduarda.alves@gocase.com","pedro.falcao@gocase.com","victor.matias@gocase.com"] },
-  { id:"team-53851", name:"[GROWTH] TIME VICTOR MATIAS", emails:["lucas.parente@gocase.com","pedro.rocha@gobeaute.com.br","victor.matias@gocase.com"] },
-  { id:"team-88184", name:"[GROWTH] TIME VINICIUS ELIAS", emails:["estevao.vidal@gocase.com","joaovitor.mesquita@gocase.com","nathalia.pinheiro@gobeaute.com.br","vinicius.elias@gocase.com"] },
-  { id:"team-71557", name:"[ILUSTRA] TIME EMILLY ALVES", emails:["emilly.alves@gocase.com","lethicia.santos@gocase.com"] },
-  { id:"team-8145", name:"[ILUSTRA] TIME RAVENNA", emails:["camila.fonteles@gocase.com","ravenna.alencar@gocase.com","renan.lima@gocase.com"] },
-  { id:"team-36141", name:"[LOJAS] TIME RICARDO LISBOA", emails:["ricardo.lisboa@gocase.com","ricardo.luiz@gocase.com"] },
-  { id:"team-6054", name:"[LOJA] TIME RICARDO LUIZ", emails:["juan.silva@gocase.com","ricardo.luiz@gocase.com"] },
-  { id:"team-31001", name:"[MKT INFLU] BACKOFFICE", emails:["larissa.lima@gocase.com","leticia.louise@gocase.com","mirlane.santos@gocase.com","rafaela.costa@gocase.com"] },
-  { id:"team-67181", name:"[MKT INFLU] PLANEJAMENTO", emails:["clara.maira@gocase.com","luana.melo@gocase.com","oscar.filho@gocase.com","raquel.bessa@gocase.com","sarah.macedo@gobeaute.com.br","yasmin.moraes@gobeaute.com.br"] },
-  { id:"team-4194", name:"[MKT INFLU] PROSPECÇÃO E NEGOCIAÇÃO", emails:["deborah.harrop@gocase.com","isabelly.soler@gocase.com","hortencia.magalhaes@gocase.com","rebeca.lobo@gocase.com"] },
-  { id:"team-24000", name:"[MKT INFLU] TIME PEDRO LUCAS", emails:["julia.martins@gocase.com","pedro.lucas@gobeaute.com.br"] },
-  { id:"team-92352", name:"[PRODUTO GOBEAUTE] P&D", emails:["fernanda.belmok@gobeaute.com.br","gabriela.umezaki@gobeaute.com.br","jessica.park@gobeaute.com.br","julia.feijao@gocase.com","juliana.moreira@gobeaute.com.br"] },
-  { id:"team-32036", name:"[PRODUTO] TIME BRUNO BASTOS", emails:["bruna@gocase.com","aurelio@gocase.com"] },
-  { id:"team-49998", name:"[PROJETOS GOBEAUTE] CRIAÇÃO", emails:["fernanda.feliciano@gobeaute.com.br","karine.pinheiro@gobeaute.com.br","levi.resende@gocase.com"] },
-  { id:"team-64499", name:"[PROJETOS GOBEAUTE] INTELIGÊNCIA DE MERCADO", emails:["ana.karine@gobeaute.com.br","dimitra.carvalho@gocase.com","joao.carlos@gocase.com"] },
-  { id:"team-8330", name:"[PROJETOS] SQUAD WAITLIST", emails:["ana.estolano@gocase.com","joao.carlos@gocase.com","levi.resende@gocase.com","rafi.mota@gocase.com"] },
-  { id:"team-7118", name:"[SUPPLY] TIME VITORIA AZEVEDO", emails:["bruna.caetano@gocase.com","gardenia.gomes@gocase.com","gustavo.castro@gocase.com","vitoria.azevedo@gocase.com"] },
-  { id:"team-62779", name:"[TECNOLOGIA] ERIK BONFIM", emails:["erik.bonfim@gocase.com","yohans.nascimento@gocase.com"] },
-  { id:"team-39058", name:"[TECNOLOGIA] TIME DANIEL MARINHO", emails:["aline.ramos@gocase.com","daniel.marinho@gocase.com","marcelo.marques@gocase.com","nicholas.nogueira@gocase.com"] },
-  { id:"team-31069", name:"[TECNOLOGIA] TIME ERICK PEREIRA", emails:["edney.freitas@gocase.com","isabella.santos@gocase.com","laura.alves@gocase.com","raissa.ribeiro@gocase.com"] },
-  { id:"team-9605", name:"[TECNOLOGIA] TIME WELLINGTON", emails:["rodrigo.rodrigues@gocase.com","wellington.brito@gobeaute.com.br"] },
-  { id:"team-41418", name:"[TRANSPORTES] AUTOMAÇÃO E DADOS", emails:["jaine.caboclo@gocase.com","josiely.ferreira@gocase.com","mario.monteiro@gocase.com"] },
-  { id:"team-63389", name:"[TRANSPORTES] SLA B2B E CUSTOS", emails:["anderson.oliveira@gocase.com","marcos.luiz@gocase.com","talita.oliveira@gocase.com"] },
-  { id:"team-94935", name:"[TRANSPORTES] TIME FABRICIA LIMA", emails:["elaine.silva@gocase.com","fablicia.lima@gocase.com"] },
-  { id:"team-37021", name:"[TRANSPORTES] TIME KELLY SOUSA", emails:["kelly.sousa@gocase.com"] },
-  { id:"team-9768", name:"[TRANSPORTES] TIME LUCAS OLIVEIRA", emails:["eduarda.ferreira@gocase.com","lucas.oliveira@gocase.com"] },
+  { id:"team-80515", area:"Operações Gocase",             name:"ARMAZÉM EXTREMA", emails:["ana.morais@gocase.com","bruno.oliveira@gocase.com","francisco.anderson@gocase.com","isabela.souza@gocase.com","izaac.bezerra@gocase.com","jairo.sousa@gocase.com","wilian.mello@gocase.com"] },
+  { id:"team-44659", area:"Operações Gocase",             name:"ARMAZÉN ITAPEVA", emails:["graziela.santos@gocase.com","joaopaulo.nobre@gocase.com"] },
+  { id:"team-5938",  area:"B2B Gobeaute",                 name:"B2B GOBEAUTE", emails:["eduardo.santana@gobeaute.com.br","italo.costa@gobeaute.com.br","joao.simao@gobeaute.com.br"] },
+  { id:"team-18889", area:"B2B Gocase",                   name:"B2B GOCASE", emails:["darlison.santos@gocase.com","igor.morais@gocase.com","leonardo.filho@gocase.com","lucas.guerra@gocase.com"] },
+  { id:"team-4892",  area:"Contabilidade",                name:"CONTABILIDADE GOBEAUTE", emails:["alessandra.forte@gocase.com","stefanny.barros@gobeaute.com.br","bianca.rodrigues@gobeaute.com.br","johnathan.freitas@gobeaute.com.br","ludmila.rodrigues@gocase.com","misael.holanda@gobeaute.com.br"] },
+  { id:"team-40874", area:"Contabilidade",                name:"CONTABILIDADE GOCASE", emails:["amanda.martins@gocase.com","luana.moreira@gocase.com","ludmila.rodrigues@gocase.com","misael.holanda@gobeaute.com.br","shelley.passos@gocase.com"] },
+  { id:"team-68419", area:"CSC",                          name:"CSC", emails:["alice.souza@gobeaute.com.br","antonio.mendes@gocase.com","carmem.bianca@gobeaute.com.br","cristianne.moura@gobeaute.com.br","jenyfer.ferreira@gocase.com","luisa@gobeaute.com.br","luiza.teixeira@gobeaute.com.br","natanael.guedes@gobeaute.com.br"] },
+  { id:"team-64373", area:"Operações Gocase",             name:"CUSTOS", emails:["guilherme.alencar@gocase.com"] },
+  { id:"team-89513", area:"CX",                           name:"CX", emails:["bruna.cunha@gocase.com","ytalo.ferreira@gocase.com"] },
+  { id:"team-4014",  area:"CX",                           name:"CX - OPERAÇÃO GOBEAUTE", emails:["larissa.queiroz@gocase.com"] },
+  { id:"team-47224", area:"RPA/Dados",                    name:"DADOS", emails:["alzir.moreira@gocase.com","gustavo.oliveira@gocase.com","joao.lopessilva@gocase.com","levi.israel@gobeaute.com.br","rodrigo.maia@gocase.com"] },
+  { id:"team-55928", area:"Produto Gobeaute",             name:"DESENVOLVIMENTO PRODUTO GOBEAUTE", emails:["jessica.park@gobeaute.com.br","patricia.trajano@gobeaute.com.br"] },
+  { id:"team-26380", area:"Produto Gocase",               name:"DESENVOLVIMENTO PRODUTO GOCASE", emails:["clara.sousa@gocase.com","paloma.bermudez@gocase.com","silvia.scarabelot@gocase.com"] },
+  { id:"team-67035", area:"Gente & Gestão",               name:"DHO E BP´S", emails:["erivania.martins@gocase.com","isabela.melo@gocase.com","jessica.andrade@gocase.com"] },
+  { id:"team-35017", area:"Departamento Pessoal",         name:"DP", emails:["ericka.caminha@gocase.com","gabriel.caleffi@gocase.com","isac.almeida@gocase.com","jhenyfer.lima@gocase.com","leticia.fernandes@gocase.com","maria.davila@gocase.com","nadia.mendes@gobeaute.com.br","will.fernandes@gocase.com"] },
+  { id:"team-57927", area:"E-Commerce",                   name:"E-COMMERCE", emails:["aline.montenegro@gocase.com","livia.dias@gocase.com","kaylane.santos@gobeaute.com.br","leticia.viana@gocase.com","victor.keven@gocase.com"] },
+  { id:"team-16772", area:"Produto Gocase",               name:"ENGENHARIA PRODUTO", emails:["carolina.ballestero@gocase.com"] },
+  { id:"team-5609",  area:"Gente & Gestão",               name:"EXPERIÊNCIA DO COLABORADOR", emails:["iasmin.brilhante@gocase.com","jaiane.pinheiro@gocase.com","layla.bezerril@gocase.com","suellen.leal@gocase.com"] },
+  { id:"team-45089", area:"Facilities",                   name:"FACILITIES", emails:["adyla.martins@gocase.com","andreia.araujo@gocase.com","matheus.silva@gocase.com","pedro.napolitano@gocase.com","rodrigo.pereira@gocase.com"] },
+  { id:"team-12790", area:"Financeiro",                   name:"FINANCEIRO", emails:["anderson.matos@gocase.com","marilia.dantas@gocase.com","carlos.feitosa@gocase.com","yngrid.falsetti@gocase.com"] },
+  { id:"team-13479", area:"Fiscal",                       name:"FISCAL", emails:["samir.labib@gocase.com","stefany.costa@gocase.com"] },
+  { id:"team-76921", area:"FP&A",                         name:"FP&A", emails:["giovanni.papini@gocase.com","hugo.santana@gobeaute.com.br","larissa.portacio@gocase.com","rodrigo.cruz@gocase.com","rute.souza@gobeaute.com.br"] },
+  { id:"team-27507", area:"Gente & Gestão",               name:"FÁBRICAS GENTE E GESTÃO", emails:["jhenyfer.silva@gocase.com","juliana.bortoletto@gocase.com","kauany.oliveira@gocase.com"] },
+  { id:"team-95011", area:"Gente & Gestão",               name:"GENTE E GESTÃO", emails:["simony.morais@gocase.com"] },
+  { id:"team-4619",  area:"Gente & Gestão",               name:"GESTÃO", emails:["laiza.garcia@gocase.com","leyde.rodrigues@gocase.com","luiza.rios@gocase.com","thaylana.deborah@gocase.com"] },
+  { id:"team-98138", area:"Growth",                       name:"GROWTH", emails:["andre.castro@gocase.com","daniel.nunez@gocase.com","giovanna.rocha@gobeaute.com.br","guilherme.filgueiras@gocase.com","othon.neri@gocase.com"] },
+  { id:"team-58543", area:"Growth",                       name:"GROWTH JUMP", emails:["alice.frota@gocase.com","lucas.breder@gocase.com","tadeu.benevides@gocase.com","yuri.rocha@gocase.com"] },
+  { id:"team-97487", area:"B2B Gocase",                   name:"Geração de demandas", emails:["larissa.bauman@gocase.com"] },
+  { id:"team-4676",  area:"Ilustração",                   name:"ILUSTRA", emails:["aline.montenegro@gocase.com","giovanna.gouveia@gocase.com","gizele.falcao@gocase.com","joao.wellington@gocase.com","rian.mesquita@gocase.com"] },
+  { id:"team-63654", area:"Operações Gobeaute",           name:"INBOUND", emails:["juliana.brilhante@gobeaute.com.br","lailton.freitas@gobeaute.com.br","maysa.moraes@gobeaute.com.br","samuel.reboucas@gobeaute.com.br"] },
+  { id:"team-5109",  area:"Produto Gocase",               name:"INTELIGÊNCIA DE MERCADO", emails:["emanuele.correia@gocase.com"] },
+  { id:"team-98081", area:"B2B Gocase",                   name:"Inbound / Farming / Feiras", emails:["anacarolina.andrade@gocase.com","bianca.grilo@gocase.com","bianca.santos@gocase.com","carlos.henrique@gocase.com","deborah.diniz@gocase.com","gean.malaquias@gocase.com","igor.morais@gocase.com","juliana.gomes@gocase.com","luiz.moura@gocase.com","karliene.oliveira@gocase.com","kauanne.rodrigues@gocase.com","mariana.ventura@gocase.com","myrela.sousa@gocase.com","vanessa.araujo@gocase.com"] },
+  { id:"team-96723", area:"Jurídico",                     name:"JURÍDICO", emails:["camila.mussim@gobeaute.com.br","gabrielle.donega@gocase.com","izadora.gomes@gocase.com","juliana.mastroeni@gobeaute.com.br","kamilly.silva@gobeaute.com.br"] },
+  { id:"team-32155", area:"Offline",                      name:"LOJAS", emails:["nathalia.moraes@gocase.com","pedro.oliveira@gocase.com","rackel.viana@gocase.com","ricardo.lisboa@gocase.com"] },
+  { id:"team-14480", area:"Marketing Branding",           name:"MARKETING BRANDING", emails:["arnaldo.viana@gocase.com","kellery.moreira@gocase.com","luiza.belo@gocase.com","duda.sales@gocase.com","patricia.stadler@gocase.com","samia.carvalho@gocase.com","samir.carvalho@gocase.com","thaissa.albuquerque@gocase.com"] },
+  { id:"team-35675", area:"Marketing de Influência",      name:"MARKETING DE INFLU.", emails:["kayo.lopes@gocase.com","leticia.louise@gocase.com","luiza.mariane@gocase.com"] },
+  { id:"team-94553", area:"Operações Gobeaute",           name:"OPERAÇÕES GOBEAUTE", emails:["gilvania.pinheiro@gobeaute.com.br","guilherme.freitas@gocase.com"] },
+  { id:"team-40691", area:"Operações Gobeaute",           name:"OUTBOUND", emails:["alice.aquino@gobeaute.com.br","carla.alencar@gobeaute.com.br","gilvania.pinheiro@gobeaute.com.br","juliana.sales@gobeaute.com.br","tifanne.mendes@gobeaute.com.br"] },
+  { id:"team-3749",  area:"Produto Gocase",               name:"PROCESSO GOCASE", emails:["gessica.pinheiro@gocase.com","artur.sampaio@gocase.com","joao.carlos@gocase.com"] },
+  { id:"team-14857", area:"Produto Gocase",               name:"PRODUTO", emails:["laiza.garcia@gocase.com","pedro.ipanema@gocase.com","silvia.scarabelot@gocase.com"] },
+  { id:"team-27650", area:"Operações Gocase",             name:"PRODUÇÃO GOCASE", emails:["belluanney.silva@gocase.com","caio.ferreirarodrigues@gocase.com","igor.fontes@gocase.com","ingliti.silva@gocase.com","lucas.barbosa@gocase.com","wagner.azevedo@gocase.com"] },
+  { id:"team-1482",  area:"Produto Gocase",               name:"PROJETOS - PRODUTO", emails:["andresa.ponte@gocase.com","joao.carlos@gocase.com"] },
+  { id:"team-46142", area:"B2B Gocase",                   name:"Pós-venda", emails:["beatriz.nogueira@gocase.com","larissa.simoes@gocase.com","lucas.rodrigues@gocase.com","paulo.seabra@gocase.com","rayka.teofilo@gocase.com","rodrigo.costa@gocase.com","samuel.rios@gocase.com","symone.seidl@gocase.com"] },
+  { id:"team-71382", area:"Qualidade",                    name:"QUALIDADE GOCASE", emails:["clistony.nascimento@gocase.com","felipe.nascif@gocase.com","gabriel.borges@gocase.com","iara.silva@gocase.com","jenifer.clementino@gocase.com","maycon.seabra@gocase.com","natalia.pavao@gocase.com"] },
+  { id:"team-75324", area:"Gente & Gestão",               name:"R&S [TIME EDUARDA]", emails:["fernanda.pires@gocase.com","karolina.oliveira@gocase.com","eduarda.lourencini@gocase.com","nicole.campos@gocase.com","sabrina.braga@gocase.com"] },
+  { id:"team-60423", area:"RPA",                          name:"RPA", emails:["joao.gabriel@gocase.com","joaovictor.esteves@gocase.com","kaique.breno@gocase.com","lucas.queiroz@gocase.com","lucas.noronha@gocase.com","victor.moreno@gocase.com"] },
+  { id:"team-86385", area:"Sourcing & Procurement",       name:"SOURCING & PROCUREMENT GOBEAUTE", emails:["bruna.crisostomo@gobeaute.com.br","edivar@gobeaute.com.br","tainara.ferreira@gobeaute.com.br","jamille.costa@gobeaute.com.br","jessica.andrade@gobeaute.com.br","viviane.rodrigues@gobeaute.com.br"] },
+  { id:"team-67123", area:"Produto Gocase",               name:"SQUAD TÉRMICOS E PET", emails:["bruna.mendes@gocase.com","leticia.gomes@gocase.com"] },
+  { id:"team-40112", area:"Produto Gocase",               name:"SQUAD TÊXTIL - MIMOS - B2B", emails:["camila.galisa@gocase.com"] },
+  { id:"team-96130", area:"Produto Gocase",               name:"SQUAD VIAGEM + FITNESS", emails:["nayany.katayama@gocase.com"] },
+  { id:"team-14441", area:"Supply Chain",                 name:"SUPPLY CHAIN", emails:["murilo.guimaraes@gocase.com","kevyn.silva@gocase.com","mariane.vasconcelos@gocase.com","samyra.houch@gocase.com","saulo.oliveira@gocase.com","vitoria.azevedo@gocase.com"] },
+  { id:"team-39414", area:"Tecnologia",                   name:"TECNOLOGIA", emails:["help.desk@gocase.com","diego.rabelo@gocase.com","douglas.ghiraldello@gobeaute.com.br","erik.bonfim@gocase.com","eughenio.constantino@gocase.com","isaac.albano@gocase.com","isabella.santos@gocase.com","lucas.braide@gocase.com","reinaldo.oliveira@gocase.com","vitor.fraifer@gobeaute.com.br","vitor.rosa@gocase.com"] },
+  { id:"team-38568", area:"Gente & Gestão",               name:"TIME ISABELA MELO - DHO", emails:["helen.alves@gocase.com","isabela.melo@gocase.com"] },
+  { id:"team-25706", area:"Gente & Gestão",               name:"TIME JOAQUIM QUINDERE", emails:["joaquim@gobeaute.com.br","leandro.perruci@gobeaute.com.br"] },
+  { id:"team-65886", area:"Gente & Gestão",               name:"TIME VINICIUS NISHIDE", emails:["luciano.cavalcante@gocase.com","vinicius.nishide@gobeaute.com.br"] },
+  { id:"team-29669", area:"Transportes E Logística",      name:"TRANSPORTES", emails:["anamonique.fernandes@gocase.com","joao.conde@gocase.com","kelly.sousa@gocase.com","welis.ribeiro@gocase.com"] },
+  { id:"team-88603", area:"Transportes E Logística",      name:"TRANSPORTES E SLA B2C", emails:["aline.souza@gobeaute.com.br","fablicia.lima@gocase.com","kelly.sousa@gocase.com","lucas.oliveira@gocase.com"] },
+  { id:"team-34324", area:"B2B Gobeaute",                 name:"[B2B GOBEAUTE] EQUIPE DE VENDAS", emails:["flavia.lopes@gobeaute.com.br","davi.castro@gobeaute.com.br","edilberto.lobo@gobeaute.com.br","isabela.silva@gobeaute.com.br","joao.simao@gobeaute.com.br","juliana.ferreira@gobeaute.com.br","lara.ambrozio@gobeaute.com.br","vinicius.gabriel@gobeaute.com.br"] },
+  { id:"team-29489", area:"CX",                           name:"[CX] DADOS E MELHORIA CONTÍNUA", emails:["bruna.gondim@gocase.com","welder.silva@gocase.com","ytalo.ferreira@gocase.com","maria.ponciano@gocase.com","naiarlisson.fernandes@gocase.com"] },
+  { id:"team-1783",  area:"CX",                           name:"[CX] JORNADA E INTEGRAÇÕES", emails:["giovanna.sabrina@gocase.com","kamel.ribeiro@gocase.com","marcelo.menezes@gocase.com","mariana.barros@gocase.com","mireia.torres@gobeaute.com.br"] },
+  { id:"team-74929", area:"CX",                           name:"[CX] OPERAÇÕES GOCASE", emails:["grasiele.passos@gocase.com","lucas.felix@gocase.com","vanessa.bezerra@gocase.com"] },
+  { id:"team-53417", area:"CX",                           name:"[CX] TIME NAIARLISSON", emails:["naiarlisson.fernandes@gocase.com","yasmin.matos@gocase.com"] },
+  { id:"team-39653", area:"Financeiro",                   name:"[FINANCEIRO] TIME ANDERSON MATOS", emails:["anderson.matos@gocase.com","lucas.fernandes@gocase.com","renata.lira@gocase.com","sarah.christian@gobeaute.com.br"] },
+  { id:"team-89827", area:"Financeiro",                   name:"[FINANCEIRO] TIME CARLOS FEITOSA", emails:["ana.claudia@gocase.com","edilane.espinoza@gocase.com","emanuel.silveira@gocase.com","carlos.feitosa@gocase.com","gabrielly.brito@gocase.com","natalia.jocundo@gocase.com"] },
+  { id:"team-3614",  area:"Financeiro",                   name:"[FINANCEIRO] TIME RENATA LIRA", emails:["izabelly.machado@gocase.com","renata.lira@gocase.com"] },
+  { id:"team-52388", area:"Fiscal",                       name:"[FISCAL] TIME DAVID BRITO", emails:["aline.fonseca@gocase.com","david.brito@gobeaute.com.br","alex.barros@gocase.com","anderson.sousa@gobeaute.com.br","lorenna.ribeiro@gocase.com","samuel.campos@gocase.com"] },
+  { id:"team-81853", area:"Fiscal",                       name:"[FISCAL] TIME HERLESON SILVA", emails:["aline.fonseca@gocase.com","lara.matos@gocase.com","alex.barros@gocase.com","gabrielle.liriel@gocase.com","herleson.amarante@gocase.com","joyce.malpera@gocase.com","nyara.sato@gocase.com","sarah.coutinho@gocase.com"] },
+  { id:"team-84141", area:"Fiscal",                       name:"[FISCAL] TIME SAMUEL DA SILVA", emails:["antonelle.gomes@gocase.com","livia.arruda@gobeaute.com.br","luiza.vitoria@gobeaute.com.br","samuel.campos@gocase.com"] },
+  { id:"team-5383",  area:"FP&A",                         name:"[FP&A] RODRIGO CRUZ", emails:["bruno.pereira@gocase.com","giovanni.papini@gocase.com"] },
+  { id:"team-6294",  area:"Growth",                       name:"[GROWTH] TIME ANTHONY", emails:["anita.perez@gobeaute.com.br","anthony.duarte@gocase.com","caio.joabe@gobeaute.com.br"] },
+  { id:"team-63606", area:"Growth",                       name:"[GROWTH] TIME BEATRIZ MONTIZUMA", emails:["beatriz.montizuma@gocase.com","thalia.farias@gocase.com"] },
+  { id:"team-59259", area:"Growth",                       name:"[GROWTH] TIME DANIEL RAMOS", emails:["beatriz.montizuma@gocase.com","andre.vasconcelos@gocase.com","daniel.nunez@gocase.com","geissilene.sousa@gocase.com","mateus.aragao@gocase.com"] },
+  { id:"team-11634", area:"Growth",                       name:"[GROWTH] TIME ESTEVAO MACIEL", emails:["larissa.cavalcanti@gocase.com","estevao.vidal@gocase.com","eurides.silva@gocase.com","joyce.lima@gocase.com"] },
+  { id:"team-58452", area:"Growth",                       name:"[GROWTH] TIME GABRIEL ARAUJO", emails:["gabriel.lopes@gocase.com","lia.linhares@gocase.com"] },
+  { id:"team-66348", area:"Growth",                       name:"[GROWTH] TIME MATEUS ARAGAO", emails:["alice.katheley@gocase.com","avila.farias@gobeaute.com.br","mateus.aragao@gocase.com"] },
+  { id:"team-56334", area:"Growth",                       name:"[GROWTH] TIME OTHON", emails:["anthony.duarte@gocase.com","gabriel.lopes@gocase.com","gustavo.abritta@gobeaute.com.br","maria.aguiar@gobeaute.com.br","matheus.vasconcelos@gocase.com","othon.neri@gocase.com"] },
+  { id:"team-57704", area:"Growth",                       name:"[GROWTH] TIME VERSTAPEN", emails:["andre.vasconcelos@gocase.com","eduarda.alves@gocase.com","pedro.falcao@gocase.com","victor.matias@gocase.com"] },
+  { id:"team-53851", area:"Growth",                       name:"[GROWTH] TIME VICTOR MATIAS", emails:["lucas.parente@gocase.com","pedro.rocha@gobeaute.com.br","victor.matias@gocase.com"] },
+  { id:"team-88184", area:"Growth",                       name:"[GROWTH] TIME VINICIUS ELIAS", emails:["estevao.vidal@gocase.com","joaovitor.mesquita@gocase.com","nathalia.pinheiro@gobeaute.com.br","vinicius.elias@gocase.com"] },
+  { id:"team-71557", area:"Ilustração",                   name:"[ILUSTRA] TIME EMILLY ALVES", emails:["emilly.alves@gocase.com","lethicia.santos@gocase.com"] },
+  { id:"team-8145",  area:"Ilustração",                   name:"[ILUSTRA] TIME RAVENNA", emails:["camila.fonteles@gocase.com","ravenna.alencar@gocase.com","renan.lima@gocase.com"] },
+  { id:"team-36141", area:"Offline",                      name:"[LOJAS] TIME RICARDO LISBOA", emails:["ricardo.lisboa@gocase.com","ricardo.luiz@gocase.com"] },
+  { id:"team-6054",  area:"Offline",                      name:"[LOJA] TIME RICARDO LUIZ", emails:["juan.silva@gocase.com","ricardo.luiz@gocase.com"] },
+  { id:"team-31001", area:"Marketing de Influência",      name:"[MKT INFLU] BACKOFFICE", emails:["larissa.lima@gocase.com","leticia.louise@gocase.com","mirlane.santos@gocase.com","rafaela.costa@gocase.com"] },
+  { id:"team-67181", area:"Marketing de Influência",      name:"[MKT INFLU] PLANEJAMENTO", emails:["clara.maira@gocase.com","luana.melo@gocase.com","oscar.filho@gocase.com","raquel.bessa@gocase.com","sarah.macedo@gobeaute.com.br","yasmin.moraes@gobeaute.com.br"] },
+  { id:"team-4194",  area:"Marketing de Influência",      name:"[MKT INFLU] PROSPECÇÃO E NEGOCIAÇÃO", emails:["deborah.harrop@gocase.com","isabelly.soler@gocase.com","hortencia.magalhaes@gocase.com","rebeca.lobo@gocase.com"] },
+  { id:"team-24000", area:"Marketing de Influência",      name:"[MKT INFLU] TIME PEDRO LUCAS", emails:["julia.martins@gocase.com","pedro.lucas@gobeaute.com.br"] },
+  { id:"team-92352", area:"Produto Gobeaute",             name:"[PRODUTO GOBEAUTE] P&D", emails:["fernanda.belmok@gobeaute.com.br","gabriela.umezaki@gobeaute.com.br","jessica.park@gobeaute.com.br","julia.feijao@gocase.com","juliana.moreira@gobeaute.com.br"] },
+  { id:"team-32036", area:"Produto Gocase",               name:"[PRODUTO] TIME BRUNO BASTOS", emails:["bruna@gocase.com","aurelio@gocase.com"] },
+  { id:"team-49998", area:"Produto Gobeaute",             name:"[PROJETOS GOBEAUTE] CRIAÇÃO", emails:["fernanda.feliciano@gobeaute.com.br","karine.pinheiro@gobeaute.com.br","levi.resende@gocase.com"] },
+  { id:"team-64499", area:"Produto Gobeaute",             name:"[PROJETOS GOBEAUTE] INTELIGÊNCIA DE MERCADO", emails:["ana.karine@gobeaute.com.br","dimitra.carvalho@gocase.com","joao.carlos@gocase.com"] },
+  { id:"team-8330",  area:"Produto Gocase",               name:"[PROJETOS] SQUAD WAITLIST", emails:["ana.estolano@gocase.com","joao.carlos@gocase.com","levi.resende@gocase.com","rafi.mota@gocase.com"] },
+  { id:"team-7118",  area:"Supply Chain",                 name:"[SUPPLY] TIME VITORIA AZEVEDO", emails:["bruna.caetano@gocase.com","gardenia.gomes@gocase.com","gustavo.castro@gocase.com","vitoria.azevedo@gocase.com"] },
+  { id:"team-62779", area:"Tecnologia",                   name:"[TECNOLOGIA] ERIK BONFIM", emails:["erik.bonfim@gocase.com","yohans.nascimento@gocase.com"] },
+  { id:"team-39058", area:"Tecnologia",                   name:"[TECNOLOGIA] TIME DANIEL MARINHO", emails:["aline.ramos@gocase.com","daniel.marinho@gocase.com","marcelo.marques@gocase.com","nicholas.nogueira@gocase.com"] },
+  { id:"team-31069", area:"Tecnologia",                   name:"[TECNOLOGIA] TIME ERICK PEREIRA", emails:["edney.freitas@gocase.com","isabella.santos@gocase.com","laura.alves@gocase.com","raissa.ribeiro@gocase.com"] },
+  { id:"team-9605",  area:"Tecnologia",                   name:"[TECNOLOGIA] TIME WELLINGTON", emails:["rodrigo.rodrigues@gocase.com","wellington.brito@gobeaute.com.br"] },
+  { id:"team-41418", area:"Transportes E Logística",      name:"[TRANSPORTES] AUTOMAÇÃO E DADOS", emails:["jaine.caboclo@gocase.com","josiely.ferreira@gocase.com","mario.monteiro@gocase.com"] },
+  { id:"team-63389", area:"Transportes E Logística",      name:"[TRANSPORTES] SLA B2B E CUSTOS", emails:["anderson.oliveira@gocase.com","marcos.luiz@gocase.com","talita.oliveira@gocase.com"] },
+  { id:"team-94935", area:"Transportes E Logística",      name:"[TRANSPORTES] TIME FABRICIA LIMA", emails:["elaine.silva@gocase.com","fablicia.lima@gocase.com"] },
+  { id:"team-37021", area:"Transportes E Logística",      name:"[TRANSPORTES] TIME KELLY SOUSA", emails:["kelly.sousa@gocase.com"] },
+  { id:"team-9768",  area:"Transportes E Logística",      name:"[TRANSPORTES] TIME LUCAS OLIVEIRA", emails:["eduarda.ferreira@gocase.com","lucas.oliveira@gocase.com"] },
 ];
 
 // ════════════════════════════════════════════════
 //  STATE
 // ════════════════════════════════════════════════
-const STORAGE_HIDDEN = 'gg_hidden_teams_v1';
-const STORAGE_CUSTOM = 'gg_custom_teams_v1';
+const STORAGE_HIDDEN  = 'gg_hidden_teams_v1';
+const STORAGE_CUSTOM  = 'gg_custom_teams_v1';
+const STORAGE_PROFILE = 'gg_user_profile_v1';
 
 let hiddenTeamIds = new Set();
-let customTeams = [];
+let customTeams   = [];
 let activeTeamIds = new Set();
-let activeRoomIds = new Set();   // selected rooms
+let activeRoomIds = new Set();
 let editingTeamId = null;
-let emails = [];
-let tokenClient = null;
-let accessToken = null;
-let userProfile = null;
-let duration = 60;
+let emails        = [];
+let tokenClient   = null;
+let accessToken   = null;
+let userProfile   = null;
+let duration      = 60;
 let excludeWeekends = true;
-let pageSize = 5;
-let addMeet = true;
-let notifLevel = 'ALL';
-let selectedSlot = null;
-let foundSlots = [];
+let pageSize      = 5;
+let addMeet       = true;
+let notifLevel    = 'ALL';
+let selectedSlot  = null;
+let foundSlots    = [];
 
 // ════════════════════════════════════════════════
 //  INIT
@@ -596,6 +619,7 @@ window.addEventListener('load', () => {
   setDefaultDates();
   renderTeamChips();
   renderRoomChips();
+  updateSearchSummary();
   waitForGIS();
 });
 
@@ -624,23 +648,236 @@ function setDefaultDates() {
 }
 
 // ════════════════════════════════════════════════
+//  AUTOCOMPLETE DE E-MAIL
+// ════════════════════════════════════════════════
+function buildEmailIndex() {
+  const index = {};
+  getAllTeams().forEach(team => {
+    team.emails.forEach(email => {
+      const key = email.trim().toLowerCase();
+      if (!key) return;
+      if (!index[key]) index[key] = { email: key, teams: [] };
+      if (!index[key].teams.includes(team.name)) index[key].teams.push(team.name);
+    });
+  });
+  return Object.values(index);
+}
+
+function onEmailInput() {
+  const val = document.getElementById('email-input').value.trim().toLowerCase();
+  const dropdown = document.getElementById('autocomplete-dropdown');
+
+  if (val.length < 2) { dropdown.style.display = 'none'; return; }
+
+  const matches = buildEmailIndex()
+    .filter(p => p.email.includes(val) && !emails.includes(p.email))
+    .slice(0, 4);
+
+  if (!matches.length) { dropdown.style.display = 'none'; return; }
+
+  dropdown.innerHTML = '';
+  matches.forEach(person => {
+    const item = document.createElement('div');
+    item.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:9px 12px;cursor:pointer;gap:10px;border-bottom:1px solid var(--border);';
+    item.onmouseover = () => item.style.background = 'var(--surface2)';
+    item.onmouseout  = () => item.style.background = '';
+
+    // Negrita a parte que bate com a busca
+    const idx = person.email.indexOf(val);
+    const highlighted = idx >= 0
+      ? escapeHtml(person.email.slice(0, idx))
+        + `<strong style="color:var(--text);">${escapeHtml(person.email.slice(idx, idx + val.length))}</strong>`
+        + escapeHtml(person.email.slice(idx + val.length))
+      : escapeHtml(person.email);
+
+    const teamList = person.teams.slice(0, 2).join(', ') + (person.teams.length > 2 ? ` +${person.teams.length - 2}` : '');
+
+    item.innerHTML = `
+      <div style="min-width:0;flex:1;">
+        <div style="font-size:13px;color:var(--text);">${highlighted}</div>
+        <div style="font-size:11px;color:var(--muted);opacity:0.7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Membro de: ${escapeHtml(teamList)}</div>
+      </div>
+      <span style="font-size:12px;color:var(--text);opacity:0.5;white-space:nowrap;flex-shrink:0;">+ Adicionar</span>`;
+
+    // Usa click (não mousedown) — mais confiável
+    item.addEventListener('click', () => {
+      addEmail(person.email);
+      dropdown.style.display = 'none';
+    });
+
+    dropdown.appendChild(item);
+  });
+
+  dropdown.style.display = 'block';
+}
+
+// Fecha dropdown ao clicar fora
+document.addEventListener('click', (e) => {
+  const inp = document.getElementById('email-input');
+  const dd  = document.getElementById('autocomplete-dropdown');
+  if (dd && inp && !inp.contains(e.target) && !dd.contains(e.target)) {
+    dd.style.display = 'none';
+  }
+});
+
+function addEmail(forceEmail) {
+  const inp = document.getElementById('email-input');
+  const val = (forceEmail !== undefined ? forceEmail : inp.value).trim().toLowerCase();
+  if (val && val.includes('@') && !emails.includes(val)) {
+    emails.push(val);
+    renderTags();
+  }
+  inp.value = '';
+  inp.focus();
+  const dd = document.getElementById('autocomplete-dropdown');
+  if (dd) dd.style.display = 'none';
+}
+
+function addEmailFromInput() {
+  addEmail();
+}
+
+function handleEmailKey(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    addEmail();
+  }
+  if (e.key === 'Escape') {
+    const dd = document.getElementById('autocomplete-dropdown');
+    if (dd) dd.style.display = 'none';
+  }
+}
+
+// ════════════════════════════════════════════════
+//  GOOGLE DRIVE — TIMES COMPARTILHADOS
+// ════════════════════════════════════════════════
+function updateSyncBadge(status, msg) {
+  const badge = document.getElementById('sync-badge');
+  if (!badge) return;
+  badge.style.display = '';
+  badge.className = 'sync-badge ' + (status === 'synced' ? 'synced' : status === 'error' ? 'error' : 'syncing');
+  badge.textContent = msg;
+}
+
+async function driveLoadSharedTeams() {
+  if (!accessToken) return;
+  try {
+    updateSyncBadge('syncing', '⟳ Sincronizando...');
+    // Busca o arquivo pelo nome
+    const search = await fetch(
+      `https://www.googleapis.com/drive/v3/files?q=name='${SHARED_FILE_NAME}' and trashed=false&fields=files(id,name,modifiedTime)&orderBy=modifiedTime desc`,
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    const searchData = await search.json();
+    if (searchData.files && searchData.files.length > 0) {
+      sharedFileId = searchData.files[0].id;
+      localStorage.setItem('gg_shared_file_id', sharedFileId);
+      // Carrega o conteúdo
+      const file = await fetch(
+        `https://www.googleapis.com/drive/v3/files/${sharedFileId}?alt=media`,
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      );
+      const data = await file.json();
+      if (Array.isArray(data)) {
+        customTeams = data;
+        saveStorage();
+        renderTeamChips();
+        updateSyncBadge('synced', '✓ Sincronizado');
+      }
+    } else {
+      // Arquivo não existe ainda — cria
+      await driveSaveSharedTeams();
+    }
+  } catch(e) {
+    console.error('Drive load error:', e);
+    updateSyncBadge('error', '✗ Erro ao sincronizar');
+  }
+}
+
+async function driveSaveSharedTeams() {
+  if (!accessToken) return;
+  try {
+    updateSyncBadge('syncing', '⟳ Salvando...');
+    const content = JSON.stringify(customTeams, null, 2);
+    const blob = new Blob([content], { type: 'application/json' });
+
+    let response;
+    if (sharedFileId) {
+      // Atualiza arquivo existente
+      response = await fetch(
+        `https://www.googleapis.com/upload/drive/v3/files/${sharedFileId}?uploadType=media`,
+        { method: 'PATCH', headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' }, body: content }
+      );
+    } else {
+      // Cria novo arquivo
+      const meta = { name: SHARED_FILE_NAME, mimeType: 'application/json' };
+      const form = new FormData();
+      form.append('metadata', new Blob([JSON.stringify(meta)], { type: 'application/json' }));
+      form.append('file', blob);
+      response = await fetch(
+        'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id',
+        { method: 'POST', headers: { Authorization: `Bearer ${accessToken}` }, body: form }
+      );
+      const created = await response.json();
+      sharedFileId = created.id;
+      localStorage.setItem('gg_shared_file_id', sharedFileId);
+      // Torna o arquivo acessível para todos na organização
+      await fetch(
+        `https://www.googleapis.com/drive/v3/files/${sharedFileId}/permissions`,
+        {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ role: 'writer', type: 'domain', domain: 'gocase.com' })
+        }
+      );
+      await fetch(
+        `https://www.googleapis.com/drive/v3/files/${sharedFileId}/permissions`,
+        {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ role: 'writer', type: 'domain', domain: 'gobeaute.com.br' })
+        }
+      );
+      updateSyncBadge('synced', '✓ Arquivo criado e compartilhado');
+      return;
+    }
+    updateSyncBadge('synced', '✓ Salvo no Drive');
+  } catch(e) {
+    console.error('Drive save error:', e);
+    updateSyncBadge('error', '✗ Erro ao salvar');
+  }
+}
+
+
+function updateSearchSummary() {
+  const el = document.getElementById('pre-search-summary');
+  if (!el) return;
+  const total = emails.length + 1;
+  const rooms = getSelectedRooms().length;
+  if (emails.length === 0 && rooms === 0) {
+    el.innerHTML = '<span style="opacity:0.6;">Adicione participantes ou selecione times para começar</span>';
+  } else {
+    let msg = `Buscando para <strong>${total}</strong> pessoa${total > 1 ? 's' : ''}`;
+    if (rooms > 0) msg += ` + <strong>${rooms}</strong> sala${rooms > 1 ? 's' : ''}`;
+    el.innerHTML = `<span style="color:var(--text);">✓ Pronto para buscar</span> — ${msg}`;
+  }
+}
+
+// ════════════════════════════════════════════════
 //  ROOM CHIPS
 // ════════════════════════════════════════════════
 function renderRoomChips() {
   const wrap = document.getElementById('room-chips');
   wrap.innerHTML = '';
-
   const cities = [...new Set(ROOMS.map(r => r.location))];
   cities.forEach(city => {
     const cityRooms = ROOMS.filter(r => r.location === city);
     const cityDiv = document.createElement('div');
     cityDiv.style.cssText = 'width:100%;margin-bottom:10px;';
-
     const cityLabel = document.createElement('div');
     cityLabel.style.cssText = 'font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;color:var(--muted);opacity:0.6;margin-bottom:6px;';
     cityLabel.textContent = city;
     cityDiv.appendChild(cityLabel);
-
     const chipsRow = document.createElement('div');
     chipsRow.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;';
     cityRooms.forEach(room => {
@@ -654,22 +891,17 @@ function renderRoomChips() {
     cityDiv.appendChild(chipsRow);
     wrap.appendChild(cityDiv);
   });
-
   const badge = document.getElementById('acc-rooms-badge');
   if (badge) {
     if (activeRoomIds.size > 0) { badge.style.display = ''; badge.textContent = activeRoomIds.size + ' sala' + (activeRoomIds.size > 1 ? 's' : ''); }
     else { badge.style.display = 'none'; }
   }
+  updateSearchSummary();
 }
 
 function toggleRoom(id) {
-  const room = ROOMS.find(r => r.id === id);
-  if (!room) return;
-  if (activeRoomIds.has(id)) {
-    activeRoomIds.delete(id);
-  } else {
-    activeRoomIds.add(id);
-  }
+  if (activeRoomIds.has(id)) activeRoomIds.delete(id);
+  else activeRoomIds.add(id);
   renderRoomChips();
   renderTags();
 }
@@ -679,27 +911,159 @@ function getSelectedRooms() {
 }
 
 // ════════════════════════════════════════════════
-//  TEAM CHIPS
+//  TEAM CHIPS (agrupado por área)
 // ════════════════════════════════════════════════
 function renderTeamChips() {
   const query = (document.getElementById('teams-search')?.value || '').toLowerCase().trim();
   const allTeams = getAllTeams();
-  const filtered = query ? allTeams.filter(t => t.name.toLowerCase().includes(query)) : allTeams;
+  const filtered = query
+    ? allTeams.filter(t => t.name.toLowerCase().includes(query) || t.emails.some(e => e.toLowerCase().includes(query)))
+    : allTeams;
 
   const wrap = document.getElementById('team-chips');
   wrap.innerHTML = '';
 
+  // ── Quando há busca, mostra pessoas individuais primeiro ──
+  if (query && query.length >= 2) {
+    const personIndex = buildEmailIndex();
+    const personMatches = personIndex
+      .filter(p => p.email.includes(query) && !emails.includes(p.email))
+      .slice(0, 4);
+
+    if (personMatches.length > 0) {
+      const hdr = document.createElement('div');
+      hdr.style.cssText = 'font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--text);margin-bottom:6px;margin-top:2px;';
+      hdr.textContent = 'Pessoas encontradas';
+      wrap.appendChild(hdr);
+
+      personMatches.forEach(person => {
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:4px;cursor:pointer;transition:background 0.1s;';
+        row.onmouseover = () => row.style.background = 'var(--surface2)';
+        row.onmouseout  = () => row.style.background = '';
+
+        // Negrita a parte que bate
+        const idx = person.email.indexOf(query);
+        const highlighted = idx >= 0
+          ? escapeHtml(person.email.slice(0, idx))
+            + `<strong>${escapeHtml(person.email.slice(idx, idx + query.length))}</strong>`
+            + escapeHtml(person.email.slice(idx + query.length))
+          : escapeHtml(person.email);
+
+        const teamList = person.teams.slice(0, 2).join(', ') + (person.teams.length > 2 ? ` +${person.teams.length - 2}` : '');
+
+        row.innerHTML = `
+          <div style="min-width:0;flex:1;">
+            <div style="font-size:13px;color:var(--text);font-weight:500;">${highlighted}</div>
+            <div style="font-size:11px;color:var(--muted);opacity:0.7;">Membro de: ${escapeHtml(teamList)}</div>
+          </div>
+          <button style="font-size:12px;padding:4px 10px;border:1px solid var(--border);border-radius:99px;background:transparent;color:var(--text);cursor:pointer;white-space:nowrap;font-family:inherit;">+ Adicionar</button>`;
+
+        row.querySelector('button').onclick = (e) => {
+          e.stopPropagation();
+          addEmail(person.email);
+          // Limpa a busca após adicionar
+          document.getElementById('teams-search').value = '';
+          renderTeamChips();
+        };
+
+        wrap.appendChild(row);
+      });
+
+      // Separador antes dos times
+      if (filtered.length > 0) {
+        const sep = document.createElement('div');
+        sep.style.cssText = 'height:1px;background:var(--border);margin:10px 0 8px;';
+        wrap.appendChild(sep);
+        const hdr2 = document.createElement('div');
+        hdr2.style.cssText = 'font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--text);margin-bottom:6px;';
+        hdr2.textContent = 'Times encontrados';
+        wrap.appendChild(hdr2);
+      }
+    }
+  }
+
+  // ── Times agrupados por área ──
+  const areaMap = {};
   filtered.forEach(team => {
-    const chip = document.createElement('button');
-    chip.className = 'team-chip' + (activeTeamIds.has(team.id) ? ' active' : '');
-    chip.onclick = () => toggleTeam(team.id);
-    chip.innerHTML = `<span>${escapeHtml(team.name)}</span><span class="team-chip-count">${team.emails.length}</span>`;
-    wrap.appendChild(chip);
+    const area = team.area || 'Outros';
+    if (!areaMap[area]) areaMap[area] = [];
+    areaMap[area].push(team);
   });
+
+  const areas = Object.keys(areaMap).sort();
+  areas.forEach(area => {
+    const teams = areaMap[area];
+    const selCount = teams.filter(t => activeTeamIds.has(t.id)).length;
+    const areaId = 'area-' + area.replace(/[^a-zA-Z0-9]/g, '_');
+
+    const groupDiv = document.createElement('div');
+    groupDiv.style.cssText = 'margin-bottom:4px;';
+
+    const header = document.createElement('div');
+    header.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface2);border-radius:var(--radius-sm);cursor:pointer;border:1px solid var(--border);user-select:none;transition:background 0.1s;';
+    header.onmouseover = () => header.style.background = 'var(--border)';
+    header.onmouseout  = () => header.style.background = 'var(--surface2)';
+    header.onclick = () => {
+      const body = document.getElementById(areaId);
+      const chev = document.getElementById('chev-' + areaId);
+      const open = body.style.display === 'flex';
+      body.style.display = open ? 'none' : 'flex';
+      chev.textContent = open ? '▾' : '▴';
+    };
+
+    const selBadge = selCount > 0
+      ? `<span style="font-size:11px;background:var(--text);color:var(--bg);padding:2px 8px;border-radius:99px;margin-left:6px;">${selCount}</span>`
+      : '';
+    header.innerHTML = `<span style="font-size:13px;font-weight:500;color:var(--text);">${escapeHtml(area)}${selBadge}</span><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:var(--muted);opacity:0.7;">${teams.length} times</span><span id="chev-${areaId}" style="font-size:13px;color:var(--muted);">▾</span></div>`;
+
+    const body = document.createElement('div');
+    body.id = areaId;
+    body.style.cssText = 'display:none;flex-direction:column;gap:2px;padding:4px 0 4px 8px;';
+
+    teams.forEach(team => {
+      const isActive = activeTeamIds.has(team.id);
+      const row = document.createElement('div');
+      row.style.cssText = `display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;transition:background 0.1s;${isActive ? 'background:var(--text);' : ''}`;
+      row.onmouseover = () => { if (!activeTeamIds.has(team.id)) row.style.background = 'var(--surface2)'; };
+      row.onmouseout  = () => { if (!activeTeamIds.has(team.id)) row.style.background = ''; };
+      row.onclick = () => toggleTeam(team.id);
+
+      const check = document.createElement('div');
+      check.style.cssText = `width:15px;height:15px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;border:0.5px solid ${isActive ? 'transparent' : 'var(--border)'};${isActive ? 'background:rgba(255,255,255,0.2);color:#fff;' : ''}`;
+      check.textContent = isActive ? '✓' : '';
+
+      const name = document.createElement('span');
+      name.style.cssText = `flex:1;${isActive ? 'color:#fff;' : 'color:var(--text);'}`;
+      name.textContent = team.name;
+
+      const count = document.createElement('span');
+      count.style.cssText = `font-size:11px;${isActive ? 'color:rgba(255,255,255,0.6);' : 'color:var(--muted);opacity:0.7;'}`;
+      count.textContent = team.emails.length;
+
+      row.appendChild(check);
+      row.appendChild(name);
+      row.appendChild(count);
+      body.appendChild(row);
+    });
+
+    groupDiv.appendChild(header);
+    groupDiv.appendChild(body);
+    wrap.appendChild(groupDiv);
+  });
+
+  // Auto-expandir quando há busca
+  if (query) {
+    wrap.querySelectorAll('[id^="area-"]').forEach(b => {
+      b.style.display = 'flex';
+      const chev = document.getElementById('chev-' + b.id);
+      if (chev) chev.textContent = '▴';
+    });
+  }
 
   const label = document.getElementById('teams-count-label');
   if (label) label.textContent = filtered.length === allTeams.length
-    ? `${allTeams.length} times disponíveis`
+    ? `${allTeams.length} times · ${Object.keys(areaMap).length} áreas`
     : `${filtered.length} de ${allTeams.length} times`;
 
   const badge = document.getElementById('acc-teams-badge');
@@ -767,38 +1131,27 @@ function clearAllTeams() {
 // ════════════════════════════════════════════════
 //  MANAGE MODAL
 // ════════════════════════════════════════════════
-function openManageModal() {
-  renderManageList();
-  openModal('manage-modal');
-}
+function openManageModal() { renderManageList(); openModal('manage-modal'); }
 
 function renderManageList() {
   const query = (document.getElementById('manage-search')?.value || '').toLowerCase().trim();
   const list = document.getElementById('manage-list');
   list.innerHTML = '';
-
   const companyFiltered = COMPANY_TEAMS.filter(t => !query || t.name.toLowerCase().includes(query));
   if (companyFiltered.length) {
     const hdr = document.createElement('div');
     hdr.style.cssText = 'font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:6px;margin-top:4px;';
     hdr.textContent = `Times da empresa (${companyFiltered.length})`;
     list.appendChild(hdr);
-    companyFiltered.forEach(team => {
-      const row = createManageRow(team, hiddenTeamIds.has(team.id), true);
-      list.appendChild(row);
-    });
+    companyFiltered.forEach(team => list.appendChild(createManageRow(team, hiddenTeamIds.has(team.id), true)));
   }
-
   const customFiltered = customTeams.filter(t => !query || t.name.toLowerCase().includes(query));
   if (customFiltered.length) {
     const hdr = document.createElement('div');
     hdr.style.cssText = 'font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:6px;margin-top:12px;';
     hdr.textContent = `Meus times (${customFiltered.length})`;
     list.appendChild(hdr);
-    customFiltered.forEach(team => {
-      const row = createManageRow(team, false, false);
-      list.appendChild(row);
-    });
+    customFiltered.forEach(team => list.appendChild(createManageRow(team, false, false)));
   }
 }
 
@@ -806,14 +1159,11 @@ function createManageRow(team, isHidden, isCompany) {
   const row = document.createElement('div');
   row.className = 'manage-team-row';
   if (isHidden) row.style.opacity = '0.45';
-
   const info = document.createElement('div');
   info.className = 'manage-team-info';
   info.innerHTML = `<div class="manage-team-name">${escapeHtml(team.name)}</div><div class="manage-team-count">${team.emails.length} integrante(s)${isCompany ? ' · empresa' : ' · personalizado'}</div>`;
-
   const actions = document.createElement('div');
   actions.className = 'manage-team-actions';
-
   if (isCompany) {
     const btnToggle = document.createElement('button');
     btnToggle.className = 'btn btn-outline btn-sm';
@@ -822,34 +1172,25 @@ function createManageRow(team, isHidden, isCompany) {
       if (isHidden) hiddenTeamIds.delete(team.id);
       else hiddenTeamIds.add(team.id);
       if (hiddenTeamIds.has(team.id)) activeTeamIds.delete(team.id);
-      saveStorage();
-      renderTeamChips();
-      renderManageList();
+      saveStorage(); renderTeamChips(); renderManageList();
     };
     actions.appendChild(btnToggle);
   } else {
     const btnEdit = document.createElement('button');
-    btnEdit.className = 'btn btn-outline btn-sm';
-    btnEdit.textContent = 'Editar';
+    btnEdit.className = 'btn btn-outline btn-sm'; btnEdit.textContent = 'Editar';
     btnEdit.onclick = () => openTeamEditor(team.id);
-
     const btnDel = document.createElement('button');
-    btnDel.className = 'btn btn-danger btn-sm';
-    btnDel.textContent = 'Excluir';
+    btnDel.className = 'btn btn-danger btn-sm'; btnDel.textContent = 'Excluir';
     btnDel.onclick = () => {
       if (!confirm(`Excluir "${team.name}"?`)) return;
       customTeams = customTeams.filter(t => t.id !== team.id);
       activeTeamIds.delete(team.id);
-      saveStorage();
-      renderTeamChips();
-      renderManageList();
+      saveStorage(); renderTeamChips(); renderManageList();
+      driveSaveSharedTeams();
     };
-    actions.appendChild(btnEdit);
-    actions.appendChild(btnDel);
+    actions.appendChild(btnEdit); actions.appendChild(btnDel);
   }
-
-  row.appendChild(info);
-  row.appendChild(actions);
+  row.appendChild(info); row.appendChild(actions);
   return row;
 }
 
@@ -870,22 +1211,19 @@ function openTeamEditor(id) {
 
 function saveTeamFromEditor() {
   const name = document.getElementById('editor-name').value.trim();
-  const raw = document.getElementById('editor-emails').value.trim();
+  const raw  = document.getElementById('editor-emails').value.trim();
   if (!name) { alert('Informe o nome do time.'); return; }
   const list = raw.split(/[\n,;]+/).map(e => e.trim().toLowerCase()).filter(e => e && e.includes('@'));
   if (!list.length) { alert('Informe ao menos um e-mail válido.'); return; }
-
   if (editingTeamId) {
     const t = customTeams.find(x => x.id === editingTeamId);
     if (t) { t.name = name; t.emails = list; }
   } else {
-    customTeams.push({ id: 'custom-' + Date.now(), name, emails: list });
+    customTeams.push({ id: 'custom-' + Date.now(), name, emails: list, area: 'Meus times' });
   }
-  saveStorage();
-  editingTeamId = null;
-  closeModal('team-editor-modal');
-  renderTeamChips();
-  openManageModal();
+  saveStorage(); editingTeamId = null;
+  closeModal('team-editor-modal'); renderTeamChips(); openManageModal();
+  driveSaveSharedTeams();
 }
 
 function deleteTeamFromEditor() {
@@ -894,11 +1232,9 @@ function deleteTeamFromEditor() {
   if (!team || !confirm(`Excluir "${team.name}"?`)) return;
   customTeams = customTeams.filter(t => t.id !== editingTeamId);
   activeTeamIds.delete(editingTeamId);
-  saveStorage();
-  editingTeamId = null;
-  closeModal('team-editor-modal');
-  renderTeamChips();
-  openManageModal();
+  saveStorage(); editingTeamId = null;
+  closeModal('team-editor-modal'); renderTeamChips(); openManageModal();
+  driveSaveSharedTeams();
 }
 
 // ════════════════════════════════════════════════
@@ -911,10 +1247,8 @@ document.querySelectorAll('.modal-backdrop').forEach(el => {
 });
 
 // ════════════════════════════════════════════════
-//  AUTH
+//  AUTH (login persistente)
 // ════════════════════════════════════════════════
-const STORAGE_PROFILE = 'gg_user_profile_v1';
-
 function waitForGIS() {
   if (typeof google === 'undefined' || !google.accounts) { setTimeout(waitForGIS, 300); return; }
   tokenClient = google.accounts.oauth2.initTokenClient({
@@ -925,14 +1259,12 @@ function waitForGIS() {
       await fetchUserInfo();
     }
   });
-
-  // Tenta renovar token silenciosamente se já logou antes
   const saved = localStorage.getItem(STORAGE_PROFILE);
   if (saved) {
     try {
       userProfile = JSON.parse(saved);
-      updateAuthUI(true); // mostra como conectado imediatamente
-      tokenClient.requestAccessToken({ prompt: '' }); // renova token em segundo plano
+      updateAuthUI(true);
+      tokenClient.requestAccessToken({ prompt: '' });
     } catch(e) { localStorage.removeItem(STORAGE_PROFILE); }
   }
 }
@@ -964,19 +1296,21 @@ async function fetchUserInfo() {
   try {
     const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: `Bearer ${accessToken}` } });
     userProfile = await r.json();
-    localStorage.setItem(STORAGE_PROFILE, JSON.stringify(userProfile)); // salva perfil
+    localStorage.setItem(STORAGE_PROFILE, JSON.stringify(userProfile));
     updateAuthUI(true);
+    // Carrega times compartilhados do Drive
+    await driveLoadSharedTeams();
   } catch(e) { console.error(e); }
 }
 
 function updateAuthUI(loggedIn) {
-  const card = document.getElementById('auth-card');
-  const dot = document.getElementById('auth-dot');
-  const statusText = document.getElementById('auth-status-text');
-  const authName = document.getElementById('auth-name');
+  const card      = document.getElementById('auth-card');
+  const dot       = document.getElementById('auth-dot');
+  const statusText= document.getElementById('auth-status-text');
+  const authName  = document.getElementById('auth-name');
   const authEmail = document.getElementById('auth-email-display');
   const btnSignin = document.getElementById('btn-signin');
-  const btnSignout = document.getElementById('btn-signout');
+  const btnSignout= document.getElementById('btn-signout');
   if (loggedIn) {
     card.classList.add('signed-in'); dot.classList.add('on');
     statusText.textContent = 'Conectado'; authName.style.display = 'block';
@@ -1001,35 +1335,22 @@ function initials(email) {
 function renderTags() {
   const wrap = document.getElementById('tags-wrap');
   wrap.innerHTML = '';
-
-  // Render selected rooms first
   getSelectedRooms().forEach(room => {
     const tag = document.createElement('div');
     tag.className = 'tag tag-room';
     tag.innerHTML = `<div class="tag-avatar room-avatar">&#9679;</div><span>${escapeHtml(room.name)}</span><span style="font-size:11px;opacity:0.65;margin-left:2px;">${escapeHtml(room.location)}</span>`;
     wrap.appendChild(tag);
   });
-
-  // Render people emails
   emails.forEach((e, i) => {
     const tag = document.createElement('div');
     tag.className = 'tag';
     tag.innerHTML = `<div class="tag-avatar">${initials(e)}</div><span>${escapeHtml(e)}</span><button class="tag-x" onclick="removeEmail(${i})">×</button>`;
     wrap.appendChild(tag);
   });
+  updateSearchSummary();
 }
-
-function addEmail() {
-  const inp = document.getElementById('email-input');
-  const val = inp.value.trim().toLowerCase();
-  if (val && val.includes('@') && !emails.includes(val)) { emails.push(val); renderTags(); }
-  inp.value = ''; inp.focus();
-}
-
-function handleEmailKey(e) { if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addEmail(); } }
 
 function removeEmail(i) {
-  const removed = emails[i];
   emails.splice(i, 1);
   const newActive = new Set();
   activeTeamIds.forEach(id => {
@@ -1063,7 +1384,7 @@ function applyCustomDur() {
   if (val && val >= 5) duration = val;
 }
 function setWknd(val, btn) { excludeWeekends = !val; document.querySelectorAll('#wknd-group .pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
-function setQty(n, btn) { pageSize = n; document.querySelectorAll('#qty-group .pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+function setQty(n, btn)   { pageSize = n; document.querySelectorAll('#qty-group .pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
 function setPref(key, val, btn) {
   if (key === 'meet') addMeet = val;
   if (key === 'notif') notifLevel = val;
@@ -1090,26 +1411,20 @@ async function searchSlots() {
   const de = document.getElementById('date-end').value;
   if (!ds || !de) { alert('Selecione o período.'); return; }
   if (new Date(ds) > new Date(de)) { alert('Data inicial deve ser anterior à final.'); return; }
-
   await ensureToken();
-
   const btn = document.getElementById('btn-search');
   btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Consultando agendas...';
-
-  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const ws = document.getElementById('work-start').value;
-  const we = document.getElementById('work-end').value;
+  const tz  = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const ws  = document.getElementById('work-start').value;
+  const we  = document.getElementById('work-end').value;
   const timeMin = ds + 'T00:00:00Z';
   const timeMax = de + 'T23:59:59Z';
-
-  // Include people + selected rooms in freeBusy query
   const selectedRooms = getSelectedRooms();
   const items = [
     { id: 'primary' },
     ...emails.map(e => ({ id: e })),
     ...selectedRooms.map(r => ({ id: r.email }))
   ];
-
   try {
     const r = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
       method: 'POST',
@@ -1118,25 +1433,20 @@ async function searchSlots() {
     });
     const data = await r.json();
     if (data.error) throw new Error(data.error.message);
-
     const allBusy = [];
     for (const cal of Object.values(data.calendars)) {
       for (const b of (cal.busy || [])) allBusy.push({ start: new Date(b.start), end: new Date(b.end) });
     }
-
     const slots = generateSlots(new Date(ds+'T00:00:00'), new Date(de+'T23:59:59'), ws, we, duration, excludeWeekends, allBusy, pageSize);
     foundSlots = slots;
-
     document.getElementById('stat-attendees').textContent = emails.length + 1;
     document.getElementById('stat-rooms').textContent = selectedRooms.length || '—';
     document.getElementById('stat-duration').textContent = duration >= 60 ? Math.floor(duration/60)+'h'+(duration%60?duration%60+'min':'') : duration+'min';
     document.getElementById('stat-slots').textContent = slots.length;
-
     document.getElementById('view-form').style.display = 'none';
     document.getElementById('view-results').style.display = '';
     document.getElementById('bar2').classList.add('done');
     document.getElementById('view-results').classList.add('fade-in');
-
     const grid = document.getElementById('slots-grid');
     if (!slots.length) {
       grid.innerHTML = '<div class="status">Nenhum horário comum encontrado. Tente ampliar o período ou reduzir a duração.</div>';
@@ -1146,20 +1456,14 @@ async function searchSlots() {
         const div = document.createElement('div');
         div.className = 'slot-item';
         div.onclick = () => selectSlot(i, div);
-
         let badgeExtra = '';
-        if (selectedRooms.length === 1) {
-          badgeExtra = `<span class="badge badge-muted" style="margin-left:6px;">${escapeHtml(selectedRooms[0].name)}</span>`;
-        } else if (selectedRooms.length > 1) {
-          badgeExtra = `<span class="badge badge-muted" style="margin-left:6px;">${selectedRooms.length} salas livres</span>`;
-        }
-
+        if (selectedRooms.length === 1) badgeExtra = `<span class="badge badge-muted" style="margin-left:6px;">${escapeHtml(selectedRooms[0].name)}</span>`;
+        else if (selectedRooms.length > 1) badgeExtra = `<span class="badge badge-muted" style="margin-left:6px;">${selectedRooms.length} salas livres</span>`;
         div.innerHTML = `<div><div class="slot-weekday">${fmtWeekday(slot.start)}</div><div class="slot-time">${fmtTime(slot.start)} – ${fmtTime(slot.end)}</div><div class="slot-date">${fmtDate(slot.start)}</div></div><div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;justify-content:flex-end;"><span class="badge badge-green">Todos livres</span>${badgeExtra}</div>`;
         grid.appendChild(div);
       });
     }
   } catch(err) { alert('Erro ao buscar disponibilidade: ' + err.message); }
-
   btn.disabled = false; btn.textContent = 'Buscar horários disponíveis';
 }
 
@@ -1189,14 +1493,11 @@ function selectSlot(i, el) {
   el.classList.add('selected');
   const card = document.getElementById('event-form-card');
   card.style.display = 'block'; card.classList.add('fade-in');
-
-  // Auto-fill location with room name if a single room is selected
   const selectedRooms = getSelectedRooms();
   if (selectedRooms.length === 1) {
     const locInput = document.getElementById('ev-location');
     if (!locInput.value) locInput.value = selectedRooms[0].name + ' — ' + selectedRooms[0].location;
   }
-
   card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   document.getElementById('bar3').classList.add('done');
 }
@@ -1208,38 +1509,30 @@ async function criarEvento() {
   if (!selectedSlot) { alert('Selecione um horário.'); return; }
   const title = document.getElementById('ev-title').value.trim();
   if (!title) { alert('Informe o título da reunião.'); return; }
-
   await ensureToken();
-
   const btn = document.getElementById('btn-create');
   btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Criando evento...';
-
-  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const tz  = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const desc = document.getElementById('ev-desc').value.trim();
-  const loc = document.getElementById('ev-location').value.trim();
+  const loc  = document.getElementById('ev-location').value.trim();
   const selectedRooms = getSelectedRooms();
-
-  // Attendees = people + room resources
   const allAttendees = [
     ...emails.map(e => ({ email: e })),
     ...selectedRooms.map(r => ({ email: r.email, resource: true }))
   ];
-
   const body = {
     summary: title,
     start: { dateTime: selectedSlot.start.toISOString(), timeZone: tz },
-    end: { dateTime: selectedSlot.end.toISOString(), timeZone: tz },
+    end:   { dateTime: selectedSlot.end.toISOString(),   timeZone: tz },
     attendees: allAttendees,
     reminders: { useDefault: true }
   };
   if (desc) body.description = desc;
-  if (loc) body.location = loc;
+  if (loc)  body.location = loc;
   if (addMeet) body.conferenceData = { createRequest: { requestId: Math.random().toString(36).slice(2) } };
-
   const notifParam = notifLevel === 'ALL' ? 'all' : notifLevel === 'EXTERNAL_ONLY' ? 'externalOnly' : 'none';
-  const meetParam = addMeet ? '&conferenceDataVersion=1' : '';
+  const meetParam  = addMeet ? '&conferenceDataVersion=1' : '';
   const url = `https://www.googleapis.com/calendar/v3/calendars/primary/events?sendUpdates=${notifParam}${meetParam}`;
-
   try {
     const r = await fetch(url, {
       method: 'POST',
@@ -1260,7 +1553,6 @@ async function criarEvento() {
     errEl.textContent = 'Erro ao criar evento: ' + err.message;
     document.getElementById('alert-success').classList.remove('visible');
   }
-
   btn.disabled = false; btn.textContent = 'Criar no Google Calendar';
 }
 
@@ -1268,8 +1560,8 @@ async function criarEvento() {
 //  HELPERS
 // ════════════════════════════════════════════════
 function fmtWeekday(d) { return d.toLocaleDateString('pt-BR', { weekday: 'long' }); }
-function fmtDate(d) { return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' }); }
-function fmtTime(d) { return d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); }
+function fmtDate(d)    { return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' }); }
+function fmtTime(d)    { return d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); }
 function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
 </script>
 </body>
