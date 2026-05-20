@@ -621,7 +621,44 @@ window.addEventListener('load', () => {
   renderRoomChips();
   updateSearchSummary();
   waitForGIS();
+  applyUrlParams();
 });
+
+// ════════════════════════════════════════════════
+//  URL PARAMS (integração AVD Central)
+// ════════════════════════════════════════════════
+function applyUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+
+  const participantsParam = params.get('participants');
+  if (participantsParam) {
+    participantsParam.split(',').forEach(e => {
+      const trimmed = e.trim();
+      if (trimmed) addEmail(trimmed);
+    });
+  }
+
+  const titleParam = params.get('title');
+  if (titleParam) {
+    const titleInput = document.getElementById('ev-title');
+    if (titleInput) titleInput.value = titleParam;
+  }
+
+  const durParam = parseInt(params.get('duration') || '', 10);
+  if (durParam && durParam >= 5) {
+    const presets = [30, 60, 90, 120];
+    const presetIdx = presets.indexOf(durParam);
+    if (presetIdx !== -1) {
+      const pills = document.querySelectorAll('#dur-group .pill');
+      if (pills[presetIdx]) pills[presetIdx].click();
+    } else {
+      const customInput = document.getElementById('custom-dur-input');
+      if (customInput) customInput.value = durParam;
+      const customPill = document.getElementById('pill-custom');
+      if (customPill) customPill.click();
+    }
+  }
+}
 
 function loadStorage() {
   try { hiddenTeamIds = new Set(JSON.parse(localStorage.getItem(STORAGE_HIDDEN) || '[]')); } catch(e) {}
