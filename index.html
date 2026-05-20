@@ -637,8 +637,67 @@ function applyUrlParams() {
       const trimmed = e.trim();
       if (trimmed) addEmail(trimmed);
     });
-    if (emails.length > 0) _pendingAvdSearch = true;
   }
+
+  const macroTeamParam = params.get('macroTeam');
+  if (macroTeamParam) {
+    const macroLower = macroTeamParam.toLowerCase();
+    getAllTeams().forEach(team => {
+      if (team.area && team.area.toLowerCase().includes(macroLower)) {
+        team.emails.forEach(e => {
+          const lo = e.trim().toLowerCase();
+          if (lo && !emails.includes(lo)) emails.push(lo);
+        });
+      }
+    });
+    renderTags();
+  }
+
+  const microTeamParam = params.get('microTeam');
+  if (microTeamParam) {
+    const microLower = microTeamParam.toLowerCase();
+    let found = false;
+    // 1. Match direto pelo name do time
+    getAllTeams().forEach(team => {
+      if (team.name.toLowerCase() === microLower) {
+        team.emails.forEach(e => {
+          const lo = e.trim().toLowerCase();
+          if (lo && !emails.includes(lo)) emails.push(lo);
+        });
+        found = true;
+      }
+    });
+    // 2. Match parcial no name
+    if (!found) {
+      getAllTeams().forEach(team => {
+        if (team.name.toLowerCase().includes(microLower) || microLower.includes(team.name.toLowerCase())) {
+          team.emails.forEach(e => {
+            const lo = e.trim().toLowerCase();
+            if (lo && !emails.includes(lo)) emails.push(lo);
+          });
+          found = true;
+        }
+      });
+    }
+    // 3. Extrai macro do prefixo [MACRO] e usa área
+    if (!found) {
+      const bracketMatch = microTeamParam.match(/^\[([^\]]+)\]/);
+      if (bracketMatch) {
+        const macroFromBracket = bracketMatch[1].toLowerCase();
+        getAllTeams().forEach(team => {
+          if (team.area && team.area.toLowerCase().includes(macroFromBracket)) {
+            team.emails.forEach(e => {
+              const lo = e.trim().toLowerCase();
+              if (lo && !emails.includes(lo)) emails.push(lo);
+            });
+          }
+        });
+      }
+    }
+    renderTags();
+  }
+
+  if (emails.length > 0) _pendingAvdSearch = true;
 
   const titleParam = params.get('title');
   if (titleParam) {
