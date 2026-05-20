@@ -1648,7 +1648,9 @@ async function criarEvento() {
     const roomNames = selectedRooms.map(r => r.name).join(', ');
     const successEl = document.getElementById('alert-success');
     successEl.classList.add('visible');
-    successEl.innerHTML = `✅ Evento criado com sucesso! ${allAttendees.length ? `Convite enviado para ${emails.length} participante(s)${selectedRooms.length ? ` e sala(s): ${roomNames}` : ''}. ` : ''}${link ? `<a href="${link}" target="_blank" style="color:var(--green);font-weight:500;">Abrir no Google Calendar →</a>` : ''}`;
+    const esc = (s) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const safeLink = link && link.startsWith('https://') ? link : '';
+    successEl.innerHTML = `✅ Evento criado com sucesso! ${allAttendees.length ? `Convite enviado para ${emails.length} participante(s)${selectedRooms.length ? ` e sala(s): ${esc(roomNames)}` : ''}. ` : ''}${safeLink ? `<a href="${esc(safeLink)}" target="_blank" rel="noopener noreferrer" style="color:var(--green);font-weight:500;">Abrir no Google Calendar →</a>` : ''}`;
     document.getElementById('alert-error').classList.remove('visible');
     // Notifica AVD Central para adicionar o evento no calendário
     if (window.opener && !window.opener.closed) {
