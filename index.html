@@ -594,12 +594,13 @@ const STORAGE_HIDDEN  = 'gg_hidden_teams_v1';
 const STORAGE_CUSTOM  = 'gg_custom_teams_v1';
 const STORAGE_PROFILE = 'gg_user_profile_v1';
 
-let hiddenTeamIds = new Set();
-let customTeams   = [];
-let activeTeamIds = new Set();
-let activeRoomIds = new Set();
-let editingTeamId = null;
-let emails        = [];
+let hiddenTeamIds    = new Set();
+let customTeams      = [];
+let activeTeamIds    = new Set();
+let activeRoomIds    = new Set();
+let editingTeamId    = null;
+let emails           = [];
+let _pendingAvdSearch = false;
 let tokenClient   = null;
 let accessToken   = null;
 let userProfile   = null;
@@ -636,6 +637,7 @@ function applyUrlParams() {
       const trimmed = e.trim();
       if (trimmed) addEmail(trimmed);
     });
+    if (emails.length > 0) _pendingAvdSearch = true;
   }
 
   const titleParam = params.get('title');
@@ -1337,6 +1339,11 @@ async function fetchUserInfo() {
     updateAuthUI(true);
     // Carrega times compartilhados do Drive
     await driveLoadSharedTeams();
+    // Se veio da integração AVD com participantes, busca automaticamente
+    if (_pendingAvdSearch && emails.length > 0) {
+      _pendingAvdSearch = false;
+      searchSlots();
+    }
   } catch(e) { console.error(e); }
 }
 
