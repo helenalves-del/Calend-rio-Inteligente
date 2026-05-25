@@ -1657,16 +1657,18 @@ async function criarEvento() {
       window.opener.postMessage({
         type: 'avd_evento_agendado',
         evento: {
-          titulo:      title,
-          data_inicio: selectedSlot.start.toISOString().slice(0, 10),
-          data_fim:    selectedSlot.end.toISOString().slice(0, 10),
-          tipo:        'Calibração',
-          descricao:   desc || null,
-          responsavel: emails.join(', ') || null,
-          area:        null,
-          fase_id:     null,
+          titulo:         title,
+          data_inicio:    selectedSlot.start.toISOString().slice(0, 10),
+          data_fim:       selectedSlot.end.toISOString().slice(0, 10),
+          horario_inicio: selectedSlot.start.toTimeString().slice(0, 5),
+          tipo:           'Calibração',
+          descricao:      desc || null,
+          responsavel:    emails.join(', ') || null,
+          area:           null,
+          fase_id:        null,
+          gcal_event_id:  data.id ?? null,
         }
-      }, '*');
+      }, 'https://box-navigator-pro.vercel.app');
     }
   } catch(err) {
     const errEl = document.getElementById('alert-error');
