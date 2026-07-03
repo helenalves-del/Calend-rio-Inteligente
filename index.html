@@ -14,10 +14,10 @@
     --surface2: #EFEDE8;
     --border: #DDD9D0;
     --text: #172554;
-    --muted: #172554;
+    --muted: #64708A;
     --accent: #172554;
-    --accent-fg: #172554;
-    --green: #172554;
+    --accent-fg: #F5F3EE;
+    --green: #2D6A4F;
     --green-bg: #D8F3DC;
     --red: #A4262C;
     --red-bg: #FDE8E9;
@@ -33,39 +33,37 @@
   .app-shell { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
   .sidebar { background: var(--text); color: var(--bg); padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 2.5rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
   .logo-wrap { display: flex; flex-direction: column; gap: 6px; }
-  .logo-tag { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.78rem; opacity: 1; letter-spacing: 0.02em; }
+  .logo-tag { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.78rem; opacity: 0.65; letter-spacing: 0.02em; }
   .sidebar-section { display: flex; flex-direction: column; gap: 0.5rem; }
-  .sidebar-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 1; font-weight: 500; margin-bottom: 4px; }
+  .sidebar-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.55; font-weight: 500; margin-bottom: 4px; }
   .auth-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 0.875rem 1rem; }
   .auth-card.signed-in { background: rgba(45,106,79,0.25); border-color: rgba(45,106,79,0.4); }
   .auth-status-dot { width: 7px; height: 7px; border-radius: 50%; background: #666; display: inline-block; margin-right: 6px; }
   .auth-status-dot.on { background: #52B788; }
   .auth-name { font-size: 13px; font-weight: 500; color: var(--bg); margin-top: 4px; }
-  .auth-email { font-size: 11px; opacity: 1; }
+  .auth-email { font-size: 11px; opacity: 0.6; }
   .btn-auth { margin-top: 10px; width: 100%; padding: 7px 12px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); color: var(--bg); cursor: pointer; transition: background 0.15s; }
   .btn-auth:hover { background: rgba(255,255,255,0.14); }
   .btn-auth.signin { background: var(--bg); color: var(--text); border-color: transparent; }
   .btn-auth.signin:hover { opacity: 0.9; }
   .stat-row { display: flex; flex-direction: column; gap: 4px; }
-  .stat { font-size: 11px; opacity: 1; display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .stat { font-size: 11px; opacity: 0.8; display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
   .stat:last-child { border-bottom: none; }
   .stat strong { opacity: 1; font-weight: 500; color: var(--bg); }
   .main { padding: 2.5rem 2.5rem 3rem; max-width: 860px; }
   .page-header { margin-bottom: 2rem; }
   .page-title { font-family: 'DM Serif Display', serif; font-size: 2.6rem; letter-spacing: -0.03em; line-height: 1.2; }
   .page-subtitle { color: var(--muted); font-size: 1rem; margin-top: 6px; }
-
   /* ── Cards ── */
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 0.75rem; box-shadow: var(--shadow); }
-  .card-title { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--text); margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; opacity: 1; }
+  .card-title { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--text); margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; opacity: 0.85; }
   .card-title-link { font-size: 13px; color: var(--text); cursor: pointer; font-weight: 500; text-transform: none; letter-spacing: normal; background: none; border: none; padding: 0; font-family: inherit; opacity: 1; }
   .card-title-link:hover { text-decoration: underline; }
-
   /* ── Accordion ── */
   .accordion-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 0.875rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 0; box-shadow: var(--shadow); transition: background 0.15s; user-select: none; }
   .accordion-header:hover { background: var(--surface2); }
   .accordion-header.open { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; }
-  .accordion-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); display: flex; align-items: center; gap: 10px; opacity: 1; }
+  .accordion-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text); display: flex; align-items: center; gap: 10px; opacity: 0.85; }
   .accordion-badge { font-size: 11px; font-weight: 500; background: var(--text); color: var(--bg); padding: 2px 8px; border-radius: 99px; opacity: 1; }
   .accordion-badge.room-badge { background: var(--room-text); }
   .accordion-chevron { font-size: 14px; color: var(--muted); transition: transform 0.25s; line-height: 1; }
@@ -73,7 +71,6 @@
   .accordion-body { background: var(--surface); border: 1px solid var(--border); border-top: none; border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius); padding: 1rem 1.5rem; margin-bottom: 0.75rem; box-shadow: var(--shadow); display: none; }
   .accordion-body.open { display: block; }
   .accordion-actions { display: flex; gap: 8px; margin-bottom: 12px; }
-
   label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 5px; font-weight: 400; }
   input[type=text], input[type=email], input[type=date], input[type=time], input[type=number], select, textarea { width: 100%; padding: 9px 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); outline: none; transition: border-color 0.15s; appearance: none; -webkit-appearance: none; }
   input:focus, select:focus, textarea:focus { border-color: var(--text); }
@@ -85,7 +82,6 @@
   .pill { padding: 5px 12px; font-size: 13px; font-family: 'DM Sans', sans-serif; border: 1px solid var(--border); border-radius: 99px; background: var(--bg); color: var(--muted); cursor: pointer; transition: all 0.15s; font-weight: 400; }
   .pill:hover { border-color: var(--text); color: var(--text); }
   .pill.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-
   /* ── Team list (accordion por área) ── */
   .teams-search-wrap { margin-bottom: 12px; position: relative; }
   .teams-search-wrap input { padding-left: 32px; }
@@ -94,7 +90,6 @@
   #team-chips { display: flex; flex-direction: column; gap: 4px; max-height: 240px; overflow-y: auto; padding-right: 4px; }
   #team-chips::-webkit-scrollbar { width: 4px; }
   #team-chips::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
-
   /* ── Room chips ── */
   .rooms-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
   .room-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border: 1px solid var(--room-border); background: var(--room-bg); color: var(--room-text); border-radius: 99px; font-size: 12px; cursor: pointer; transition: all 0.15s; font-family: inherit; user-select: none; font-weight: 400; }
@@ -103,7 +98,6 @@
   .room-chip-icon { font-size: 12px; opacity: 0.7; }
   .room-chip.active .room-chip-icon { opacity: 1; }
   .rooms-hint { font-size: 11px; color: var(--muted); opacity: 0.7; margin-top: 4px; }
-
   /* ── Tags ── */
   .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; min-height: 4px; }
   .tag { display: inline-flex; align-items: center; gap: 6px; background: var(--surface2); border: 1px solid var(--border); border-radius: 99px; padding: 4px 10px 4px 7px; font-size: 13px; color: var(--text); }
@@ -112,7 +106,6 @@
   .tag-avatar.room-avatar { background: var(--room-text); font-size: 11px; }
   .tag-x { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 16px; line-height: 1; padding: 0; display: flex; align-items: center; }
   .tag-x:hover { color: var(--text); }
-
   /* ── Buttons ── */
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 20px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; border-radius: var(--radius-sm); border: 1px solid transparent; cursor: pointer; transition: all 0.15s; text-decoration: none; }
   .btn-primary { background: var(--text); color: var(--bg); }
@@ -127,7 +120,6 @@
   .spinner { width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: currentColor; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
   .spinner.dark { border-color: rgba(0,0,0,0.1); border-top-color: var(--text); }
   @keyframes spin { to { transform: rotate(360deg); } }
-
   /* ── Slots ── */
   .slots-grid { display: flex; flex-direction: column; gap: 8px; }
   .slot-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s; user-select: none; }
@@ -138,9 +130,10 @@
   .slot-date { font-size: 12px; color: var(--muted); margin-top: 1px; }
   .badge { font-size: 11px; padding: 3px 10px; border-radius: 99px; font-weight: 500; }
   .badge-green { background: var(--green-bg); color: var(--green); }
+  .badge-muted { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
   .badge-conflict { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
-.slot-conflicts { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
-.conflict-chip { font-size: 10px; padding: 2px 6px; background: #FEF3C7; color: #92400E; border-radius: 99px; display: inline-flex; align-items: center; gap: 3px; }
+  .slot-conflicts { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .conflict-chip { font-size: 10px; padding: 2px 6px; background: #FEF3C7; color: #92400E; border-radius: 99px; display: inline-flex; align-items: center; gap: 3px; }
   .status { text-align: center; padding: 2rem; color: var(--muted); font-size: 14px; }
   .alert { padding: 0.875rem 1rem; border-radius: var(--radius-sm); font-size: 13px; margin-top: 10px; display: none; border: 1px solid; }
   .alert.visible { display: block; }
@@ -150,7 +143,6 @@
   .step-bar { flex: 1; height: 2px; border-radius: 99px; background: var(--border); transition: background 0.3s; }
   .step-bar.done { background: var(--text); }
   .divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
-
   /* ── Autocomplete dropdown ── */
   .autocomplete-wrap { position: relative; flex: 1; }
   .autocomplete-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius-sm) var(--radius-sm); box-shadow: var(--shadow); z-index: 50; max-height: 220px; overflow-y: auto; display: none; }
@@ -161,7 +153,6 @@
   .autocomplete-teams { font-size: 11px; color: var(--muted); opacity: 0.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
   .autocomplete-add { font-size: 11px; color: var(--text); white-space: nowrap; opacity: 0.6; }
   .autocomplete-divider { height: 1px; background: var(--border); margin: 2px 0; }
-
   /* ── Sync status ── */
   .sync-badge { font-size: 11px; padding: 2px 8px; border-radius: 99px; display: inline-flex; align-items: center; gap: 4px; }
   .sync-badge.synced { background: var(--green-bg); color: var(--green); }
@@ -169,7 +160,6 @@
   .sync-badge.error { background: var(--red-bg); color: var(--red); }
   .sticky-search-bar { position: sticky; bottom: 0; background: var(--bg); padding: 10px 0 16px; margin-top: 4px; border-top: 1px solid var(--border); }
   .search-summary { font-size: 12px; color: var(--muted); margin-bottom: 8px; text-align: center; min-height: 18px; }
-
   /* ── Modal ── */
   .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center; z-index: 100; padding: 1rem; }
   .modal-backdrop.visible { display: flex; }
@@ -186,7 +176,6 @@
   .manage-list::-webkit-scrollbar { width: 4px; }
   .manage-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
   .manage-search { margin-bottom: 10px; }
-
   @media (max-width: 700px) {
     .app-shell { grid-template-columns: 1fr; }
     .sidebar { position: static; height: auto; }
@@ -199,7 +188,6 @@
 </head>
 <body>
 <div class="app-shell">
-
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="logo-wrap">
@@ -209,7 +197,7 @@
     <div class="sidebar-section">
       <div class="sidebar-label">Conta</div>
       <div class="auth-card" id="auth-card">
-        <div><span class="auth-status-dot" id="auth-dot"></span><span style="font-size:12px;opacity:1;" id="auth-status-text">Não conectado</span></div>
+        <div><span class="auth-status-dot" id="auth-dot"></span><span style="font-size:12px;opacity:0.75;" id="auth-status-text">Não conectado</span></div>
         <div class="auth-name" id="auth-name" style="display:none;"></div>
         <div class="auth-email" id="auth-email-display"></div>
         <button class="btn-auth signin" id="btn-signin" onclick="signIn()">Entrar com Google</button>
@@ -226,10 +214,9 @@
       </div>
     </div>
     <div style="margin-top:auto;">
-      <div style="font-size:11px;opacity:1;line-height:1.6;">Seus dados nunca saem do navegador.<br/>Comunicação direta com a API do Google.</div>
+      <div style="font-size:11px;opacity:0.55;line-height:1.6;">Seus dados nunca saem do navegador.<br/>Comunicação direta com a API do Google.</div>
     </div>
   </aside>
-
   <!-- MAIN -->
   <main class="main">
     <div class="page-header">
@@ -241,10 +228,8 @@
       <div class="step-bar" id="bar2"></div>
       <div class="step-bar" id="bar3"></div>
     </div>
-
     <!-- STEP 1 -->
     <div id="view-form">
-
       <!-- Times accordion (agrupado por área) -->
       <div class="accordion-header" id="acc-teams-header" onclick="toggleAccordion('teams')">
         <div class="accordion-title">
@@ -270,9 +255,7 @@
         <div class="teams-meta">
           <span id="teams-count-label" style="color:var(--muted);"></span>
         </div>
-
         <div class="divider" style="margin:14px 0 10px;"></div>
-
         <!-- Email input com autocomplete -->
         <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--text);margin-bottom:8px;">Adicionar participante individualmente</div>
         <div style="position:relative;margin-bottom:8px;">
@@ -285,7 +268,6 @@
         <div class="tags-wrap" id="tags-wrap"></div>
         <div style="font-size:12px;color:var(--muted);margin-top:4px;opacity:0.7;">Sua agenda é incluída automaticamente na busca.</div>
       </div>
-
       <!-- Salas de reunião — card separado -->
       <div class="accordion-header" id="acc-rooms-header" onclick="toggleAccordion('rooms')">
         <div class="accordion-title">
@@ -298,21 +280,20 @@
         <div class="rooms-grid" id="room-chips"></div>
         <div class="rooms-hint" style="margin-top:8px;">Selecione uma sala para verificar disponibilidade e reservar junto com o evento.</div>
       </div>
-
       <!-- Período e preferências -->
       <div class="card">
         <div class="card-title"><span>Período e preferências</span></div>
         <div class="grid2 field">
           <div><label>Data inicial</label><input type="date" id="date-start" /></div>
           <div><label>Data final</label><input type="date" id="date-end" /></div>
-         <div class="field">
-  <label>Modo de busca</label>
-  <div class="pill-group" id="conflict-group">
-    <button class="pill active" onclick="setIgnoreConflicts(false,this)">Só horários livres</button>
-    <button class="pill" onclick="setIgnoreConflicts(true,this)">Mostrar todos (com conflitos)</button>
-  </div>
-  <div style="font-size:12px;color:var(--muted);margin-top:6px;opacity:0.7;">No modo "todos", horários com conflito aparecem com aviso de quem está ocupado.</div>
-</div>
+        </div>
+        <div class="field">
+          <label>Modo de busca</label>
+          <div class="pill-group" id="conflict-group">
+            <button class="pill active" onclick="setIgnoreConflicts(false,this)">Só horários livres</button>
+            <button class="pill" onclick="setIgnoreConflicts(true,this)">Mostrar todos (com conflitos)</button>
+          </div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px;opacity:0.7;">No modo "todos", horários com conflito aparecem com aviso de quem está ocupado.</div>
         </div>
         <div class="field">
           <label>Duração da reunião</label>
@@ -347,118 +328,21 @@
             <button class="pill active" onclick="setQty(5,this)">5</button>
             <button class="pill" onclick="setQty(8,this)">8</button>
             <button class="pill" onclick="setQty(12,this)">12</button>
-           function setIgnoreConflicts(val, btn) {
-  ignoreConflicts = val;
-  document.querySelectorAll('#conflict-group .pill').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-}
           </div>
         </div>
       </div>
-
       <!-- Sticky search bar com contador -->
       <div class="sticky-search-bar">
         <div class="search-summary" id="pre-search-summary"></div>
-        <button class="btn btn-primary btn-full" id="btn-search" onclick="async function searchSlots() {
-  if (!accessToken) { alert('Faça login com o Google primeiro.'); return; }
-  const ds = document.getElementById('date-start').value;
-  const de = document.getElementById('date-end').value;
-  if (!ds || !de) { alert('Selecione o período.'); return; }
-  if (new Date(ds) > new Date(de)) { alert('Data inicial deve ser anterior à final.'); return; }
-  await ensureToken();
-  const btn = document.getElementById('btn-search');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Consultando agendas...';
-  const tz  = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const ws  = document.getElementById('work-start').value;
-  const we  = document.getElementById('work-end').value;
-  const timeMin = ds + 'T00:00:00Z';
-  const timeMax = de + 'T23:59:59Z';
-  const selectedRooms = getSelectedRooms();
-  const items = [
-    { id: 'primary' },
-    ...emails.map(e => ({ id: e })),
-    ...selectedRooms.map(r => ({ id: r.email }))
-  ];
-  try {
-    const r = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ timeMin, timeMax, timeZone: tz, items })
-    });
-    const data = await r.json();
-    if (data.error) throw new Error(data.error.message);
-
-    // Busy agregado + busy por pessoa
-    const allBusy = [];
-    const busyByPerson = {};
-    for (const [calId, cal] of Object.entries(data.calendars)) {
-      const periods = (cal.busy || []).map(b => ({ start: new Date(b.start), end: new Date(b.end) }));
-      busyByPerson[calId] = periods;
-      periods.forEach(p => allBusy.push(p));
-    }
-
-    const slots = ignoreConflicts
-      ? generateAllSlots(new Date(ds+'T00:00:00'), new Date(de+'T23:59:59'), ws, we, duration, excludeWeekends, busyByPerson, pageSize)
-      : generateSlots(new Date(ds+'T00:00:00'), new Date(de+'T23:59:59'), ws, we, duration, excludeWeekends, allBusy, pageSize);
-
-    foundSlots = slots;
-    document.getElementById('stat-attendees').textContent = emails.length + 1;
-    document.getElementById('stat-rooms').textContent = selectedRooms.length || '—';
-    document.getElementById('stat-duration').textContent = duration >= 60 ? Math.floor(duration/60)+'h'+(duration%60?duration%60+'min':'') : duration+'min';
-    document.getElementById('stat-slots').textContent = slots.length;
-    document.getElementById('view-form').style.display = 'none';
-    document.getElementById('view-results').style.display = '';
-    document.getElementById('bar2').classList.add('done');
-    document.getElementById('view-results').classList.add('fade-in');
-
-    const grid = document.getElementById('slots-grid');
-    if (!slots.length) {
-      grid.innerHTML = '<div class="status">Nenhum horário encontrado. Tente ampliar o período ou reduzir a duração.</div>';
-    } else {
-      grid.innerHTML = '';
-      slots.forEach((slot, i) => {
-        const div = document.createElement('div');
-        div.className = 'slot-item';
-        div.onclick = () => selectSlot(i, div);
-
-        let mainBadge, conflictsHtml = '';
-        if (slot.conflicts && slot.conflicts.length > 0) {
-          mainBadge = `<span class="badge badge-conflict">⚠ ${slot.conflicts.length} conflito${slot.conflicts.length>1?'s':''}</span>`;
-          conflictsHtml = '<div class="slot-conflicts">' +
-            slot.conflicts.map(c => `<span class="conflict-chip">⚠ ${escapeHtml(c)} ocupado</span>`).join('') +
-            '</div>';
-        } else {
-          mainBadge = '<span class="badge badge-green">Todos livres</span>';
-        }
-
-        let roomBadge = '';
-        if (selectedRooms.length === 1) roomBadge = `<span class="badge badge-muted" style="margin-left:6px;">${escapeHtml(selectedRooms[0].name)}</span>`;
-        else if (selectedRooms.length > 1) roomBadge = `<span class="badge badge-muted" style="margin-left:6px;">${selectedRooms.length} salas</span>`;
-
-        div.innerHTML = `
-          <div style="flex:1;">
-            <div class="slot-weekday">${fmtWeekday(slot.start)}</div>
-            <div class="slot-time">${fmtTime(slot.start)} – ${fmtTime(slot.end)}</div>
-            <div class="slot-date">${fmtDate(slot.start)}</div>
-            ${conflictsHtml}
-          </div>
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;justify-content:flex-end;">
-            ${mainBadge}${roomBadge}
-          </div>`;
-        grid.appendChild(div);
-      });
-    }
-  } catch(err) { alert('Erro ao buscar disponibilidade: ' + err.message); }
-  btn.disabled = false; btn.textContent = 'Buscar horários disponíveis';
-}
-
+        <button class="btn btn-primary btn-full" id="btn-search" onclick="searchSlots()">Buscar horários disponíveis</button>
+      </div>
+    </div>
     <!-- STEP 2 -->
     <div id="view-results" style="display:none;" class="fade-in">
       <div class="card">
         <div class="card-title"><span>Horários livres encontrados</span></div>
         <div class="slots-grid" id="slots-grid"></div>
       </div>
-
       <div class="card" id="event-form-card" style="display:none;">
         <div class="card-title"><span>Criar evento</span></div>
         <div class="field"><label>Título da reunião *</label><input type="text" id="ev-title" placeholder="Ex: Alinhamento de produto" onkeydown="if(event.key==='Enter') criarEvento()" /></div>
@@ -483,13 +367,11 @@
           </div>
         </div>
       </div>
-
       <button class="btn btn-primary btn-full" id="btn-create" onclick="criarEvento()">Criar no Google Calendar</button>
       <div class="alert alert-success" id="alert-success"></div>
       <div class="alert alert-error" id="alert-error"></div>
       <button class="btn btn-outline" onclick="goBack()" style="margin-top:8px;">← Nova busca</button>
     </div>
-
     <!-- Setup Guide -->
     <div id="setup-guide" style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);">
       <h2 style="font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:1rem;letter-spacing:-0.02em;">Como configurar</h2>
@@ -503,7 +385,6 @@
     </div>
   </main>
 </div>
-
 <!-- Modal: Manage Teams -->
 <div class="modal-backdrop" id="manage-modal">
   <div class="modal">
@@ -522,7 +403,6 @@
     </div>
   </div>
 </div>
-
 <!-- Modal: Team Editor -->
 <div class="modal-backdrop" id="team-editor-modal">
   <div class="modal">
@@ -539,7 +419,6 @@
     </div>
   </div>
 </div>
-
 <script src="https://accounts.google.com/gsi/client" async></script>
 <script>
 // ════════════════════════════════════════════════
@@ -547,7 +426,6 @@
 // ════════════════════════════════════════════════
 const CLIENT_ID = '737692861184-2e49p43be8purmfmiqc3m1nv6k4hn1f7.apps.googleusercontent.com';
 const SCOPES = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/drive.file';
-
 // ════════════════════════════════════════════════
 //  TIMES COMPARTILHADOS (Google Drive)
 //  Nome do arquivo compartilhado no Drive.
@@ -556,7 +434,6 @@ const SCOPES = 'https://www.googleapis.com/auth/calendar https://www.googleapis.
 const SHARED_FILE_NAME = 'gogroup-agenda-custom-teams.json';
 let sharedFileId = localStorage.getItem('gg_shared_file_id') || null;
 let syncStatus = 'idle'; // idle | syncing | synced | error
-
 // ════════════════════════════════════════════════
 //  SALAS DE REUNIÃO
 // ════════════════════════════════════════════════
@@ -582,7 +459,6 @@ const ROOMS = [
   { id:'room-19', name:'Time Campeão',          location:'São Paulo/SP', email:'c_1887rrt78i64gh4qgilgotep3ta1k@resource.calendar.google.com' },
   { id:'room-20', name:'Mente Aberta',          location:'São Paulo/SP', email:'c_188679cqbeh0uge8hn0t5oqreki9u@resource.calendar.google.com' },
 ];
-
 // ════════════════════════════════════════════════
 //  TIMES DA EMPRESA (com área macro)
 // ════════════════════════════════════════════════
@@ -690,20 +566,19 @@ const COMPANY_TEAMS = [
   { id:"team-37021", area:"Transportes E Logística",      name:"[TRANSPORTES] TIME KELLY SOUSA", emails:["kelly.sousa@gocase.com"] },
   { id:"team-9768",  area:"Transportes E Logística",      name:"[TRANSPORTES] TIME LUCAS OLIVEIRA", emails:["eduarda.ferreira@gocase.com","lucas.oliveira@gocase.com"] },
 ];
-
 // ════════════════════════════════════════════════
 //  STATE
 // ════════════════════════════════════════════════
 const STORAGE_HIDDEN  = 'gg_hidden_teams_v1';
 const STORAGE_CUSTOM  = 'gg_custom_teams_v1';
 const STORAGE_PROFILE = 'gg_user_profile_v1';
-
 let hiddenTeamIds    = new Set();
 let customTeams      = [];
 let activeTeamIds    = new Set();
 let activeRoomIds    = new Set();
 let editingTeamId    = null;
 let emails           = [];
+let foundSlots       = [];
 let _pendingAvdSearch = false;
 let tokenClient   = null;
 let accessToken   = null;
@@ -715,7 +590,6 @@ let addMeet       = true;
 let notifLevel    = 'ALL';
 let selectedSlot  = null;
 let ignoreConflicts = false;
-
 // ════════════════════════════════════════════════
 //  INIT
 // ════════════════════════════════════════════════
@@ -728,13 +602,11 @@ window.addEventListener('load', () => {
   waitForGIS();
   applyUrlParams();
 });
-
 // ════════════════════════════════════════════════
 //  URL PARAMS (integração AVD Central)
 // ════════════════════════════════════════════════
 function applyUrlParams() {
   const params = new URLSearchParams(window.location.search);
-
   const participantsParam = params.get('participants');
   if (participantsParam) {
     participantsParam.split(',').forEach(e => {
@@ -742,7 +614,6 @@ function applyUrlParams() {
       if (trimmed) addEmail(trimmed);
     });
   }
-
   const macroTeamParam = params.get('macroTeam');
   if (macroTeamParam) {
     const macroLower = macroTeamParam.toLowerCase();
@@ -756,7 +627,6 @@ function applyUrlParams() {
     });
     renderTags();
   }
-
   const microTeamParam = params.get('microTeam');
   if (microTeamParam) {
     const microLower = microTeamParam.toLowerCase();
@@ -800,15 +670,12 @@ function applyUrlParams() {
     }
     renderTags();
   }
-
   if (emails.length > 0) _pendingAvdSearch = true;
-
   const titleParam = params.get('title');
   if (titleParam) {
     const titleInput = document.getElementById('ev-title');
     if (titleInput) titleInput.value = titleParam;
   }
-
   const durParam = parseInt(params.get('duration') || '', 10);
   if (durParam && durParam >= 5) {
     const presets = [30, 60, 90, 120];
@@ -824,22 +691,18 @@ function applyUrlParams() {
     }
   }
 }
-
 function loadStorage() {
   try { hiddenTeamIds = new Set(JSON.parse(localStorage.getItem(STORAGE_HIDDEN) || '[]')); } catch(e) {}
   try { customTeams = JSON.parse(localStorage.getItem(STORAGE_CUSTOM) || '[]'); } catch(e) {}
 }
-
 function saveStorage() {
   localStorage.setItem(STORAGE_HIDDEN, JSON.stringify([...hiddenTeamIds]));
   localStorage.setItem(STORAGE_CUSTOM, JSON.stringify(customTeams));
 }
-
 function getAllTeams() {
   const visible = COMPANY_TEAMS.filter(t => !hiddenTeamIds.has(t.id));
   return [...visible, ...customTeams];
 }
-
 function setDefaultDates() {
   const now = new Date();
   const pad = n => String(n).padStart(2,'0');
@@ -848,7 +711,6 @@ function setDefaultDates() {
   const later = new Date(now); later.setDate(now.getDate()+7);
   document.getElementById('date-end').value = fmt(later);
 }
-
 // ════════════════════════════════════════════════
 //  AUTOCOMPLETE DE E-MAIL
 // ════════════════════════════════════════════════
@@ -864,26 +726,20 @@ function buildEmailIndex() {
   });
   return Object.values(index);
 }
-
 function onEmailInput() {
   const val = document.getElementById('email-input').value.trim().toLowerCase();
   const dropdown = document.getElementById('autocomplete-dropdown');
-
   if (val.length < 2) { dropdown.style.display = 'none'; return; }
-
   const matches = buildEmailIndex()
     .filter(p => p.email.includes(val) && !emails.includes(p.email))
     .slice(0, 4);
-
   if (!matches.length) { dropdown.style.display = 'none'; return; }
-
   dropdown.innerHTML = '';
   matches.forEach(person => {
     const item = document.createElement('div');
     item.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:9px 12px;cursor:pointer;gap:10px;border-bottom:1px solid var(--border);';
     item.onmouseover = () => item.style.background = 'var(--surface2)';
     item.onmouseout  = () => item.style.background = '';
-
     // Negrita a parte que bate com a busca
     const idx = person.email.indexOf(val);
     const highlighted = idx >= 0
@@ -891,28 +747,22 @@ function onEmailInput() {
         + `<strong style="color:var(--text);">${escapeHtml(person.email.slice(idx, idx + val.length))}</strong>`
         + escapeHtml(person.email.slice(idx + val.length))
       : escapeHtml(person.email);
-
     const teamList = person.teams.slice(0, 2).join(', ') + (person.teams.length > 2 ? ` +${person.teams.length - 2}` : '');
-
     item.innerHTML = `
       <div style="min-width:0;flex:1;">
         <div style="font-size:13px;color:var(--text);">${highlighted}</div>
         <div style="font-size:11px;color:var(--muted);opacity:0.7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Membro de: ${escapeHtml(teamList)}</div>
       </div>
       <span style="font-size:12px;color:var(--text);opacity:0.5;white-space:nowrap;flex-shrink:0;">+ Adicionar</span>`;
-
     // Usa click (não mousedown) — mais confiável
     item.addEventListener('click', () => {
       addEmail(person.email);
       dropdown.style.display = 'none';
     });
-
     dropdown.appendChild(item);
   });
-
   dropdown.style.display = 'block';
 }
-
 // Fecha dropdown ao clicar fora
 document.addEventListener('click', (e) => {
   const inp = document.getElementById('email-input');
@@ -921,7 +771,6 @@ document.addEventListener('click', (e) => {
     dd.style.display = 'none';
   }
 });
-
 function addEmail(forceEmail) {
   const inp = document.getElementById('email-input');
   const val = (forceEmail !== undefined ? forceEmail : inp.value).trim().toLowerCase();
@@ -934,11 +783,9 @@ function addEmail(forceEmail) {
   const dd = document.getElementById('autocomplete-dropdown');
   if (dd) dd.style.display = 'none';
 }
-
 function addEmailFromInput() {
   addEmail();
 }
-
 function handleEmailKey(e) {
   if (e.key === 'Enter' || e.key === ',') {
     e.preventDefault();
@@ -949,7 +796,6 @@ function handleEmailKey(e) {
     if (dd) dd.style.display = 'none';
   }
 }
-
 // ════════════════════════════════════════════════
 //  GOOGLE DRIVE — TIMES COMPARTILHADOS
 // ════════════════════════════════════════════════
@@ -960,7 +806,6 @@ function updateSyncBadge(status, msg) {
   badge.className = 'sync-badge ' + (status === 'synced' ? 'synced' : status === 'error' ? 'error' : 'syncing');
   badge.textContent = msg;
 }
-
 async function driveLoadSharedTeams() {
   if (!accessToken) return;
   try {
@@ -995,14 +840,12 @@ async function driveLoadSharedTeams() {
     updateSyncBadge('error', '✗ Erro ao sincronizar');
   }
 }
-
 async function driveSaveSharedTeams() {
   if (!accessToken) return;
   try {
     updateSyncBadge('syncing', '⟳ Salvando...');
     const content = JSON.stringify(customTeams, null, 2);
     const blob = new Blob([content], { type: 'application/json' });
-
     let response;
     if (sharedFileId) {
       // Atualiza arquivo existente
@@ -1023,13 +866,15 @@ async function driveSaveSharedTeams() {
       const created = await response.json();
       sharedFileId = created.id;
       localStorage.setItem('gg_shared_file_id', sharedFileId);
-      // Torna o arquivo acessível para todos na organização
+      // Torna o arquivo acessível para leitura/escrita por quem já tem o link dentro do domínio.
+      // Usamos 'reader' (não 'writer') para que a edição de times passe sempre pelo app,
+      // que é quem garante o merge/validação antes de regravar o arquivo.
       await fetch(
         `https://www.googleapis.com/drive/v3/files/${sharedFileId}/permissions`,
         {
           method: 'POST',
           headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ role: 'writer', type: 'domain', domain: 'gocase.com' })
+          body: JSON.stringify({ role: 'reader', type: 'domain', domain: 'gocase.com' })
         }
       );
       await fetch(
@@ -1037,7 +882,7 @@ async function driveSaveSharedTeams() {
         {
           method: 'POST',
           headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ role: 'writer', type: 'domain', domain: 'gobeaute.com.br' })
+          body: JSON.stringify({ role: 'reader', type: 'domain', domain: 'gobeaute.com.br' })
         }
       );
       updateSyncBadge('synced', '✓ Arquivo criado e compartilhado');
@@ -1049,8 +894,6 @@ async function driveSaveSharedTeams() {
     updateSyncBadge('error', '✗ Erro ao salvar');
   }
 }
-
-
 function updateSearchSummary() {
   const el = document.getElementById('pre-search-summary');
   if (!el) return;
@@ -1064,7 +907,6 @@ function updateSearchSummary() {
     el.innerHTML = `<span style="color:var(--text);">✓ Pronto para buscar</span> — ${msg}`;
   }
 }
-
 // ════════════════════════════════════════════════
 //  ROOM CHIPS
 // ════════════════════════════════════════════════
@@ -1100,18 +942,15 @@ function renderRoomChips() {
   }
   updateSearchSummary();
 }
-
 function toggleRoom(id) {
   if (activeRoomIds.has(id)) activeRoomIds.delete(id);
   else activeRoomIds.add(id);
   renderRoomChips();
   renderTags();
 }
-
 function getSelectedRooms() {
   return ROOMS.filter(r => activeRoomIds.has(r.id));
 }
-
 // ════════════════════════════════════════════════
 //  TEAM CHIPS (agrupado por área)
 // ════════════════════════════════════════════════
@@ -1121,29 +960,24 @@ function renderTeamChips() {
   const filtered = query
     ? allTeams.filter(t => t.name.toLowerCase().includes(query) || t.emails.some(e => e.toLowerCase().includes(query)))
     : allTeams;
-
   const wrap = document.getElementById('team-chips');
   wrap.innerHTML = '';
-
   // ── Quando há busca, mostra pessoas individuais primeiro ──
   if (query && query.length >= 2) {
     const personIndex = buildEmailIndex();
     const personMatches = personIndex
       .filter(p => p.email.includes(query) && !emails.includes(p.email))
       .slice(0, 4);
-
     if (personMatches.length > 0) {
       const hdr = document.createElement('div');
       hdr.style.cssText = 'font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--text);margin-bottom:6px;margin-top:2px;';
       hdr.textContent = 'Pessoas encontradas';
       wrap.appendChild(hdr);
-
       personMatches.forEach(person => {
         const row = document.createElement('div');
         row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:4px;cursor:pointer;transition:background 0.1s;';
         row.onmouseover = () => row.style.background = 'var(--surface2)';
         row.onmouseout  = () => row.style.background = '';
-
         // Negrita a parte que bate
         const idx = person.email.indexOf(query);
         const highlighted = idx >= 0
@@ -1151,16 +985,13 @@ function renderTeamChips() {
             + `<strong>${escapeHtml(person.email.slice(idx, idx + query.length))}</strong>`
             + escapeHtml(person.email.slice(idx + query.length))
           : escapeHtml(person.email);
-
         const teamList = person.teams.slice(0, 2).join(', ') + (person.teams.length > 2 ? ` +${person.teams.length - 2}` : '');
-
         row.innerHTML = `
           <div style="min-width:0;flex:1;">
             <div style="font-size:13px;color:var(--text);font-weight:500;">${highlighted}</div>
             <div style="font-size:11px;color:var(--muted);opacity:0.7;">Membro de: ${escapeHtml(teamList)}</div>
           </div>
           <button style="font-size:12px;padding:4px 10px;border:1px solid var(--border);border-radius:99px;background:transparent;color:var(--text);cursor:pointer;white-space:nowrap;font-family:inherit;">+ Adicionar</button>`;
-
         row.querySelector('button').onclick = (e) => {
           e.stopPropagation();
           addEmail(person.email);
@@ -1168,10 +999,8 @@ function renderTeamChips() {
           document.getElementById('teams-search').value = '';
           renderTeamChips();
         };
-
         wrap.appendChild(row);
       });
-
       // Separador antes dos times
       if (filtered.length > 0) {
         const sep = document.createElement('div');
@@ -1184,7 +1013,6 @@ function renderTeamChips() {
       }
     }
   }
-
   // ── Times agrupados por área ──
   const areaMap = {};
   filtered.forEach(team => {
@@ -1192,16 +1020,13 @@ function renderTeamChips() {
     if (!areaMap[area]) areaMap[area] = [];
     areaMap[area].push(team);
   });
-
   const areas = Object.keys(areaMap).sort();
   areas.forEach(area => {
     const teams = areaMap[area];
     const selCount = teams.filter(t => activeTeamIds.has(t.id)).length;
     const areaId = 'area-' + area.replace(/[^a-zA-Z0-9]/g, '_');
-
     const groupDiv = document.createElement('div');
     groupDiv.style.cssText = 'margin-bottom:4px;';
-
     const header = document.createElement('div');
     header.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface2);border-radius:var(--radius-sm);cursor:pointer;border:1px solid var(--border);user-select:none;transition:background 0.1s;';
     header.onmouseover = () => header.style.background = 'var(--border)';
@@ -1213,16 +1038,13 @@ function renderTeamChips() {
       body.style.display = open ? 'none' : 'flex';
       chev.textContent = open ? '▾' : '▴';
     };
-
     const selBadge = selCount > 0
       ? `<span style="font-size:11px;background:var(--text);color:var(--bg);padding:2px 8px;border-radius:99px;margin-left:6px;">${selCount}</span>`
       : '';
     header.innerHTML = `<span style="font-size:13px;font-weight:500;color:var(--text);">${escapeHtml(area)}${selBadge}</span><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;color:var(--muted);opacity:0.7;">${teams.length} times</span><span id="chev-${areaId}" style="font-size:13px;color:var(--muted);">▾</span></div>`;
-
     const body = document.createElement('div');
     body.id = areaId;
     body.style.cssText = 'display:none;flex-direction:column;gap:2px;padding:4px 0 4px 8px;';
-
     teams.forEach(team => {
       const isActive = activeTeamIds.has(team.id);
       const row = document.createElement('div');
@@ -1230,30 +1052,24 @@ function renderTeamChips() {
       row.onmouseover = () => { if (!activeTeamIds.has(team.id)) row.style.background = 'var(--surface2)'; };
       row.onmouseout  = () => { if (!activeTeamIds.has(team.id)) row.style.background = ''; };
       row.onclick = () => toggleTeam(team.id);
-
       const check = document.createElement('div');
       check.style.cssText = `width:15px;height:15px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;border:0.5px solid ${isActive ? 'transparent' : 'var(--border)'};${isActive ? 'background:rgba(255,255,255,0.2);color:#fff;' : ''}`;
       check.textContent = isActive ? '✓' : '';
-
       const name = document.createElement('span');
       name.style.cssText = `flex:1;${isActive ? 'color:#fff;' : 'color:var(--text);'}`;
       name.textContent = team.name;
-
       const count = document.createElement('span');
       count.style.cssText = `font-size:11px;${isActive ? 'color:rgba(255,255,255,0.6);' : 'color:var(--muted);opacity:0.7;'}`;
       count.textContent = team.emails.length;
-
       row.appendChild(check);
       row.appendChild(name);
       row.appendChild(count);
       body.appendChild(row);
     });
-
     groupDiv.appendChild(header);
     groupDiv.appendChild(body);
     wrap.appendChild(groupDiv);
   });
-
   // Auto-expandir quando há busca
   if (query) {
     wrap.querySelectorAll('[id^="area-"]').forEach(b => {
@@ -1262,19 +1078,16 @@ function renderTeamChips() {
       if (chev) chev.textContent = '▴';
     });
   }
-
   const label = document.getElementById('teams-count-label');
   if (label) label.textContent = filtered.length === allTeams.length
     ? `${allTeams.length} times · ${Object.keys(areaMap).length} áreas`
     : `${filtered.length} de ${allTeams.length} times`;
-
   const badge = document.getElementById('acc-teams-badge');
   if (badge) {
     if (activeTeamIds.size > 0) { badge.style.display = ''; badge.textContent = activeTeamIds.size + ' selecionado' + (activeTeamIds.size > 1 ? 's' : ''); }
     else { badge.style.display = 'none'; }
   }
 }
-
 function toggleTeam(id) {
   const all = getAllTeams();
   const team = all.find(t => t.id === id);
@@ -1297,7 +1110,6 @@ function toggleTeam(id) {
   renderTeamChips();
   renderTags();
 }
-
 // ════════════════════════════════════════════════
 //  ACCORDION
 // ════════════════════════════════════════════════
@@ -1310,7 +1122,6 @@ function toggleAccordion(key) {
   header.classList.toggle('open', !isOpen);
   chev.classList.toggle('open', !isOpen);
 }
-
 function selectAllTeams() {
   getAllTeams().forEach(team => {
     if (!activeTeamIds.has(team.id)) {
@@ -1323,18 +1134,15 @@ function selectAllTeams() {
   });
   renderTeamChips(); renderTags();
 }
-
 function clearAllTeams() {
   activeTeamIds.clear();
   emails = [];
   renderTeamChips(); renderTags();
 }
-
 // ════════════════════════════════════════════════
 //  MANAGE MODAL
 // ════════════════════════════════════════════════
 function openManageModal() { renderManageList(); openModal('manage-modal'); }
-
 function renderManageList() {
   const query = (document.getElementById('manage-search')?.value || '').toLowerCase().trim();
   const list = document.getElementById('manage-list');
@@ -1356,7 +1164,6 @@ function renderManageList() {
     customFiltered.forEach(team => list.appendChild(createManageRow(team, false, false)));
   }
 }
-
 function createManageRow(team, isHidden, isCompany) {
   const row = document.createElement('div');
   row.className = 'manage-team-row';
@@ -1395,7 +1202,6 @@ function createManageRow(team, isHidden, isCompany) {
   row.appendChild(info); row.appendChild(actions);
   return row;
 }
-
 // ════════════════════════════════════════════════
 //  TEAM EDITOR
 // ════════════════════════════════════════════════
@@ -1410,7 +1216,6 @@ function openTeamEditor(id) {
   openModal('team-editor-modal');
   setTimeout(() => document.getElementById('editor-name').focus(), 100);
 }
-
 function saveTeamFromEditor() {
   const name = document.getElementById('editor-name').value.trim();
   const raw  = document.getElementById('editor-emails').value.trim();
@@ -1427,7 +1232,6 @@ function saveTeamFromEditor() {
   closeModal('team-editor-modal'); renderTeamChips(); openManageModal();
   driveSaveSharedTeams();
 }
-
 function deleteTeamFromEditor() {
   if (!editingTeamId) return;
   const team = customTeams.find(t => t.id === editingTeamId);
@@ -1438,7 +1242,6 @@ function deleteTeamFromEditor() {
   closeModal('team-editor-modal'); renderTeamChips(); openManageModal();
   driveSaveSharedTeams();
 }
-
 // ════════════════════════════════════════════════
 //  MODAL HELPERS
 // ════════════════════════════════════════════════
@@ -1447,7 +1250,6 @@ function closeModal(id) { document.getElementById(id).classList.remove('visible'
 document.querySelectorAll('.modal-backdrop').forEach(el => {
   el.addEventListener('click', e => { if (e.target === el) el.classList.remove('visible'); });
 });
-
 // ════════════════════════════════════════════════
 //  AUTH (login persistente)
 // ════════════════════════════════════════════════
@@ -1455,11 +1257,7 @@ function waitForGIS() {
   if (typeof google === 'undefined' || !google.accounts) { setTimeout(waitForGIS, 300); return; }
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID, scope: SCOPES,
-    callback: async (resp) => {
-      if (resp.error) { console.error(resp); return; }
-      accessToken = resp.access_token;
-      await fetchUserInfo();
-    }
+    callback: handleTokenResponse
   });
   const saved = localStorage.getItem(STORAGE_PROFILE);
   if (saved) {
@@ -1470,36 +1268,47 @@ function waitForGIS() {
     } catch(e) { localStorage.removeItem(STORAGE_PROFILE); }
   }
 }
-
+// Callback "canônico" do tokenClient: guarda o token e atualiza o perfil/UI.
+// Definido como função nomeada (em vez de sobrescrever tokenClient.callback
+// em vários lugares) para nunca perder a atualização de perfil depois que
+// ensureToken() faz um refresh silencioso.
+async function handleTokenResponse(resp) {
+  if (resp.error) { console.error(resp); return; }
+  accessToken = resp.access_token;
+  await fetchUserInfo();
+}
 function signIn() {
   if (!tokenClient) { alert('Google Identity Services ainda carregando. Aguarde.'); return; }
   tokenClient.requestAccessToken({ prompt: 'consent' });
 }
-
 function signOut() {
   if (accessToken) google.accounts.oauth2.revoke(accessToken);
   accessToken = null; userProfile = null;
   localStorage.removeItem(STORAGE_PROFILE);
   updateAuthUI(false);
 }
-
 async function ensureToken() {
   if (accessToken) return;
+  // Reaproveita o mesmo callback nomeado (handleTokenResponse), em vez de
+  // substituir tokenClient.callback por uma função descartável — assim o
+  // fluxo normal de login continua funcionando depois de um refresh silencioso.
   return new Promise(resolve => {
-    tokenClient.callback = (resp) => {
-      if (!resp.error) { accessToken = resp.access_token; }
+    const onResp = async (resp) => {
+      await handleTokenResponse(resp);
       resolve();
     };
+    tokenClient.callback = onResp;
     tokenClient.requestAccessToken({ prompt: '' });
   });
 }
-
 async function fetchUserInfo() {
   try {
     const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: `Bearer ${accessToken}` } });
     userProfile = await r.json();
     localStorage.setItem(STORAGE_PROFILE, JSON.stringify(userProfile));
     updateAuthUI(true);
+    // Restaura o callback canônico caso ensureToken() o tenha trocado.
+    if (tokenClient) tokenClient.callback = handleTokenResponse;
     // Carrega times compartilhados do Drive
     await driveLoadSharedTeams();
     // Se veio da integração AVD com participantes, busca automaticamente
@@ -1509,7 +1318,6 @@ async function fetchUserInfo() {
     }
   } catch(e) { console.error(e); }
 }
-
 function updateAuthUI(loggedIn) {
   const card      = document.getElementById('auth-card');
   const dot       = document.getElementById('auth-dot');
@@ -1530,7 +1338,6 @@ function updateAuthUI(loggedIn) {
     btnSignin.style.display = 'block'; btnSignout.style.display = 'none';
   }
 }
-
 // ════════════════════════════════════════════════
 //  EMAIL TAGS
 // ════════════════════════════════════════════════
@@ -1538,7 +1345,6 @@ function initials(email) {
   const parts = email.split('@')[0].replace(/[._-]/g,' ').trim().split(' ');
   return ((parts[0][0] || '') + (parts[1] ? parts[1][0] : '')).toUpperCase();
 }
-
 function renderTags() {
   const wrap = document.getElementById('tags-wrap');
   wrap.innerHTML = '';
@@ -1556,7 +1362,6 @@ function renderTags() {
   });
   updateSearchSummary();
 }
-
 function removeEmail(i) {
   emails.splice(i, 1);
   const newActive = new Set();
@@ -1567,7 +1372,6 @@ function removeEmail(i) {
   activeTeamIds = newActive;
   renderTags(); renderTeamChips();
 }
-
 // ════════════════════════════════════════════════
 //  PILLS
 // ════════════════════════════════════════════════
@@ -1592,6 +1396,11 @@ function applyCustomDur() {
 }
 function setWknd(val, btn) { excludeWeekends = !val; document.querySelectorAll('#wknd-group .pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
 function setQty(n, btn)   { pageSize = n; document.querySelectorAll('#qty-group .pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+function setIgnoreConflicts(val, btn) {
+  ignoreConflicts = val;
+  document.querySelectorAll('#conflict-group .pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
 function setPref(key, val, btn) {
   if (key === 'meet') addMeet = val;
   if (key === 'notif') notifLevel = val;
@@ -1599,7 +1408,6 @@ function setPref(key, val, btn) {
   document.querySelectorAll(group + ' .pill').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
-
 function goBack() {
   document.getElementById('view-form').style.display = '';
   document.getElementById('view-results').style.display = 'none';
@@ -1608,10 +1416,15 @@ function goBack() {
   document.getElementById('bar3').classList.remove('done');
   selectedSlot = null;
 }
-
 // ════════════════════════════════════════════════
 //  SEARCH
 // ════════════════════════════════════════════════
+function labelForCalendarId(id) {
+  if (id === 'primary') return 'Você';
+  const room = ROOMS.find(r => r.email === id);
+  if (room) return room.name;
+  return id;
+}
 async function searchSlots() {
   if (!accessToken) { alert('Faça login com o Google primeiro.'); return; }
   const ds = document.getElementById('date-start').value;
@@ -1640,11 +1453,17 @@ async function searchSlots() {
     });
     const data = await r.json();
     if (data.error) throw new Error(data.error.message);
+    // Busy agregado (para o modo "só livres") + busy por pessoa/sala (para o modo "com conflitos")
     const allBusy = [];
-    for (const cal of Object.values(data.calendars)) {
-      for (const b of (cal.busy || [])) allBusy.push({ start: new Date(b.start), end: new Date(b.end) });
+    const busyByPerson = {};
+    for (const [calId, cal] of Object.entries(data.calendars)) {
+      const periods = (cal.busy || []).map(b => ({ start: new Date(b.start), end: new Date(b.end) }));
+      busyByPerson[calId] = periods;
+      periods.forEach(p => allBusy.push(p));
     }
-    const slots = generateSlots(new Date(ds+'T00:00:00'), new Date(de+'T23:59:59'), ws, we, duration, excludeWeekends, allBusy, pageSize);
+    const slots = ignoreConflicts
+      ? generateAllSlots(new Date(ds+'T00:00:00'), new Date(de+'T23:59:59'), ws, we, duration, excludeWeekends, busyByPerson, pageSize)
+      : generateSlots(new Date(ds+'T00:00:00'), new Date(de+'T23:59:59'), ws, we, duration, excludeWeekends, allBusy, pageSize);
     foundSlots = slots;
     document.getElementById('stat-attendees').textContent = emails.length + 1;
     document.getElementById('stat-rooms').textContent = selectedRooms.length || '—';
@@ -1656,24 +1475,41 @@ async function searchSlots() {
     document.getElementById('view-results').classList.add('fade-in');
     const grid = document.getElementById('slots-grid');
     if (!slots.length) {
-      grid.innerHTML = '<div class="status">Nenhum horário comum encontrado. Tente ampliar o período ou reduzir a duração.</div>';
+      grid.innerHTML = '<div class="status">Nenhum horário encontrado. Tente ampliar o período ou reduzir a duração.</div>';
     } else {
       grid.innerHTML = '';
       slots.forEach((slot, i) => {
         const div = document.createElement('div');
         div.className = 'slot-item';
         div.onclick = () => selectSlot(i, div);
-        let badgeExtra = '';
-        if (selectedRooms.length === 1) badgeExtra = `<span class="badge badge-muted" style="margin-left:6px;">${escapeHtml(selectedRooms[0].name)}</span>`;
-        else if (selectedRooms.length > 1) badgeExtra = `<span class="badge badge-muted" style="margin-left:6px;">${selectedRooms.length} salas livres</span>`;
-        div.innerHTML = `<div><div class="slot-weekday">${fmtWeekday(slot.start)}</div><div class="slot-time">${fmtTime(slot.start)} – ${fmtTime(slot.end)}</div><div class="slot-date">${fmtDate(slot.start)}</div></div><div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;justify-content:flex-end;"><span class="badge badge-green">Todos livres</span>${badgeExtra}</div>`;
+        let mainBadge, conflictsHtml = '';
+        if (slot.conflicts && slot.conflicts.length > 0) {
+          mainBadge = `<span class="badge badge-conflict">⚠ ${slot.conflicts.length} conflito${slot.conflicts.length>1?'s':''}</span>`;
+          conflictsHtml = '<div class="slot-conflicts">' +
+            slot.conflicts.map(c => `<span class="conflict-chip">⚠ ${escapeHtml(c)} ocupado</span>`).join('') +
+            '</div>';
+        } else {
+          mainBadge = '<span class="badge badge-green">Todos livres</span>';
+        }
+        let roomBadge = '';
+        if (selectedRooms.length === 1) roomBadge = `<span class="badge badge-muted" style="margin-left:6px;">${escapeHtml(selectedRooms[0].name)}</span>`;
+        else if (selectedRooms.length > 1) roomBadge = `<span class="badge badge-muted" style="margin-left:6px;">${selectedRooms.length} salas</span>`;
+        div.innerHTML = `
+          <div style="flex:1;">
+            <div class="slot-weekday">${fmtWeekday(slot.start)}</div>
+            <div class="slot-time">${fmtTime(slot.start)} – ${fmtTime(slot.end)}</div>
+            <div class="slot-date">${fmtDate(slot.start)}</div>
+            ${conflictsHtml}
+          </div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;justify-content:flex-end;">
+            ${mainBadge}${roomBadge}
+          </div>`;
         grid.appendChild(div);
       });
     }
   } catch(err) { alert('Erro ao buscar disponibilidade: ' + err.message); }
   btn.disabled = false; btn.textContent = 'Buscar horários disponíveis';
 }
-
 function generateSlots(startDate, endDate, workStart, workEnd, durMins, excludeWknd, busyPeriods, limit) {
   const slots = [];
   const step = 30;
@@ -1693,7 +1529,32 @@ function generateSlots(startDate, endDate, workStart, workEnd, durMins, excludeW
   }
   return slots;
 }
-
+// Modo "Mostrar todos (com conflitos)": enumera candidatos a cada 30 min dentro
+// do expediente e, em vez de pular os horários ocupados, marca em slot.conflicts
+// quem está ocupado (pessoa, sala) naquele intervalo.
+function generateAllSlots(startDate, endDate, workStart, workEnd, durMins, excludeWknd, busyByPerson, limit) {
+  const slots = [];
+  const step = 30;
+  const [wsH, wsM] = workStart.split(':').map(Number);
+  const [weH, weM] = workEnd.split(':').map(Number);
+  const cursor = new Date(startDate);
+  cursor.setHours(wsH, wsM, 0, 0);
+  while (cursor < endDate && slots.length < limit) {
+    const dow = cursor.getDay();
+    if (excludeWknd && (dow === 0 || dow === 6)) { cursor.setDate(cursor.getDate()+1); cursor.setHours(wsH,wsM,0,0); continue; }
+    const endOfDay = new Date(cursor); endOfDay.setHours(weH, weM, 0, 0);
+    const slotEnd = new Date(cursor.getTime() + durMins * 60000);
+    if (slotEnd > endOfDay) { cursor.setDate(cursor.getDate()+1); cursor.setHours(wsH,wsM,0,0); continue; }
+    const conflicts = [];
+    for (const [calId, periods] of Object.entries(busyByPerson)) {
+      const busy = periods.some(b => cursor < b.end && slotEnd > b.start);
+      if (busy) conflicts.push(labelForCalendarId(calId));
+    }
+    slots.push({ start: new Date(cursor), end: new Date(slotEnd), conflicts });
+    cursor.setMinutes(cursor.getMinutes() + step);
+  }
+  return slots;
+}
 function selectSlot(i, el) {
   selectedSlot = foundSlots[i];
   document.querySelectorAll('.slot-item').forEach(c => c.classList.remove('selected'));
@@ -1708,7 +1569,6 @@ function selectSlot(i, el) {
   card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   document.getElementById('bar3').classList.add('done');
 }
-
 // ════════════════════════════════════════════════
 //  CREATE EVENT
 // ════════════════════════════════════════════════
@@ -1782,7 +1642,6 @@ async function criarEvento() {
   }
   btn.disabled = false; btn.textContent = 'Criar no Google Calendar';
 }
-
 // ════════════════════════════════════════════════
 //  HELPERS
 // ════════════════════════════════════════════════
@@ -1793,3 +1652,4 @@ function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;'
 </script>
 </body>
 </html>
+
