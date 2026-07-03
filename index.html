@@ -305,6 +305,14 @@
         <div class="grid2 field">
           <div><label>Data inicial</label><input type="date" id="date-start" /></div>
           <div><label>Data final</label><input type="date" id="date-end" /></div>
+         <div class="field">
+  <label>Modo de busca</label>
+  <div class="pill-group" id="conflict-group">
+    <button class="pill active" onclick="setIgnoreConflicts(false,this)">Só horários livres</button>
+    <button class="pill" onclick="setIgnoreConflicts(true,this)">Mostrar todos (com conflitos)</button>
+  </div>
+  <div style="font-size:12px;color:var(--muted);margin-top:6px;opacity:0.7;">No modo "todos", horários com conflito aparecem com aviso de quem está ocupado.</div>
+</div>
         </div>
         <div class="field">
           <label>Duração da reunião</label>
@@ -339,6 +347,11 @@
             <button class="pill active" onclick="setQty(5,this)">5</button>
             <button class="pill" onclick="setQty(8,this)">8</button>
             <button class="pill" onclick="setQty(12,this)">12</button>
+           function setIgnoreConflicts(val, btn) {
+  ignoreConflicts = val;
+  document.querySelectorAll('#conflict-group .pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
           </div>
         </div>
       </div>
@@ -346,9 +359,98 @@
       <!-- Sticky search bar com contador -->
       <div class="sticky-search-bar">
         <div class="search-summary" id="pre-search-summary"></div>
-        <button class="btn btn-primary btn-full" id="btn-search" onclick="searchSlots()">Buscar horários disponíveis</button>
-      </div>
-    </div>
+        <button class="btn btn-primary btn-full" id="btn-search" onclick="async function searchSlots() {
+  if (!accessToken) { alert('Faça login com o Google primeiro.'); return; }
+  const ds = document.getElementById('date-start').value;
+  const de = document.getElementById('date-end').value;
+  if (!ds || !de) { alert('Selecione o período.'); return; }
+  if (new Date(ds) > new Date(de)) { alert('Data inicial deve ser anterior à final.'); return; }
+  await ensureToken();
+  const btn = document.getElementById('btn-search');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Consultando agendas...';
+  const tz  = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const ws  = document.getElementById('work-start').value;
+  const we  = document.getElementById('work-end').value;
+  const timeMin = ds + 'T00:00:00Z';
+  const timeMax = de + 'T23:59:59Z';
+  const selectedRooms = getSelectedRooms();
+  const items = [
+    { id: 'primary' },
+    ...emails.map(e => ({ id: e })),
+    ...selectedRooms.map(r => ({ id: r.email }))
+  ];
+  try {
+    const r = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ timeMin, timeMax, timeZone: tz, items })
+    });
+    const data = await r.json();
+    if (data.error) throw new Error(data.error.message);
+
+    // Busy agregado + busy por pessoa
+    const allBusy = [];
+    const busyByPerson = {};
+    for (const [calId, cal] of Object.entries(data.calendars)) {
+      const periods = (cal.busy || []).map(b => ({ start: new Date(b.start), end: new Date(b.end) }));
+      busyByPerson[calId] = periods;
+      periods.forEach(p => allBusy.push(p));
+    }
+
+    const slots = ignoreConflicts
+      ? generateAllSlots(new Date(ds+'T00:00:00'), new Date(de+'T23:59:59'), ws, we, duration, excludeWeekends, busyByPerson, pageSize)
+      : generateSlots(new Date(ds+'T00:00:00'), new Date(de+'T23:59:59'), ws, we, duration, excludeWeekends, allBusy, pageSize);
+
+    foundSlots = slots;
+    document.getElementById('stat-attendees').textContent = emails.length + 1;
+    document.getElementById('stat-rooms').textContent = selectedRooms.length || '—';
+    document.getElementById('stat-duration').textContent = duration >= 60 ? Math.floor(duration/60)+'h'+(duration%60?duration%60+'min':'') : duration+'min';
+    document.getElementById('stat-slots').textContent = slots.length;
+    document.getElementById('view-form').style.display = 'none';
+    document.getElementById('view-results').style.display = '';
+    document.getElementById('bar2').classList.add('done');
+    document.getElementById('view-results').classList.add('fade-in');
+
+    const grid = document.getElementById('slots-grid');
+    if (!slots.length) {
+      grid.innerHTML = '<div class="status">Nenhum horário encontrado. Tente ampliar o período ou reduzir a duração.</div>';
+    } else {
+      grid.innerHTML = '';
+      slots.forEach((slot, i) => {
+        const div = document.createElement('div');
+        div.className = 'slot-item';
+        div.onclick = () => selectSlot(i, div);
+
+        let mainBadge, conflictsHtml = '';
+        if (slot.conflicts && slot.conflicts.length > 0) {
+          mainBadge = `<span class="badge badge-conflict">⚠ ${slot.conflicts.length} conflito${slot.conflicts.length>1?'s':''}</span>`;
+          conflictsHtml = '<div class="slot-conflicts">' +
+            slot.conflicts.map(c => `<span class="conflict-chip">⚠ ${escapeHtml(c)} ocupado</span>`).join('') +
+            '</div>';
+        } else {
+          mainBadge = '<span class="badge badge-green">Todos livres</span>';
+        }
+
+        let roomBadge = '';
+        if (selectedRooms.length === 1) roomBadge = `<span class="badge badge-muted" style="margin-left:6px;">${escapeHtml(selectedRooms[0].name)}</span>`;
+        else if (selectedRooms.length > 1) roomBadge = `<span class="badge badge-muted" style="margin-left:6px;">${selectedRooms.length} salas</span>`;
+
+        div.innerHTML = `
+          <div style="flex:1;">
+            <div class="slot-weekday">${fmtWeekday(slot.start)}</div>
+            <div class="slot-time">${fmtTime(slot.start)} – ${fmtTime(slot.end)}</div>
+            <div class="slot-date">${fmtDate(slot.start)}</div>
+            ${conflictsHtml}
+          </div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;justify-content:flex-end;">
+            ${mainBadge}${roomBadge}
+          </div>`;
+        grid.appendChild(div);
+      });
+    }
+  } catch(err) { alert('Erro ao buscar disponibilidade: ' + err.message); }
+  btn.disabled = false; btn.textContent = 'Buscar horários disponíveis';
+}
 
     <!-- STEP 2 -->
     <div id="view-results" style="display:none;" class="fade-in">
