@@ -670,11 +670,28 @@ function applyUrlParams() {
     }
     renderTags();
   }
-  if (emails.length > 0) _pendingAvdSearch = true;
+  const dateParam = params.get('date');
+  const horarioParam = params.get('horario');
+  // Se já vem com data+horário decididos (sessão pré-agendada no AVD Central), não faz
+  // sentido disparar a busca automática de horário livre — o slot vai ser fixado no final
+  // desta função, depois que a duração (abaixo) já estiver aplicada.
+  if (emails.length > 0 && !(dateParam && horarioParam)) _pendingAvdSearch = true;
   const titleParam = params.get('title');
   if (titleParam) {
     const titleInput = document.getElementById('ev-title');
     if (titleInput) titleInput.value = titleParam;
+  }
+  const roomParam = params.get('room');
+  if (roomParam && ROOMS.some(r => r.id === roomParam)) {
+    activeRoomIds.add(roomParam);
+    renderRoomChips();
+    renderTags();
+  }
+  if (params.get('meet') === '0') {
+    addMeet = false;
+    const pills = document.querySelectorAll('#meet-group .pill');
+    pills.forEach(b => b.classList.remove('active'));
+    if (pills[1]) pills[1].classList.add('active'); // pill "Não"
   }
   const durParam = parseInt(params.get('duration') || '', 10);
   if (durParam && durParam >= 5) {
@@ -688,6 +705,15 @@ function applyUrlParams() {
       if (customInput) customInput.value = durParam;
       const customPill = document.getElementById('pill-custom');
       if (customPill) customPill.click();
+    }
+  }
+  // Slot já decidido no AVD Central (sessão pré-agendada) — pula a busca de
+  // disponibilidade e vai direto pra tela de criar evento com esse horário fixado.
+  if (dateParam && horarioParam) {
+    const start = new Date(`${dateParam}T${horarioParam}:00`);
+    if (!isNaN(start.getTime())) {
+      const end = new Date(start.getTime() + duration * 60000);
+      applyFixedSlot(start, end);
     }
   }
 }
@@ -1559,6 +1585,12 @@ function selectSlot(i, el) {
   selectedSlot = foundSlots[i];
   document.querySelectorAll('.slot-item').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
+  showEventForm();
+}
+// Revela o card "Criar evento" e pré-preenche o local com a sala selecionada —
+// compartilhado entre a escolha manual de um slot (selectSlot) e o slot fixo que
+// vem pronto do AVD Central (applyFixedSlot).
+function showEventForm() {
   const card = document.getElementById('event-form-card');
   card.style.display = 'block'; card.classList.add('fade-in');
   const selectedRooms = getSelectedRooms();
@@ -1568,6 +1600,28 @@ function selectSlot(i, el) {
   }
   card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   document.getElementById('bar3').classList.add('done');
+}
+// Sessão já pré-agendada no AVD Central: em vez de rodar a busca de disponibilidade,
+// mostra o horário já decidido como se fosse o único resultado e abre direto o
+// formulário de criação — o ADM só confirma/ajusta título, descrição e local.
+function applyFixedSlot(start, end) {
+  selectedSlot = { start, end };
+  foundSlots = [selectedSlot];
+  document.getElementById('view-form').style.display = 'none';
+  document.getElementById('view-results').style.display = '';
+  document.getElementById('view-results').classList.add('fade-in');
+  document.getElementById('bar2').classList.add('done');
+  const grid = document.getElementById('slots-grid');
+  grid.innerHTML = `
+    <div class="slot-item selected" style="cursor:default;">
+      <div style="flex:1;">
+        <div class="slot-weekday">${fmtWeekday(start)}</div>
+        <div class="slot-time">${fmtTime(start)} – ${fmtTime(end)}</div>
+        <div class="slot-date">${fmtDate(start)}</div>
+      </div>
+      <div><span class="badge badge-muted">Definido no AVD Central</span></div>
+    </div>`;
+  showEventForm();
 }
 // ════════════════════════════════════════════════
 //  CREATE EVENT
