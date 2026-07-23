@@ -590,6 +590,11 @@ let addMeet       = true;
 let notifLevel    = 'ALL';
 let selectedSlot  = null;
 let ignoreConflicts = false;
+// Origem do AVD Central pra onde o postMessage de "evento criado" é enviado de volta —
+// vem da própria URL (param 'opener', setado pelo app que abriu esta aba) em vez de
+// hardcoded, porque o domínio do AVD Central já mudou uma vez e deixou esse valor órfão
+// (box-navigator-pro.vercel.app não existe mais — nenhum aviso de agendamento chegava).
+let avdOpenerOrigin = 'https://avd-central-gogroup.vercel.app';
 // ════════════════════════════════════════════════
 //  INIT
 // ════════════════════════════════════════════════
@@ -680,6 +685,10 @@ function applyUrlParams() {
   if (titleParam) {
     const titleInput = document.getElementById('ev-title');
     if (titleInput) titleInput.value = titleParam;
+  }
+  const openerParam = params.get('opener');
+  if (openerParam) {
+    try { avdOpenerOrigin = new URL(openerParam).origin; } catch(e) {}
   }
   const roomParam = params.get('room');
   if (roomParam && ROOMS.some(r => r.id === roomParam)) {
@@ -1686,7 +1695,7 @@ async function criarEvento() {
           fase_id:        null,
           gcal_event_id:  data.id ?? null,
         }
-      }, 'https://box-navigator-pro.vercel.app');
+      }, avdOpenerOrigin);
     }
   } catch(err) {
     const errEl = document.getElementById('alert-error');
